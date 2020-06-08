@@ -1,9 +1,9 @@
 
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
- 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
@@ -15,18 +15,14 @@ import { ConcertListComponent } from './concert-list/concert-list.component';
  
  
 @NgModule({
-  declarations: [
-    
-    AppComponent, 
-    FormsModule,
+  declarations: [ 
+    AppComponent,  
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
     ConcertComponent,
-    ConcertListComponent,
-    
-   
+    ConcertListComponent, 
   ],
   imports: [ 
     HttpClientModule,
@@ -38,7 +34,8 @@ import { ConcertListComponent } from './concert-list/concert-list.component';
     ]),
   
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserModule
   ], 
   providers: [],
   bootstrap: [AppComponent]
