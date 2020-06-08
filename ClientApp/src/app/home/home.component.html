@@ -11,15 +11,15 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let concert of Concerts; let i - index">
-      <td>{{i+1}}</td>
-      <td>{{concert.id}}</td>
-      <td>{{concert.tourName}}</td>
-      <td>{{concert.artist}}</td>
-      <td>{{concert.stage}}</td>
-      <td>{{concert.concertDate}}</td>
-      <td>{{concert.numberTicketsAvailable}}</td>
-      <td>{{concert.ticketPrice}}</td>
+    <tr *ngFor="let concert of concertService.list">
+      <td>{{concert.Id}}</td>
+      <td>{{concert.TourName}}</td>
+      <td>{{concert.Artist}}</td>
+      <td>{{concert.Stage}}</td>
+      <td>{{concert.ConcertDate}}</td>
+      <td>{{concert.NumberTicketsAvailable}}</td>
+      <td>{{concert.TicketPrice}}</td>
+       
     </tr>
   </tbody>
 </table>

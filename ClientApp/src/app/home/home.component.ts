@@ -1,4 +1,5 @@
 import { Component, Inject } from '@angular/core';
+import { ConcertService } from './../concert/concert.service';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -7,22 +8,16 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomeComponent {
 
-  Concerts: Concert[] = []
-
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<Concert[]>(baseUrl + 'api/Concert').subscribe(result => {
+   
+  constructor(public concertService: ConcertService) {
+    /*http.get<Concert[]>(baseUrl + 'api/Concert').subscribe(result => {
       this.Concerts = result;
-    }, error => console.error(error))
+    }, error => console.error(error))*/
+  }
+
+  ngOnInit() {
+    this.concertService.refreshList();
   }
 
 }
 
-interface Concert {
-  id: number;
-  TourName: string;
-  Artist: string;
-  Stage: string;
-  ConcertDate: Date;
-  NumberTicketsAvailable: number;
-  TicketPrice: number;
-}
