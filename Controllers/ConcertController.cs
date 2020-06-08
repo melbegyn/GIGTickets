@@ -56,7 +56,7 @@ namespace GIGTickets.Controllers
 
         // POST: api/Concert
         [HttpPost]
-        public async Task<ActionResult<Concert>> PostConcert(Concert concert)
+        public async Task<ActionResult<Concert>> PostConcert([FromBody] Concert concert)
         {
             _context.Concert.Add(concert);
             await _context.SaveChangesAsync();

@@ -10,15 +10,22 @@ namespace GIGTickets.Models
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "Tour")]
+
+        [Required]
         public String TourName { get; set; }
+        [Required]
         public String Artist { get; set; }
+        [Required]
         public String Stage { get; set; }
 
+        [Required]
         [DataType(DataType.Date)]
         public DateTime ConcertDate { get; set; }
+
+        [Required]
         public int NumberTicketsAvailable { get; set; }
 
+        [Required]
         [Column(TypeName = "decimal(18, 2)")]
         public int TicketPrice { get; set; }
 

@@ -3,45 +3,44 @@
 
   <h2>Concert form</h2>
 
-  <form [formGroup]="concertForm" (ngSubmit)="addConcert()">
-
+  <form #form="ngForm" (submit)="onSubmit(form)">
+    <input type="hidden" name="PMId" [value]="concertService.formData.Id">
     <div class="form-group">
       <label for="tourName">Tour name: </label>
-      <input type="text" class="form-control" formControlName="tourName" id="tourName" aria-describedby="infoHelp" placeholder="Enter the name of the tour">
+      <input name="TourName" #TourName="ngModel" type="text" class="form-control" [(ngModel)]="concertService.formData.TourName" id="tourName" aria-describedby="infoHelp" placeholder="Enter the name of the tour" required>
       <small id="infoHelp" class="form-text text-muted">Petite info en bas ! nice</small>
     </div>
 
     <div class="form-group">
       <label for="artist">Artist: </label>
-      <input type="text" class="form-control" formControlName="artist" id="artist">
+      <input name="Artist" #Artist="ngModel" type="text" class="form-control" [(ngModel)]="concertService.formData.Artist" id="artist" required>
     </div>
 
     <div class="form-group">
       <label for="stage">Stage: </label>
-      <input type="text" class="form-control" formControlName="stage" id="stage">
+      <input name="Stage" #Stage="ngModel" type="text" class="form-control" [(ngModel)]="concertService.formData.Stage" id="stage" required>
     </div>
 
     <div class="form-group row">
       <label for="concertDate" class="col-2 col-form-label">Date: </label>
       <div class="col-10">
-        <input class="form-control" type="date" value="2020-07-19" formControlName="concertDate" id="concertDate">
+        <input name="ConcertDate" #ConcertDate="ngModel" class="form-control" type="date" value="2020-07-19" [(ngModel)]="concertService.formData.ConcertDate" id="concertDate" required>
       </div>
     </div>
 
 
     <div class="form-group">
       <label for="nbTicketsAvailable">Number of tickets: </label>
-      <input type="text" class="form-control" formControlName="nbTicketsAvailable" id="nbTicketsAvailable">
+      <input name="NbTicketsAvailable" #NbTicketsAvailable="ngModel" type="text" class="form-control" [(ngModel)]="concertService.formData.NbTicketsAvailable" id="nbTicketsAvailable" required>
     </div>
 
 
     <div class="form-group">
       <label for="ticketPrice">Ticket price: </label>
-      <input type="text" class="form-control" formControlName="ticketPrice" id="ticketPrice">
+      <input name="TicketPrice" #TicketPrice="ngModel" type="text" class="form-control" [(ngModel)]="concertService.formData.TicketPrice" id="ticketPrice" required>
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
   </form>
 </div>
 

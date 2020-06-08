@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+ 
+using Microsoft.AspNetCore.SpaServices; 
 
 namespace GIGTickets
 {
@@ -26,6 +28,16 @@ namespace GIGTickets
 
             // ********** ADD CORS FOR SECURITY REQUEST **********
             services.AddCors();
+
+           
+	        //remove default json formatting
+	        services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.PropertyNamingPolicy = null;
+                options.JsonSerializerOptions.DictionaryKeyPolicy = null;
+            });
+             
+ 
 
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
@@ -57,7 +69,12 @@ namespace GIGTickets
             }
 
             // Cors configuration
-            app.UseCors(a => a.SetIsOriginAllowed(x => _ = true).AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+            //app.UseCors(a => a.SetIsOriginAllowed(x => _ = true).AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+
+            app.UseCors(options =>
+            options.WithOrigins("http://localhost:4200")
+            .AllowAnyMethod()
+            .AllowAnyHeader());
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -73,6 +90,8 @@ namespace GIGTickets
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
+
+                 
             });
 
             app.UseSpa(spa =>

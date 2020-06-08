@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { Concert } from '../shared/concert.model';
+
+
 
 const headers: HttpHeaders = new HttpHeaders();
 headers.set('Content-Type', 'application/json');
@@ -10,12 +13,24 @@ headers.set('Content-Type', 'application/json');
   providedIn: 'root'
 })
 export class ConcertService {
+  formData: Concert;
+  readonly rootURL = environment.apiBaseURI;
+  list: Concert[];
+
 
   constructor(private http: HttpClient) { }
 
-  saveConcert(ConcertData) {
-    return this.http.post('https://localhost:44374/api/Concert', ConcertData, { headers: headers });
-  }                     
+ postConcert() {
+    return this.http.post(this.rootURL + '/Concert', this.formData);
+  }
+
+
+  refreshList() {
+    this.http.get(this.rootURL + '/Concert')
+      .toPromise()
+      .then(res => this.list = res as Concert[]);
+  }
+
 
   updateConcert(ConcertData) { 
     return this.http.put('https://localhost:44374/api/Concert', ConcertData, { headers: headers });
