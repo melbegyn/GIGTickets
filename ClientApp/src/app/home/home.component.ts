@@ -9,7 +9,7 @@ export class HomeComponent {
 
   Concerts: Concert[] = []
 
-  constructor(http: HttpClient, @Inject('BASE URL') baseUrl: string) {
+  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     http.get<Concert[]>(baseUrl + 'api/Concert').subscribe(result => {
       this.Concerts = result;
     }, error => console.error(error))
