@@ -11,7 +11,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let concert of concertService.list | async">
+    <tr *ngFor="let concert of concertService.list  ">
       <td>{{concert.Id}}</td>
       <td>{{concert.TourName}}</td>
       <td>{{concert.Artist}}</td>

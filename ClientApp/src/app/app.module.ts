@@ -27,8 +27,7 @@ import { ConcertService } from './concert/concert.service';
     HttpClientModule,
     FormsModule,  
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'backoffice', component: ConcertListComponent },
+      { path: '', component: HomeComponent, pathMatch: 'full' }
     ]),
   
     AppRoutingModule,

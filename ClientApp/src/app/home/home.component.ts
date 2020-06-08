@@ -8,15 +8,9 @@ import { Concert } from '../shared/concert.model';
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
-
-  //list: Concert[];
-
+   
   constructor(public concertService: ConcertService) {
 
-   
-    /*http.get<Concert[]>(baseUrl + 'api/Concert').subscribe(result => {
-      this.Concerts = result;
-    }, error => console.error(error))*/
   }
 
   ngOnInit() {
