@@ -3,41 +3,40 @@
 
   <h2>Concert form</h2>
 
-  <form #form="ngForm" (submit)="onSubmit(form)">
-    <input type="hidden" name="PMId" [value]="concertService.formData.Id">
+  <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+    <input type="hidden" name="Id" [value]="formData.Id">
     <div class="form-group">
-      <label for="tourName">Tour name: </label>
-      <input name="TourName" #TourName="ngModel" type="text" class="form-control" [(ngModel)]="concertService.formData.TourName" id="tourName" aria-describedby="infoHelp" placeholder="Enter the name of the tour" required>
-      <small id="infoHelp" class="form-text text-muted">Petite info en bas ! nice</small>
+      <label for="tourName">Tour: </label>
+      <input name="TourName" #TourName="ngModel" [(ngModel)]="formData.TourName" type="text" class="form-control"   required>
     </div>
 
     <div class="form-group">
       <label for="artist">Artist: </label>
-      <input name="Artist" #Artist="ngModel" type="text" class="form-control" [(ngModel)]="concertService.formData.Artist" id="artist" required>
+      <input name="Artist" #Artist="ngModel" type="text" class="form-control" [(ngModel)]="formData.Artist"  required>
     </div>
 
     <div class="form-group">
       <label for="stage">Stage: </label>
-      <input name="Stage" #Stage="ngModel" type="text" class="form-control" [(ngModel)]="concertService.formData.Stage" id="stage" required>
+      <input name="Stage" #Stage="ngModel" type="text" class="form-control" [(ngModel)]="formData.Stage"  required>
     </div>
 
     <div class="form-group row">
       <label for="concertDate" class="col-2 col-form-label">Date: </label>
       <div class="col-10">
-        <input name="ConcertDate" #ConcertDate="ngModel" class="form-control" type="date" value="2020-07-19" [(ngModel)]="concertService.formData.ConcertDate" id="concertDate" required>
+        <input name="ConcertDate" #ConcertDate="ngModel" class="form-control" type="date" value="2020-07-19" [(ngModel)]="formData.ConcertDate" required>
       </div>
     </div>
 
 
     <div class="form-group">
       <label for="nbTicketsAvailable">Number of tickets: </label>
-      <input name="NbTicketsAvailable" #NbTicketsAvailable="ngModel" type="text" class="form-control" [(ngModel)]="concertService.formData.NbTicketsAvailable" id="nbTicketsAvailable" required>
+      <input name="NbTicketsAvailable" #NbTicketsAvailable="ngModel" type="text" class="form-control" [(ngModel)]="formData.NbTicketsAvailable" required>
     </div>
 
 
     <div class="form-group">
       <label for="ticketPrice">Ticket price: </label>
-      <input name="TicketPrice" #TicketPrice="ngModel" type="text" class="form-control" [(ngModel)]="concertService.formData.TicketPrice" id="ticketPrice" required>
+      <input name="TicketPrice" #TicketPrice="ngModel" type="text" class="form-control" [(ngModel)]="formData.TicketPrice"  required>
     </div>
 
     <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>

@@ -5,8 +5,10 @@ import { ConcertListComponent } from './concert-list/concert-list.component';
 
 
 // all the paths of the pages
-const routes: Routes = [{ path: 'create-concert', component: ConcertComponent },
-  { path: 'display-concert', component: ConcertListComponent }];
+const routes: Routes = [
+  { path: 'backoffice/', component: ConcertListComponent },
+  { path: 'backoffice/create-concert', component: ConcertComponent }  
+];
 
 
 

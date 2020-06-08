@@ -1,5 +1,6 @@
 import { ConcertService } from './../concert/concert.service';
 import { Component, OnInit } from '@angular/core'; 
+import { Concert } from '../shared/concert.model';
 
 @Component({
   selector: 'app-concert-list',
@@ -8,16 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConcertListComponent implements OnInit {
 
+  formData: Concert;
+  //list: Concert[];
+
   constructor(public concertService: ConcertService) { }
 
   ngOnInit() {
     this.concertService.refreshList();
   }
 
-  populateForm(selectedRecord) {
-    this.concertService.formData = Object.assign({}, selectedRecord);
-  }
-
+/*  populateForm(selectedRecord) {
+    this.formData = Object.assign({}, selectedRecord);
+  }*/
+/*
   onDelete(id) {
     if (confirm('Are you sure to delete this concert ?')) {
       this.concertService.deleteConcert(id)
@@ -26,5 +30,5 @@ export class ConcertListComponent implements OnInit {
         },
           err => { console.log(err); })
     }
-  }
+  }*/
 }

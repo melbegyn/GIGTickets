@@ -1,3 +1,6 @@
+
+  <a routerLink='/backoffice/create-concert'>Add a new concert</a>
+
 <table>
   <thead>
     <tr>
@@ -19,7 +22,7 @@
       <td>{{concert.ConcertDate}}</td>
       <td>{{concert.NumberTicketsAvailable}}</td>
       <td>{{concert.TicketPrice}}</td>
-      <td (click)="populateForm(concert)">edit</td>
+      <td><a [routerLink]="['/backoffice/edit-concert', concertId]" class="btn btn-primary">Edit</a></td>
       <td>
         <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(concert.id)"></i>
       </td>

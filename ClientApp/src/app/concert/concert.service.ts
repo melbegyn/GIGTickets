@@ -13,32 +13,36 @@ headers.set('Content-Type', 'application/json');
   providedIn: 'root'
 })
 export class ConcertService {
-  formData: Concert;
+  
   readonly rootURL = environment.apiBaseURI;
+ 
   list: Concert[];
-
 
   constructor(private http: HttpClient) { }
 
- postConcert() {
-    return this.http.post(this.rootURL + '/Concert', this.formData);
- }
-
-  deleteConcert(id) {
-    return this.http.delete(this.rootURL + '/Concert/' + id);
+ postConcert(formData) {
+    return this.http.post(this.rootURL + '/Concert', formData);
   }
 
-
-  putConcert() {
-    return this.http.put(this.rootURL + '/Concert', this.formData.id);
+  putConcert(formData) {
+    return this.http.put(this.rootURL + '/Concert' + formData.Id, formData);
   }
-
 
   refreshList() {
     this.http.get(this.rootURL + '/Concert')
       .toPromise()
       .then(res => this.list = res as Concert[]);
   }
+/*
+
+
+
+
+  deleteConcert(id) {
+    return this.http.delete(this.rootURL + '/Concert/' + id);
+  }
+
+
 
 
   updateConcert(ConcertData) { 
@@ -56,5 +60,5 @@ export class ConcertService {
   deleteConcertById(id) {
     return this.http.delete('https://localhost:44374/api/Concert/' + id, { headers: headers } );
   }
-
+*/
 }

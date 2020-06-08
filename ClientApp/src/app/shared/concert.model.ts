@@ -1,9 +1,9 @@
 export class Concert {
-  id: number;
+  Id: number;
   TourName: string;
   Artist: string;
   Stage: string;
   ConcertDate: Date;
-  NumberTicketsAvailable: number;
+  NbTicketsAvailable: number;
   TicketPrice: number;
 }

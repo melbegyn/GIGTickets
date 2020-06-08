@@ -1,7 +1,7 @@
 <table>
   <thead>
     <tr>
-      <th>id</th>
+      <th>Id</th>
       <th>TourName</th>
       <th>Artist</th>
       <th>Stage</th>
@@ -11,7 +11,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let concert of concertService.list">
+    <tr *ngFor="let concert of concertService.list | async">
       <td>{{concert.Id}}</td>
       <td>{{concert.TourName}}</td>
       <td>{{concert.Artist}}</td>

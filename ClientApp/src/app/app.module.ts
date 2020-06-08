@@ -1,43 +1,40 @@
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
+
+
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { HomeComponent } from './home/home.component'; 
 import { ConcertComponent } from './concert/concert.component';
-import { AppRoutingModule } from './app-routing.module';
 import { ConcertListComponent } from './concert-list/concert-list.component';
- 
+
+import { ConcertService } from './concert/concert.service';
  
 @NgModule({
   declarations: [ 
     AppComponent,  
     NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
+    HomeComponent, 
     ConcertComponent,
     ConcertListComponent, 
   ],
   imports: [ 
     HttpClientModule,
-    FormsModule, // necessary with reactive forms
+    FormsModule,  
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'backoffice', component: ConcertListComponent },
     ]),
   
     AppRoutingModule,
-    ReactiveFormsModule,
     BrowserModule
   ], 
-  providers: [],
+  providers: [ConcertService], // IMPORTANT !!
   bootstrap: [AppComponent]
 })
 export class AppModule { }
