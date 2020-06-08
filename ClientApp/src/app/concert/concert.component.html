@@ -3,7 +3,7 @@
 
   <h2>Concert form</h2>
 
-  <form [formGroup]="concertForm" (ngSubmit)="OnSubmit()">
+  <form [formGroup]="concertForm" (ngSubmit)="addConcert()">
 
     <div class="form-group">
       <label for="tourName">Tour name: </label>
@@ -69,6 +69,7 @@
       <td>{{concert.concertDate}}</td>
       <td>{{concert.numberTicketsAvailable}}</td>
       <td>{{concert.ticketPrice}}</td>
+      <td><button (click)="editConcert(concert.id)">Edit</button></td>
     </tr>
   </tbody>
 </table>

@@ -11,10 +11,11 @@ import { ConcertService } from './concert.service';
 export class ConcertComponent implements OnInit {
 
   concertForm: FormGroup;
-  concertList;
+  concertList = [];
 
-  constructor(private fb: FormBuilder, private http: HttpClient,
-              private concertService: ConcertService) { }
+  constructor(
+    private fb: FormBuilder,
+    private concertService: ConcertService) { }
 
   ngOnInit() {
 
@@ -26,18 +27,30 @@ export class ConcertComponent implements OnInit {
       nbTicketsAvailable: [''],
       ticketPrice: ['']
     });
+
     this.getConcertData();
+    
   }
 
-  OnSubmit() {
-    this.concertService.saveConcert(this.concertForm.value).subscribe(data => {
-      this.getConcertData();
-    });    
+  addConcert() {
+
+    if (this.concertForm.value.id == 0)
+      this.concertService.saveConcert(this.concertForm.value).subscribe(
+        (res: any) => {
+          this.concertForm.patchValue({ id: res.id });
+          error: error => console.error('There was an error!', error)
+        });
   }
 
   getConcertData() {
-    this.concertService.getConcerts().subscribe(data => {
-      this.concertList = data;
+    this.concertService.getConcertList().subscribe(data => {
+        this.concertList = data as [];
+    });
+  }
+
+  editConcert(id) {
+    this.concertService.getConcertById(id).subscribe(data => {
+      this.concertForm.patchValue(data);
     });
   }
 }
