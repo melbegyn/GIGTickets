@@ -19,7 +19,12 @@
       <td>{{concert.ConcertDate}}</td>
       <td>{{concert.NumberTicketsAvailable}}</td>
       <td>{{concert.TicketPrice}}</td>
-       
+      <td>
+      
+        <a [routerLink]="['/concert', concert.Id]">
+          more info
+        </a>
+      </td>
     </tr>
   </tbody>
 </table>

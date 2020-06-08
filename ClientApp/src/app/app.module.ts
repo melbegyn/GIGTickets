@@ -14,6 +14,7 @@ import { ConcertComponent } from './concert/concert.component';
 import { ConcertListComponent } from './concert-list/concert-list.component';
 
 import { ConcertService } from './concert/concert.service';
+import { ConcertDetailsComponent } from './concert-details/concert-details.component';
  
 @NgModule({
   declarations: [ 
@@ -21,7 +22,8 @@ import { ConcertService } from './concert/concert.service';
     NavMenuComponent,
     HomeComponent, 
     ConcertComponent,
-    ConcertListComponent, 
+    ConcertListComponent,
+    ConcertDetailsComponent, 
   ],
   imports: [ 
     HttpClientModule,

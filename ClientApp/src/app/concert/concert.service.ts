@@ -33,6 +33,13 @@ export class ConcertService {
       .toPromise()
       .then(res => this.list = res as Concert[]);
   }
+
+
+  getConcert(id) {
+    return this.http.get('https://localhost:44374/api/Concert/' + id);
+  }
+
+
 /*
 
 
