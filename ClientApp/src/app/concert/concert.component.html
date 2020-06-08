@@ -46,29 +46,4 @@
 
 
 
-<table>
-  <thead>
-    <tr>
-      <th scope="col">id</th>
-      <th scope="col">TourName</th>
-      <th scope="col">Artist</th>
-      <th scope="col">Stage</th>
-      <th scope="col">ConcertDate</th>
-      <th scope="col">NumberTicketsAvailable</th>
-      <th scope="col">TicketPrice</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let concert of Concerts; let i - index">
-      <td>{{i+1}}</td>
-      <td>{{concert.id}}</td>
-      <td>{{concert.tourName}}</td>
-      <td>{{concert.artist}}</td>
-      <td>{{concert.stage}}</td>
-      <td>{{concert.concertDate}}</td>
-      <td>{{concert.numberTicketsAvailable}}</td>
-      <td>{{concert.ticketPrice}}</td>
-      <td><button (click)="editConcert(concert.id)">Edit</button></td>
-    </tr>
-  </tbody>
-</table>
+

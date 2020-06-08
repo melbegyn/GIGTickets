@@ -22,6 +22,15 @@ export class ConcertService {
 
  postConcert() {
     return this.http.post(this.rootURL + '/Concert', this.formData);
+ }
+
+  deleteConcert(id) {
+    return this.http.delete(this.rootURL + '/Concert/' + id);
+  }
+
+
+  putConcert() {
+    return this.http.put(this.rootURL + '/Concert', this.formData.id);
   }
 
 

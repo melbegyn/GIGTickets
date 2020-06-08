@@ -4,11 +4,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ConcertService } from './concert.service';
 import { environment } from '../../environments/environment';
 import { NgForm } from '@angular/forms';
+ 
+
 
 @Component({
   selector: 'app-concert',
   templateUrl: './concert.component.html',
-  styleUrls: ['./concert.component.css']
+  styleUrls: []
 })
 export class ConcertComponent implements OnInit {
 
@@ -20,26 +22,19 @@ export class ConcertComponent implements OnInit {
     private http: HttpClient,
     private concertService: ConcertService) { }
 
+ 
+
   ngOnInit() {
      
-      this.resetForm();
-    
+    this.resetForm;
 
-    
-   // this.concertForm = this.fb.group({
-    //  tourName: ['', Validators.required],
-    //  artist: ['', Validators.required],
-    //  stage: ['', Validators.required],
-    //  concertDate: ['', Validators.required],
-     // nbTicketsAvailable: ['', Validators.required],
-     // ticketPrice: ['', Validators.required]
-    //});
-    //this.getConcertData();
-    
   }
 
   onSubmit(form: NgForm) {
-    this.insertRecord(form);
+    if (this.concertService.formData.id == 0)
+      this.insertRecord(form);
+    else
+      this.updateRecord(form);
   }
 
   insertRecord(form: NgForm) {
@@ -49,6 +44,20 @@ export class ConcertComponent implements OnInit {
         this.concertService.refreshList();
       },
       err => { console.log(err); }
+    )
+  }
+
+
+
+  updateRecord(form: NgForm) {
+    this.concertService.putConcert().subscribe(
+      res => {
+        this.resetForm(form); 
+        this.concertService.refreshList();
+      },
+      err => {
+        console.log(err);
+      }
     )
   }
 
