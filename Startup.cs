@@ -56,6 +56,9 @@ namespace GIGTickets
                 app.UseHsts();
             }
 
+            // Cors configuration
+            app.UseCors(a => a.SetIsOriginAllowed(x => _ = true).AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             if (!env.IsDevelopment())
