@@ -1,1 +1,74 @@
-<p>concert works!</p>
+
+<div class="container" style="margin:10px;">
+
+  <h2>Concert form</h2>
+
+  <form [formGroup]="concertForm" (ngSubmit)="OnSubmit()">
+
+    <div class="form-group">
+      <label for="tourName">Tour name: </label>
+      <input type="text" class="form-control" formControlName="tourName" id="tourName" aria-describedby="infoHelp" placeholder="Enter the name of the tour">
+      <small id="infoHelp" class="form-text text-muted">Petite info en bas ! nice</small>
+    </div>
+
+    <div class="form-group">
+      <label for="artist">Artist: </label>
+      <input type="text" class="form-control" formControlName="artist" id="artist">
+    </div>
+
+    <div class="form-group">
+      <label for="stage">Stage: </label>
+      <input type="text" class="form-control" formControlName="stage" id="stage">
+    </div>
+
+    <div class="form-group row">
+      <label for="concertDate" class="col-2 col-form-label">Date: </label>
+      <div class="col-10">
+        <input class="form-control" type="date" value="2020-07-19" formControlName="concertDate" id="concertDate">
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label for="nbTicketsAvailable">Number of tickets: </label>
+      <input type="text" class="form-control" formControlName="nbTicketsAvailable" id="nbTicketsAvailable">
+    </div>
+
+
+    <div class="form-group">
+      <label for="ticketPrice">Ticket price: </label>
+      <input type="text" class="form-control" formControlName="ticketPrice" id="ticketPrice">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+  </form>
+</div>
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">TourName</th>
+      <th scope="col">Artist</th>
+      <th scope="col">Stage</th>
+      <th scope="col">ConcertDate</th>
+      <th scope="col">NumberTicketsAvailable</th>
+      <th scope="col">TicketPrice</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let concert of Concerts; let i - index">
+      <td>{{i+1}}</td>
+      <td>{{concert.id}}</td>
+      <td>{{concert.tourName}}</td>
+      <td>{{concert.artist}}</td>
+      <td>{{concert.stage}}</td>
+      <td>{{concert.concertDate}}</td>
+      <td>{{concert.numberTicketsAvailable}}</td>
+      <td>{{concert.ticketPrice}}</td>
+    </tr>
+  </tbody>
+</table>
