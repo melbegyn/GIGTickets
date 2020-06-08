@@ -23,30 +23,48 @@ namespace GIGTickets.Controllers
 
         // GET: api/Concert
         [HttpGet]
-        //public async Task<ActionResult<IEnumerable<Concert>>> GetConcert()
         public ActionResult<List<Concert>> Get()
         {
-            return _context.Concert.ToList();
+            return Ok(_context.Concert.ToList());
         }
 
         // GET: api/Concert/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Concert>> GetConcert(int id)
+        public ActionResult<Concert> Get(int id)
         {
-            var concert = await _context.Concert.FindAsync(id);
+            var concert = _context.Concert.FirstOrDefault(a => a.Id == id);
 
-            if (concert == null)
-            {
-                return NotFound();
-            }
+            return Ok(concert);
+        }
 
-            return concert;
+        // POST: api/Concert
+        [HttpPost]
+        public ActionResult<Concert> PostConcert(Concert concert)
+        {
+            _context.Concert.Add(concert);
+            _context.SaveChanges();
+            return Ok(concert);
+            // return CreatedAtAction("GetConcert", new { id = concert.Id }, concert);
+        }
+
+        public ActionResult<Concert> PutConcert(Concert concert)
+        {
+            var concertInDb = _context.Concert.FirstOrDefault(a => a.Id == concert.Id);
+            concertInDb.TourName = concert.TourName;
+            concertInDb.Stage = concert.Stage;
+            concertInDb.Artist = concert.Artist;
+            concertInDb.ConcertDate = concert.ConcertDate;
+            concertInDb.NumberTicketsAvailable = concert.NumberTicketsAvailable;
+            concertInDb.TicketPrice = concert.TicketPrice;
+
+            _context.SaveChanges();
+            return Ok(concert);
         }
 
         // PUT: api/Concert/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
+        /*[HttpPut("{id}")]
         public async Task<IActionResult> PutConcert(int id, Concert concert)
         {
             if (id != concert.Id)
@@ -73,39 +91,29 @@ namespace GIGTickets.Controllers
             }
 
             return NoContent();
-        }
-
-        // POST: api/Concert
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<Concert>> PostConcert(Concert concert)
-        {
-            _context.Concert.Add(concert);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetConcert", new { id = concert.Id }, concert);
-        }
+        }*/
 
         // DELETE: api/Concert/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Concert>> DeleteConcert(int id)
         {
-            var concert = await _context.Concert.FindAsync(id);
-            if (concert == null)
+            var concertInDb = _context.Concert.FirstOrDefault(a => a.Id == id);
+            if (concertInDb == null)
             {
                 return NotFound();
             }
 
-            _context.Concert.Remove(concert);
-            await _context.SaveChangesAsync();
+            _context.Remove(concertInDb);
+            _context.SaveChanges();
 
-            return concert;
+            return Ok(concertInDb);
         }
 
         private bool ConcertExists(int id)
         {
             return _context.Concert.Any(e => e.Id == id);
         }
+
+ 
     }
 }
