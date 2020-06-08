@@ -3,4 +3,31 @@
   <div class="container">
     <router-outlet></router-outlet>
   </div>
+
+  <table *nglf="Concerts && Concerts.length > 0">
+
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>TourName</th>
+        <th>Artist</th>
+        <th>Stage</th>
+        <th>ConcertDate</th>
+        <th>NumberTicketsAvailable</th>
+        <th>TicketPrice</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let concert of concerts; let i - index">
+        <td>{{i+1}}</td>
+        <td>{{concert.id}}</td>
+        <td>{{concert.tourName}}</td>
+        <td>{{concert.artist}}</td>
+        <td>{{concert.stage}}</td>
+        <td>{{concert.concertDate}}</td>
+        <td>{{concert.numberTicketsAvailable}}</td>
+        <td>{{concert.ticketPrice}}</td>
+      </tr>
+    </tbody>
+  </table>
 </body>
