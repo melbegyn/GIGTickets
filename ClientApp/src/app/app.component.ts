@@ -1,26 +1,12 @@
-import { Component, Inject, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-  Concerts: Concert[] = []
-
-  constructor(http: HttpClient, @Inject('BASE URL') baseUrl: string) {
-    http.get<Concert[]>(baseUrl + 'api/Concerts').subscribe(result => {
-      this.Concerts = result;
-    }, error => console.error(error))
-  }
+  title = 'GIGTickets';
+  subtitle = 'Buy best concert tickets!'
 }
 
 
-interface Concert {
-  id: number;
-  TourName: string;
-  Artist: string;
-  Stage: string;
-  ConcertDate: Date;
-  NumberTicketsAvailable: number;
-  TicketPrice: number;
-}
+

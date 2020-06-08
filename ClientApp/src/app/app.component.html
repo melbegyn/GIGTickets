@@ -1,33 +1,17 @@
-<body>
+<!--<body>
   <app-nav-menu></app-nav-menu>
   <div class="container">
     <router-outlet></router-outlet>
   </div>
+</body>-->
 
-  <table *nglf="Concerts && Concerts.length > 0">
+<div style="text-align:center">
 
-    <thead>
-      <tr>
-        <th>id</th>
-        <th>TourName</th>
-        <th>Artist</th>
-        <th>Stage</th>
-        <th>ConcertDate</th>
-        <th>NumberTicketsAvailable</th>
-        <th>TicketPrice</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let concert of concerts; let i - index">
-        <td>{{i+1}}</td>
-        <td>{{concert.id}}</td>
-        <td>{{concert.tourName}}</td>
-        <td>{{concert.artist}}</td>
-        <td>{{concert.stage}}</td>
-        <td>{{concert.concertDate}}</td>
-        <td>{{concert.numberTicketsAvailable}}</td>
-        <td>{{concert.ticketPrice}}</td>
-      </tr>
-    </tbody>
-  </table>
-</body>
+  <h1>
+    {{title}}
+  </h1>
+  <h2>
+    {{subtitle}}
+  </h2>
+
+</div>
