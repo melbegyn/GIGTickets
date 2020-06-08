@@ -20,6 +20,10 @@ namespace GIGTickets
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            // ********** ADD MVC **********
+            services.AddMvc();
+
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -30,6 +34,8 @@ namespace GIGTickets
             // ********** ADD DBCONTEXT HERE **********
             // available for all the controllers
             services.AddDbContext<APIDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
+
+            services.AddTransient<DataSeed>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -76,4 +82,4 @@ namespace GIGTickets
             });
         }
     }
-}
+ 
