@@ -24,6 +24,9 @@ namespace GIGTickets
             // ********** ADD MVC **********
             services.AddMvc();
 
+            // ********** ADD CORS FOR SECURITY REQUEST **********
+            services.AddCors();
+
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -31,11 +34,12 @@ namespace GIGTickets
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            // ********** ADD DBCONTEXT HERE **********
+            // ********** ADD DBCONTEXT **********
             // available for all the controllers
             services.AddDbContext<APIDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
 
-            services.AddTransient<DataSeed>();
+            // ********** DATA SEED **********
+            //services.AddTransient<DataSeed>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -82,4 +86,6 @@ namespace GIGTickets
             });
         }
     }
+
+}
  
