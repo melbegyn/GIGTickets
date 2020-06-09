@@ -2,11 +2,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { ToastrModule } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
  
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -19,6 +20,12 @@ import { UserComponent } from './user/user.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 
 import { ConcertService } from './concert/concert.service';
+import { LoginComponent } from './user/login/login.component';
+import { UserService } from './service/user.service';
+ 
+
+import { AuthInterceptor } from './auth/auth.interceptor';
+import { AuthGuard } from './auth/auth.guard';
 
  
 @NgModule({
@@ -31,31 +38,41 @@ import { ConcertService } from './concert/concert.service';
     ConcertDetailsComponent,
     ConcertEditComponent,
     UserComponent,
-    RegistrationComponent, 
+    RegistrationComponent,
+    LoginComponent, 
   ],
   imports: [ 
     HttpClientModule,
     FormsModule,  
     RouterModule.forRoot([
-      /*{ path: '', component: HomeComponent, pathMatch: 'full' }*/
-      { path: '', redirectTo: '/user/registration', pathMatch: 'full' },
+      { path: '', redirectTo: '/user/login', pathMatch: 'full' },
       {
         path: 'user', component: UserComponent,
         children: [
-          { path: 'registration', component: RegistrationComponent }
+          { path: 'registration', component: RegistrationComponent },
+          { path: 'login', component: LoginComponent }
         ]
-      }
+      },
+      { path: 'home', component: HomeComponent, canActivate: [AuthGuard] }
     ]),
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserModule,
     AngularFontAwesomeModule,
+    BrowserAnimationsModule,
     ToastrModule.forRoot({
       progressBar: true
     })
      
   ], 
-  providers: [ConcertService], // IMPORTANT !!
+  providers: [ 
+    UserService, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    } ,
+    ConcertService
+  ], 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

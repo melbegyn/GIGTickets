@@ -23,10 +23,21 @@ export class RegistrationComponent implements OnInit {
     console.log(" test " + JSON.stringify(this.service.formModel.value))
     this.service.register().subscribe(
       (res: any) => {
-        if (res.succeeded) {
+
+        if (res.key !== '') {
           this.service.formModel.reset();
+          this.toastr.success('User registration successful');
+        }
+        else
+          this.toastr.error('Registration failed');
+
+        /*if (res.succeeded) {
+          console.log(" 0 ")
+          this.service.formModel.reset();
+          console.log(" 1 "  )
           this.toastr.success('New user created!', 'Registration successful.');
         } else {
+          console.log(" 2 ")
           res.errors.forEach(element => {
             switch (element.code) {
               case 'DuplicateUserName':
@@ -38,7 +49,7 @@ export class RegistrationComponent implements OnInit {
                 break;
             }
           });
-        }
+        }*/
       },
       err => {
         console.log(err);

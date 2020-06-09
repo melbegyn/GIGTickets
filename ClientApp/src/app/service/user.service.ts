@@ -42,8 +42,14 @@ export class UserService {
       FullName: this.formModel.value.FullName,
       Password: this.formModel.value.Passwords.Password
     };
+    return this.http.post(this.rootURL + '/ApplicationUser/Register', body);
+  }
 
-    console.log(body.Email);
-      return this.http.post(this.rootURL + '/ApplicationUser/Register', body);
+  login(formData) {
+    return this.http.post(this.rootURL + '/ApplicationUser/Login', formData);
+  }
+
+  getUserProfile() {
+    return this.http.get(this.rootURL + '/UserProfile');
   }
 }
