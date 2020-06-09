@@ -31,11 +31,14 @@ export class ConcertComponent implements OnInit {
       Artist: '',
       Stage: '',
       ConcertDate: null,
-      NbTicketsAvailable: 0,
+      NumberTicketsAvailable: 0,
       TicketPrice: 0
     }
 
   }
+
+
+ 
 
   onSubmit(form: NgForm) {
     //if (this.formData.Id == 0)
@@ -58,17 +61,7 @@ export class ConcertComponent implements OnInit {
 
 
 
-  updateRecord(form: NgForm) {
-    this.service.putConcert(form).subscribe(
-      res => {
-        this.resetForm(form); 
-        this.service.refreshList();
-      },
-      err => {
-        console.log(err);
-      }
-    )
-  }
+ 
 
   resetForm(form?: NgForm) {
     if (form != null)
@@ -79,7 +72,7 @@ export class ConcertComponent implements OnInit {
       Artist: '',
       Stage: '',
       ConcertDate: null,
-      NbTicketsAvailable: 0,
+      NumberTicketsAvailable: 0,
       TicketPrice: 0
     }
   }  

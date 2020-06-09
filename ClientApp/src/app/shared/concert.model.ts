@@ -4,6 +4,6 @@ export class Concert {
   Artist: string;
   Stage: string;
   ConcertDate: Date;
-  NbTicketsAvailable: number;
+  NumberTicketsAvailable: number;
   TicketPrice: number;
 }

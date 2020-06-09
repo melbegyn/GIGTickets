@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GIGTickets.Data;
 using GIGTickets.Models;
+using Microsoft.AspNetCore.Routing;
 
 namespace GIGTickets.Controllers
 {
@@ -20,13 +21,6 @@ namespace GIGTickets.Controllers
         {
             _context = context;
         }
-
-        /*// GET: api/Concert
-        [HttpGet]
-        public ActionResult<List<Concert>> GetConcerts()
-        {
-            return Ok(_context.Concert.ToList());
-        }*/
 
         // GET: api/Concert
         [HttpGet]
@@ -44,15 +38,6 @@ namespace GIGTickets.Controllers
             return Ok(concert);
         }
 
-        /*// POST: api/Concert
-        [HttpPost]
-        public ActionResult<Concert> PostConcert(Concert concert)
-        {
-            _context.Concert.Add(concert);
-            _context.SaveChanges();
-            // return Ok(concert);
-            return CreatedAtAction("GetConcert", new { id = concert.Id }, concert);
-        }*/
 
         // POST: api/Concert
         [HttpPost]
@@ -65,29 +50,18 @@ namespace GIGTickets.Controllers
         }
 
         // PUT: api/Concert/5
-        public ActionResult<Concert> PutConcert(Concert concert)
-        {
-            var concertInDb = _context.Concert.FirstOrDefault(a => a.Id == concert.Id);
-            concertInDb.TourName = concert.TourName;
-            concertInDb.Stage = concert.Stage;
-            concertInDb.Artist = concert.Artist;
-            concertInDb.ConcertDate = concert.ConcertDate;
-            concertInDb.NumberTicketsAvailable = concert.NumberTicketsAvailable;
-            concertInDb.TicketPrice = concert.TicketPrice;
-
-            _context.SaveChanges();
-            return Ok(concert);
-        }
-
-        // PUT: api/Concert/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        /*[HttpPut("{id}")]
-        public async Task<IActionResult> PutConcert(int id, Concert concert)
+        [HttpPut("{id}")]
+        [Route("api/Concert/{id}")]
+        public async Task<IActionResult> PutConcert(int id, [FromBody] Concert concert)
         {
             if (id != concert.Id)
             {
-                return BadRequest();
+                ModelState.AddModelError("Id", "Invalid Id");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
             }
 
             _context.Entry(concert).State = EntityState.Modified;
@@ -108,8 +82,9 @@ namespace GIGTickets.Controllers
                 }
             }
 
-            return NoContent();
-        }*/
+            return AcceptedAtAction("GetConcert", new { id = concert.Id }, concert);
+
+        }
 
         // DELETE: api/Concert/5
         [HttpDelete("{id}")]

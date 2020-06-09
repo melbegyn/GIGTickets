@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Concert } from '../shared/concert.model';
-
+import { map, share } from 'rxjs/operators';
 
 
 const headers: HttpHeaders = new HttpHeaders();
-headers.set('Content-Type', 'application/json');
+headers.set('Content-Type', 'application/json;charset=UTF-8');
 
 
 @Injectable({
@@ -24,8 +24,23 @@ export class ConcertService {
     return this.http.post(this.rootURL + '/Concert', formData);
   }
 
-  putConcert(formData) {
-    return this.http.put(this.rootURL + '/Concert' + formData.Id, formData);
+  putConcert(concert) {
+    console.log("final " + concert.Id);
+
+    console.log("final " + concert.NumberTicketsAvailable);
+    console.log("final " + concert.Artist);
+    console.log("final " + concert.ConcertDate);
+    console.log("final " + concert.Stage);
+    console.log("final " + concert.TicketPrice);
+    console.log("final " + concert.TourName);
+
+
+
+
+
+
+
+    return this.http.put(this.rootURL + '/Concert/' + concert.Id, concert)
   }
 
   refreshList() {
@@ -36,7 +51,7 @@ export class ConcertService {
 
 
   getConcert(id) {
-    return this.http.get('https://localhost:44374/api/Concert/' + id);
+    return this.http.get(this.rootURL + '/Concert/' + id);
   }
 
 
