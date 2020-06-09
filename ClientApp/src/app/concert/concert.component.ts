@@ -46,7 +46,7 @@ export class ConcertComponent implements OnInit {
           Id: 0,
           Category: '',
           Price: 0,
-          Concert: 0
+          ConcertId: 0
         }
       ]
           
@@ -149,7 +149,7 @@ export class ConcertComponent implements OnInit {
           Id: 0,
           Category: '',
           Price: 0,
-          Concert: 0
+          ConcertId: 0
         }
       ]
     }

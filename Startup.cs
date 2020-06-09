@@ -4,9 +4,18 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore; 
  
-using Microsoft.AspNetCore.SpaServices; 
+using Microsoft.AspNetCore.SpaServices;
+using GIGTickets.Models;
 
 namespace GIGTickets
 {
@@ -22,6 +31,23 @@ namespace GIGTickets
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            // ********** AUTHENTICATION **********
+
+            services.AddDefaultIdentity<ApplicationUser>()
+                .AddEntityFrameworkStores<APIDBContext>();
+
+            services.Configure<IdentityOptions>(options =>
+                {
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequiredLength = 4;
+                }
+            );
+
+
 
             // ********** ADD MVC **********
             services.AddMvc();
@@ -67,6 +93,9 @@ namespace GIGTickets
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            // AUTHENTICATION
+            app.UseAuthentication();
 
             // Cors configuration
             //app.UseCors(a => a.SetIsOriginAllowed(x => _ = true).AllowAnyMethod().AllowAnyHeader().AllowCredentials());

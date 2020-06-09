@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GIGTickets.Migrations
 {
     [DbContext(typeof(APIDBContext))]
-    [Migration("20200608004211_InitialDB")]
-    partial class InitialDB
+    [Migration("20200609083049_InitialCreateAgain")]
+    partial class InitialCreateAgain
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,6 +29,7 @@ namespace GIGTickets.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Artist")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ConcertDate")
@@ -38,17 +39,52 @@ namespace GIGTickets.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Stage")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("TicketPrice")
                         .HasColumnType("decimal(18, 2)");
 
                     b.Property<string>("TourName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Concert");
+                });
+
+            modelBuilder.Entity("GIGTickets.Models.Ticket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ConcertId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConcertId");
+
+                    b.ToTable("Ticket");
+                });
+
+            modelBuilder.Entity("GIGTickets.Models.Ticket", b =>
+                {
+                    b.HasOne("GIGTickets.Models.Concert", null)
+                        .WithMany("Tickets")
+                        .HasForeignKey("ConcertId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
