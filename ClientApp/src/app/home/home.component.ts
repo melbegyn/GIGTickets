@@ -10,36 +10,20 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
-
-  userDetails;
-
-  constructor(
-    private router: Router,
-    public concertService: ConcertService,
-    private service: UserService) {
+   
+  constructor( 
+    public concertService: ConcertService ) {
 
   }
 
   ngOnInit() {
 
-    this.service.getUserProfile().subscribe(
-      res => {
-        this.userDetails = res;
-      },
-      err => {
-        console.log(err);
-      },
-    );
+    
 
     this.concertService.refreshList();
 
 
-  }
-
-  onLogout() {
-    localStorage.removeItem('token');
-    this.router.navigate(['/user/login']);
-  }
+  } 
 
 }
 
