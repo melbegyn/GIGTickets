@@ -16,6 +16,8 @@ import { ConcertService } from './concert/concert.service';
 import { ConcertDetailsComponent } from './concert-details/concert-details.component';
 import { ConcertEditComponent } from './concert-edit/concert-edit.component';
 
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+
 
  
 @NgModule({
@@ -36,7 +38,8 @@ import { ConcertEditComponent } from './concert-edit/concert-edit.component';
     ]),
     ReactiveFormsModule,
     AppRoutingModule,
-    BrowserModule
+    BrowserModule,
+    AngularFontAwesomeModule
   ], 
   providers: [ConcertService], // IMPORTANT !!
   bootstrap: [AppComponent]

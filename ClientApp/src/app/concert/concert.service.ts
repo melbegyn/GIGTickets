@@ -24,22 +24,7 @@ export class ConcertService {
     return this.http.post(this.rootURL + '/Concert', formData);
   }
 
-  putConcert(concert) {
-    console.log("final " + concert.Id);
-
-    console.log("final " + concert.NumberTicketsAvailable);
-    console.log("final " + concert.Artist);
-    console.log("final " + concert.ConcertDate);
-    console.log("final " + concert.Stage);
-    console.log("final " + concert.TicketPrice);
-    console.log("final " + concert.TourName);
-
-
-
-
-
-
-
+  putConcert(concert) {    
     return this.http.put(this.rootURL + '/Concert/' + concert.Id, concert)
   }
 
@@ -49,38 +34,12 @@ export class ConcertService {
       .then(res => this.list = res as Concert[]);
   }
 
-
   getConcert(id) {
     return this.http.get(this.rootURL + '/Concert/' + id);
   }
-
-
-/*
-
-
-
-
+   
   deleteConcert(id) {
     return this.http.delete(this.rootURL + '/Concert/' + id);
   }
 
-
-
-
-  updateConcert(ConcertData) { 
-    return this.http.put('https://localhost:44374/api/Concert', ConcertData, { headers: headers });
-  }
-
-  getConcertList() {
-    return this.http.get(environment.apiBaseURI + '/Concert', { headers: headers });
-  }
-
-  getConcertById(id) {
-    return this.http.get('https://localhost:44374/api/Concert/' + id, { headers: headers });
-  }
-
-  deleteConcertById(id) {
-    return this.http.delete('https://localhost:44374/api/Concert/' + id, { headers: headers } );
-  }
-*/
 }

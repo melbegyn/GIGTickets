@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ConcertService } from './concert.service';
-import { environment } from '../../environments/environment';
+import { Component, OnInit } from '@angular/core'; 
+import { ConcertService } from './concert.service'; 
 import { NgForm } from '@angular/forms';
 import { Concert } from '../shared/concert.model';
- 
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -15,13 +13,11 @@ import { Concert } from '../shared/concert.model';
 export class ConcertComponent implements OnInit {
 
   formData: Concert;
-  //list: Concert[];
-  //concertForm: FormGroup;
   concertList;
 
-  constructor(public service: ConcertService) { }
-
- 
+  constructor(
+    public service: ConcertService,
+    private router: Router) { }
 
   ngOnInit() {
      
@@ -37,30 +33,22 @@ export class ConcertComponent implements OnInit {
 
   }
 
-
- 
-
-  onSubmit(form: NgForm) {
-    //if (this.formData.Id == 0)
-      this.insertRecord(form);
-   // else
-     // this.updateRecord(form);
+  onSubmit(form: NgForm) { 
+      this.addConcert(form); 
   }
 
-  insertRecord(form: NgForm) {
-    console.log(form.value);
+  addConcert(form: NgForm) {
+    //console.log(form.value);
     this.service.postConcert(form.value).subscribe(
       res => {
         console.log(res);
         this.resetForm(form);
         this.service.refreshList();
+        this.router.navigate(['backoffice']);
       },
       err => { console.log(err); }
     )
   }
-
-
-
  
 
   resetForm(form?: NgForm) {

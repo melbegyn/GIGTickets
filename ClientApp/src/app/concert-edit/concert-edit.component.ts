@@ -28,8 +28,7 @@ export class ConcertEditComponent implements OnInit {
     if (this.actRoute.snapshot.params["id"]) {
       this.id = this.actRoute.snapshot.params['id'];
     }
-
-   
+     
 
     this.concertForm = this.fb.group({ 
 
@@ -41,9 +40,7 @@ export class ConcertEditComponent implements OnInit {
       NumberTicketsAvailable: [null, Validators.compose([Validators.required])],
       TicketPrice: [null, Validators.compose([Validators.required])]
     });
-
-   
-
+     
   }
 
   ngOnInit() {
@@ -61,7 +58,7 @@ export class ConcertEditComponent implements OnInit {
 
 
 
-  loadConcert(concertId) {
+/*  loadConcert(concertId) {
     this.concertService.getConcert(concertId).subscribe(concert => {
       this.concertData = concert;
 
@@ -72,7 +69,7 @@ export class ConcertEditComponent implements OnInit {
       this.concertForm.controls['TicketPrice'].setValue(this.concertData['TicketPrice']);
       this.concertForm.controls['ConcertDate'].setValue(this.concertData['ConcertDate']);
     }); 
-  }
+  }*/
 
 
   update() {

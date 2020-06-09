@@ -30,13 +30,13 @@
 
     <div class="form-group">
       <label for="numberTicketsAvailable">Number of tickets: </label>
-      <input name="NumberTicketsAvailable" #NumberTicketsAvailable="ngModel" type="text" class="form-control" [(ngModel)]="formData.NumberTicketsAvailable" required>
+      <input name="NumberTicketsAvailable" #NumberTicketsAvailable="ngModel" type="number" class="form-control" [(ngModel)]="formData.NumberTicketsAvailable" required>
     </div>
 
 
     <div class="form-group">
       <label for="ticketPrice">Ticket price: </label>
-      <input name="TicketPrice" #TicketPrice="ngModel" type="text" class="form-control" [(ngModel)]="formData.TicketPrice"  required>
+      <input name="TicketPrice" #TicketPrice="ngModel" type="number" class="form-control" [(ngModel)]="formData.TicketPrice"  required>
     </div>
 
     <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
