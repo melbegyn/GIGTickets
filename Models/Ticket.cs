@@ -20,7 +20,8 @@ namespace GIGTickets.Models
         [Column(TypeName = "decimal(18, 2)")]
         public int Price { get; set; }
 
-        [ForeignKey("Concert")]
-        public int ConcertId { get; set; } 
+        //[ForeignKey("Concert")]
+        public int ConcertId { get; set; }
+        public Concert Concert { get; set; }
     }
 }

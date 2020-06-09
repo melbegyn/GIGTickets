@@ -1,3 +1,4 @@
+<app-nav-menu></app-nav-menu>
 
 <div class="container" style="margin:10px;">
 
@@ -38,12 +39,12 @@
       <label for="ticketPrice">Ticket price: </label>
       <input name="TicketPrice" #TicketPrice="ngModel" type="number" class="form-control" [(ngModel)]="formData.TicketPrice" required>
     </div>
- 
 
-<!--    <div class="form-group">
-      <label for="Category">Category: </label>
-      <input name="Category" #Category="ngModel" type="text" class="form-control" [(ngModel)]="formData.TicketsList.Category" required>
-    </div>-->
+
+    <!--    <div class="form-group">
+          <label for="Category">Category: </label>
+          <input name="Category" #Category="ngModel" type="text" class="form-control" [(ngModel)]="formData.TicketsList.Category" required>
+        </div>-->
 
 
     <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>

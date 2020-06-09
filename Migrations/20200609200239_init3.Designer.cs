@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GIGTickets.Migrations
 {
     [DbContext(typeof(APIDBContext))]
-    [Migration("20200609083712_updateal")]
-    partial class updateal
+    [Migration("20200609200239_init3")]
+    partial class init3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -224,10 +224,12 @@ namespace GIGTickets.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -264,10 +266,12 @@ namespace GIGTickets.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -279,7 +283,7 @@ namespace GIGTickets.Migrations
 
             modelBuilder.Entity("GIGTickets.Models.Ticket", b =>
                 {
-                    b.HasOne("GIGTickets.Models.Concert", null)
+                    b.HasOne("GIGTickets.Models.Concert", "Concert")
                         .WithMany("Tickets")
                         .HasForeignKey("ConcertId")
                         .OnDelete(DeleteBehavior.Cascade)

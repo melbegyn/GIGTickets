@@ -10,7 +10,9 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
-   
+
+  userDetails;
+
   constructor( 
     public concertService: ConcertService ) {
 

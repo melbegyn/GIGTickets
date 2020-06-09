@@ -7,6 +7,10 @@ namespace GIGTickets.Models
 {
     public class Concert
     {
+        public Concert()
+        {
+            Tickets = new HashSet<Ticket>();
+        }
 
         [Key]
         public int Id { get; set; }
@@ -30,8 +34,10 @@ namespace GIGTickets.Models
         [Column(TypeName = "decimal(18, 2)")]
         public int TicketPrice { get; set; }
 
-        [ForeignKey("ConcertId")]
-        public ICollection<Ticket> Tickets { get; set; }
+        //[ForeignKey("ConcertId")]
+        public virtual ICollection<Ticket> Tickets { get; set; }
+
+
 
 
     }
