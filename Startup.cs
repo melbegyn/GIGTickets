@@ -94,8 +94,7 @@ namespace GIGTickets
                 app.UseHsts();
             }
 
-            // AUTHENTICATION
-            app.UseAuthentication();
+   
 
             // Cors configuration
             //app.UseCors(a => a.SetIsOriginAllowed(x => _ = true).AllowAnyMethod().AllowAnyHeader().AllowCredentials());
@@ -113,6 +112,9 @@ namespace GIGTickets
             }
 
             app.UseRouting();
+
+            // AUTHENTICATION
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
