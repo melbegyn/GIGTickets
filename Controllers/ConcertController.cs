@@ -26,9 +26,9 @@ namespace GIGTickets.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Concert>>> GetConcerts()
         {
-            return await _context.Concert.ToListAsync();
+            return await _context.Concert.Include(x => x.Tickets).ToListAsync();
         }
-        
+
         // GET: api/Concert/5
         [HttpGet("{id}")]
         public ActionResult<Concert> GetConcert(int id)
@@ -44,6 +44,7 @@ namespace GIGTickets.Controllers
         public async Task<ActionResult<Concert>> PostConcert([FromBody] Concert concert)
         {
             _context.Concert.Add(concert);
+
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetConcert", new { id = concert.Id }, concert);
@@ -107,6 +108,6 @@ namespace GIGTickets.Controllers
             return _context.Concert.Any(e => e.Id == id);
         }
 
- 
+
     }
 }

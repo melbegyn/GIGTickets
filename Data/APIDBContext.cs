@@ -11,21 +11,20 @@ namespace GIGTickets.Data
 
         public DbSet<Concert> Concert { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        public DbSet<Ticket> Ticket { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            modelBuilder.Entity<Concert>().HasData(
-               new Concert()
-               {
-                   Id = 1,
-                   TourName = "Farewell Yellow Brick Road",
-                   Artist = "Elton John",
-                   Stage = "American Airlines Center",
-                   ConcertDate = DateTime.Parse("2020-6-26"),
-                   NumberTicketsAvailable = 3500,
-                   TicketPrice = 299,
-               }
-            );
+            base.OnModelCreating(builder);
+
+
+
+            builder.Entity<Concert>()
+                .HasMany(c => c.Tickets);
+
+
         }
+ 
 
     }
 }

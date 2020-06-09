@@ -1,3 +1,6 @@
+import { Ticket } from "./ticket.model";
+
+
 export class Concert {
   Id: number;
   TourName: string;
@@ -6,4 +9,6 @@ export class Concert {
   ConcertDate: Date;
   NumberTicketsAvailable: number;
   TicketPrice: number;
+  TicketsList: Ticket[];
+
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -28,6 +29,9 @@ namespace GIGTickets.Models
         [Required]
         [Column(TypeName = "decimal(18, 2)")]
         public int TicketPrice { get; set; }
+
+        [ForeignKey("ConcertId")]
+        public ICollection<Ticket> Tickets { get; set; }
 
 
     }
