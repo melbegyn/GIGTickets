@@ -12,8 +12,7 @@ import { Router } from '@angular/router';
 })
 export class NavMenuComponent {
 
-
-  userDetails;
+   
 
   constructor(
     private router: Router, 
@@ -22,16 +21,7 @@ export class NavMenuComponent {
   }
 
   ngOnInit() {
-
-    this.service.getUserProfile().subscribe(
-      res => {
-        this.userDetails = res;
-      },
-      err => {
-        console.log(err);
-      },
-    );
-     
+ 
   }
 
   onLogout() {

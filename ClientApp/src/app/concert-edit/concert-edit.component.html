@@ -6,7 +6,7 @@
 
   <h2>Concert form</h2>
 
-  <form [formGroup]="concertForm" (ngSubmit)="update(concertForm.value)" #formDir="ngForm" novalidate>
+  <form [formGroup]="concertForm" (ngSubmit)="update()" #formDir="ngForm" novalidate>
 
     <div class="form-group">
       <label for="id">Id: </label>
@@ -47,20 +47,20 @@
       <input formControlName="TicketPrice" type="number" class="form-control" required>
     </div>
 
-    
 
-    <div formGroupName="Tickets">
-      
-        <div *ngFor="let ticket of concertForm.get('Tickets').controls; let i=index" [formGroupName]="i">
-          <label>  Price: </label>
-          <input formControlName="Price" type="number" /><br>
-          <label>{{i}}. Category: </label>
-          <input formControlName="Category" type="text" />
-          <!-- The repeated address template -->
-        </div>
-      
- 
-    </div>
+
+    <!--<div formGroupName="Tickets">
+
+      <div *ngFor="let ticket of concertForm.get('Tickets')['controls']; let i=index" [formGroupName]="i">
+        <label>  Price: </label>
+        <input formControlName="Price" type="number" /><br>
+        <label>{ {i}}. Category: </label>
+        <input formControlName="Category" type="text" />-->
+    <!-- The repeated address template -->
+    <!--</div>
+
+
+  </div>-->
 
 
     <button type="submit" class="btn btn-primary">Submit</button>

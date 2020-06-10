@@ -4,7 +4,7 @@
 
   <h2>Concert form</h2>
 
-  <form [formGroup]="concertForm" (ngSubmit)="update()">
+  <form [formGroup]="concertForm" (ngSubmit)="add(concertForm.value)">
     <!--<input type="hidden" name="Id" [value]="formData.Id">-->
     <div class="form-group">
       <label for="TourName">Tour: </label>
@@ -41,7 +41,7 @@
     </div>
 
       <div formGroupName="Tickets">
-          <div *ngFor="let child of concertForm.get('Tickets').controls; let i = index">
+          <div *ngFor="let child of concertForm.get('Tickets')['controls']; let i = index">
             <div [formGroupName]="i">
               <label>{{i+1}}. Price: </label>
               <input formControlName="Price" type="number" /><br>

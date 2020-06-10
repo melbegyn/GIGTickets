@@ -34,9 +34,13 @@ export class ConcertService {
     console.log("LA 1 ")
     this.http.get(this.rootURL + '/Concert')
       .toPromise()
-      .then(res => this.list = res as Concert[]);
+      .then(res => {
+        this.list = res as Concert[];
+          console.log(JSON.stringify(this.list));
+      }
+    );
 
-    //console.log("LA  !! " + this.list.values)
+    
   }
 
 

@@ -41,8 +41,8 @@ import { AuthGuard } from './auth/auth.guard';
     RegistrationComponent,
     LoginComponent, 
   ],
-  imports: [ 
-    HttpClientModule,
+  imports: [
+    BrowserModule,
     FormsModule,  
     RouterModule.forRoot([
       { path: '', redirectTo: '/user/login', pathMatch: 'full' },
@@ -57,7 +57,7 @@ import { AuthGuard } from './auth/auth.guard';
     ]),
     ReactiveFormsModule,
     AppRoutingModule,
-    BrowserModule,
+    HttpClientModule,
     AngularFontAwesomeModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({

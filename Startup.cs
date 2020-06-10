@@ -22,6 +22,8 @@ using System;
 using System.Text;
 using GIGTickets.Repository;
 using GIGTickets.Data.DataManager;
+using Microsoft.AspNetCore.Authentication.Certificate;
+using Microsoft.AspNetCore.Http;
 
 namespace GIGTickets
 {
@@ -60,6 +62,11 @@ namespace GIGTickets
             //Jwt Authentication
             var key = Encoding.UTF8.GetBytes(Configuration["ApplicationSettings:JWT_Secret"].ToString());
 
+       
+
+            services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme)
+       .AddCertificate();
+
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -78,9 +85,12 @@ namespace GIGTickets
                 };
             });
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddHttpContextAccessor();
 
             // ********** ADD MVC **********
-           // services.AddMvc();
+            // services.AddMvc();
             //services.AddMvc(option => option.EnableEndpointRouting = false)
             //    .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
             //   .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceHandling.Preserve);
@@ -153,6 +163,11 @@ namespace GIGTickets
             // AUTHENTICATION
             app.UseAuthentication();
             app.UseDeveloperExceptionPage();
+
+            app.UseCertificateForwarding(); 
+
+            app.UseAuthorization();
+             
 
             app.UseEndpoints(endpoints =>
             {

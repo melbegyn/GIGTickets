@@ -99,7 +99,7 @@ export class ConcertComponent implements OnInit {
 
  
 
-  submit(value) {
+  add(value) {
     console.log(value);
 
     this.concertService.postConcert(value).subscribe(
@@ -186,7 +186,7 @@ export class ConcertComponent implements OnInit {
     }
    
   */
-    resetForm(form?: NgForm) {
+   /* resetForm(form?: NgForm) {
       if (form != null)
         form.form.reset({ id: this.concertForm.id });
       this.formData = {
@@ -206,7 +206,7 @@ export class ConcertComponent implements OnInit {
           }
         ]
       } 
-    } 
+    } */
 
 
 

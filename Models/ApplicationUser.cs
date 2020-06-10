@@ -11,5 +11,13 @@ namespace GIGTickets.Models
     {
         [Column(TypeName = "nvarchar(150)")]
         public string FullName { get; set; }
+
+        // inherited data
+        //public string UserName { get; set; }
+
+        // inherited data
+        //public string Email { get; set; }
+       // public string Password { get; set; }
+
     }
 }

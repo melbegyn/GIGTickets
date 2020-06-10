@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using GIGTickets.Data;
 using GIGTickets.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -16,9 +17,13 @@ namespace GIGTickets.Controllers
     public class UserProfileController : ControllerBase
     {
         private UserManager<ApplicationUser> _userManager;
-        public UserProfileController(UserManager<ApplicationUser> userManager)
+
+        private APIDBContext _context;
+
+        public UserProfileController(UserManager<ApplicationUser> userManager, APIDBContext context)
         {
             _userManager = userManager;
+            _context = context;
         }
 
         [HttpGet]
@@ -27,15 +32,20 @@ namespace GIGTickets.Controllers
         public async Task<Object> GetUserProfile()
         {
             //string userId = User.Claims.First(c => c.Type == "UserID").Value;
-            string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
- 
-            var user = await _userManager.FindByIdAsync(userId);
-                return new
-                {
-                    user.FullName,
-                    user.Email,
-                    user.UserName
-                };
-            }
+            string userId = User.Claims.FirstOrDefault(c => c.Type == "UserID").Value;
+
+            var user = _context.Users.FirstOrDefault(c => c.Id == userId);
+
+            var email = user.Email;
+
+            //var user = await _userManager.GetUserAsync(HttpContext.User);
+            return new
+            {
+                user.FullName,
+                user.Email,
+                user.UserName
+            };
+        }
+    
     }
 }

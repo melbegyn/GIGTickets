@@ -22,6 +22,8 @@ namespace GIGTickets.Models
         public String Artist { get; set; }
         [Required]
         public String Stage { get; set; }
+        [Required]
+        public String Picture { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
