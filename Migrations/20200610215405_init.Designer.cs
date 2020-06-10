@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GIGTickets.Migrations
 {
     [DbContext(typeof(APIDBContext))]
-    [Migration("20200610114554_extend user prop fin")]
-    partial class extenduserpropfin
+    [Migration("20200610215405_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,6 +41,7 @@ namespace GIGTickets.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FullName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -69,9 +70,6 @@ namespace GIGTickets.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TicketId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -88,8 +86,6 @@ namespace GIGTickets.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("TicketId");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -133,7 +129,7 @@ namespace GIGTickets.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = 100,
                             Artist = "Elton John",
                             ConcertDate = new DateTime(2008, 5, 1, 5, 34, 42, 0, DateTimeKind.Local),
                             NumberTicketsAvailable = 5,
@@ -161,25 +157,30 @@ namespace GIGTickets.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18, 2)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ConcertId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Ticket");
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = 7,
                             Category = "VIP",
-                            ConcertId = 1,
+                            ConcertId = 100,
                             Price = 199m
                         },
                         new
                         {
-                            Id = 2,
+                            Id = 20,
                             Category = "VIP",
-                            ConcertId = 1,
+                            ConcertId = 100,
                             Price = 199m
                         });
                 });
@@ -319,13 +320,6 @@ namespace GIGTickets.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("GIGTickets.Models.ApplicationUser", b =>
-                {
-                    b.HasOne("GIGTickets.Models.Ticket", "Ticket")
-                        .WithMany()
-                        .HasForeignKey("TicketId");
-                });
-
             modelBuilder.Entity("GIGTickets.Models.Ticket", b =>
                 {
                     b.HasOne("GIGTickets.Models.Concert", "Concert")
@@ -333,6 +327,10 @@ namespace GIGTickets.Migrations
                         .HasForeignKey("ConcertId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("GIGTickets.Models.ApplicationUser", "User")
+                        .WithMany("Tickets")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

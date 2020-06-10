@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GIGTickets.Migrations
 {
-    public partial class init3 : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,7 +40,7 @@ namespace GIGTickets.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    FullName = table.Column<string>(type: "nvarchar(150)", nullable: true)
+                    FullName = table.Column<string>(type: "nvarchar(150)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -56,6 +56,7 @@ namespace GIGTickets.Migrations
                     TourName = table.Column<string>(nullable: false),
                     Artist = table.Column<string>(nullable: false),
                     Stage = table.Column<string>(nullable: false),
+                    Picture = table.Column<string>(nullable: false),
                     ConcertDate = table.Column<DateTime>(nullable: false),
                     NumberTicketsAvailable = table.Column<int>(nullable: false),
                     TicketPrice = table.Column<decimal>(type: "decimal(18, 2)", nullable: false)
@@ -179,7 +180,8 @@ namespace GIGTickets.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Category = table.Column<string>(nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    ConcertId = table.Column<int>(nullable: false)
+                    ConcertId = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -190,7 +192,28 @@ namespace GIGTickets.Migrations
                         principalTable: "Concert",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Ticket_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Concert",
+                columns: new[] { "Id", "Artist", "ConcertDate", "NumberTicketsAvailable", "Picture", "Stage", "TicketPrice", "TourName" },
+                values: new object[] { 100, "Elton John", new DateTime(2008, 5, 1, 5, 34, 42, 0, DateTimeKind.Local), 5, "rocketman.png", "American Center Airline", 199m, "Rocketman Tour" });
+
+            migrationBuilder.InsertData(
+                table: "Ticket",
+                columns: new[] { "Id", "Category", "ConcertId", "Price", "UserId" },
+                values: new object[] { 7, "VIP", 100, 199m, null });
+
+            migrationBuilder.InsertData(
+                table: "Ticket",
+                columns: new[] { "Id", "Category", "ConcertId", "Price", "UserId" },
+                values: new object[] { 20, "VIP", 100, 199m, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -235,6 +258,11 @@ namespace GIGTickets.Migrations
                 name: "IX_Ticket_ConcertId",
                 table: "Ticket",
                 column: "ConcertId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ticket_UserId",
+                table: "Ticket",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -261,10 +289,10 @@ namespace GIGTickets.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Concert");
 
             migrationBuilder.DropTable(
-                name: "Concert");
+                name: "AspNetUsers");
         }
     }
 }

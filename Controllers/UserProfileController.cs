@@ -57,10 +57,10 @@ namespace GIGTickets.Controllers
              
             await _userManager.UpdateAsync(user);
 
-            if (userInDb != null)
+            /*if (userInDb != null)
             {
                 userInDb.Ticket = user.Ticket;
-            }
+            }*/
 
             await _context.SaveChangesAsync();
 
