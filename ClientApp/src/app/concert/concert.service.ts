@@ -48,7 +48,7 @@ export class ConcertService {
  getTicketsById(concertId) {
    
    console.log("HERE ")
-   this.http.get(this.rootURL + '/Ticket/' + concertId)
+   this.http.get(this.rootURL + '/Ticket/Add/' + concertId)
      .toPromise()
      .then(res => { 
        this.ticketList = res as Ticket[];

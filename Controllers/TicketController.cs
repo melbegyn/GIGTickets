@@ -23,32 +23,48 @@ namespace GIGTickets.Controllers
         }
 
         // GET: api/Ticket
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Ticket>>> GetTicket()
+       [HttpGet]
+        public async Task<ActionResult<IEnumerable<Ticket>>> GetTickets()
         {
-            return await _context.Ticket.ToListAsync();
+            return await _context.Ticket.Where(f => f.ConcertId == 1).ToListAsync();
+        } 
+
+        //[HttpGet]
+        [HttpGet("Add/{value1}/")]
+        public async Task<ActionResult<IEnumerable<Ticket>>> GetAllTickets(int value1)
+        {
+            return await _context.Ticket.Where(f => f.ConcertId == value1).ToListAsync();
         }
 
 
         [Route("api/Ticket/{param1}")]
-        public ActionResult<List<Concert>> Get([FromQuery] int param1)
+        public ActionResult<IEnumerable<Concert>> Get([FromQuery] int param1)
         {
-            List<Ticket> ticketsList =  _context.Ticket.Where(f => f.ConcertId == param1).ToList();
-            //return  await _context.Ticket.Where(f => f.ConcertId == param1).ToListAsync();
            
-            return Ok(ticketsList);
+            var ticketsList =  _context.Ticket.Where(f => f.ConcertId == param1);
+            //return  await _context.Ticket.Where(f => f.ConcertId == param1).ToListAsync();
+            // var users = _context.Users.Where(u => u == user);
+            List<Ticket> dd = new List<Ticket>();
+
+            foreach (Ticket t in ticketsList.ToList()) {
+                dd.Add(t);
+            }
+
+
+            
+            return Ok(dd);
         }
 
         // GET: api/Ticket
 
-        [HttpGet]
+/*        [HttpGet]
         [Route("AllTickets/{param1}")] //   /api/example/get1/1?param2=4
         public ActionResult<IEnumerable<Ticket>> GetTicketsById([FromQuery]int param1)
         {
             List<Ticket> ticketsList = _context.Ticket.Where(f => f.Id == param1).ToList();
            
             return Ok(ticketsList);
-        }
+        }*/
 
        /* [HttpGet("{concertId}")]
         [Route("api/AllTickets/")]
@@ -58,8 +74,7 @@ namespace GIGTickets.Controllers
             return tickets;
 
         }*/
-
-
+ 
 
         // GET: api/Ticket/5
         [HttpGet("{id}")]
@@ -73,7 +88,7 @@ namespace GIGTickets.Controllers
             }
 
             return ticket;
-        }
+        } 
 
         // PUT: api/Ticket/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for

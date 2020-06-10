@@ -7,22 +7,22 @@
         <table class="table table-striped">
           <tr>
             <td>Tour</td>
-            <td>{{concertData['TourName']}}</td>
+            <td>{{concertData?.TourName}}</td>
           </tr>
           <tr>
             <td>Stage</td>
-            <td>{{concertData['Stage']}}</td>
+            <td>{{concertData?.Stage}}</td>
           </tr>
           <tr>
             <td>Price</td>
-            <td>{{concertData['TicketPrice']}}</td>
+            <td>{{concertData?.TicketPrice}}</td>
           </tr>
           <tr>
-            <td>Ticket</td>
-            <td>{{concertData['Category']}}</td>
+            <td>Number of tickets</td>
+            <td>{{concertData?.NumberTicketsAvailable}}</td>
           </tr>
           <tr>
-            <i class="fa fa-trash" aria-hidden="true" (click)="buyTicket()"></i> Buy ticket
+            <i class="fa fa-shopping-cart" aria-hidden="true" (click)="buyTicket()"></i>  Buy ticket
 
           </tr>
         </table>
@@ -35,13 +35,10 @@
   <table>
     <thead>
       <tr>
-        <th scope="col">id</th>
-        <th scope="col">TourName</th>
-        <th scope="col">Artist</th>
-        <th scope="col">Stage</th>
-        <th scope="col">ConcertDate</th>
-        <th scope="col">NumberTicketsAvailable</th>
-        <th scope="col">TicketPrice</th>
+        <th scope="col">id</th>  
+        <th scope="col">Price</th>
+        <th scope="col">Category</th>
+        <th scope="col">ConcertId</th>
       </tr>
     </thead>
     <tbody>
@@ -53,7 +50,7 @@
 
       </tr>
       <tr>
-        <i class="fa fa-trash" aria-hidden="true" (click)="buyTicket()"></i> Buy ticket
+        <i class="fa fa-shopping-cart" aria-hidden="true" (click)="buyTicket()"></i>  Buy ticket
 
       </tr>
       </tbody>

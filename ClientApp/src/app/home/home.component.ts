@@ -42,8 +42,7 @@ export class HomeComponent {
 
 
     this.concertService.refreshList();
-
-    console.log("ff la " + this.userDetails.userName)
+     
 
   } 
 

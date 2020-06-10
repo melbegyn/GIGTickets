@@ -151,6 +151,11 @@ namespace GIGTickets
                     .AllowAnyMethod()
                     .AllowAnyHeader());
 
+
+            string test = Configuration["ApplicationSettings:Client_URL"].ToString();
+
+            Console.Write(test);
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             if (!env.IsDevelopment())
