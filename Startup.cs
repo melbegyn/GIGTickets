@@ -20,6 +20,8 @@ using GIGTickets.Models;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
+using GIGTickets.Repository;
+using GIGTickets.Data.DataManager;
 
 namespace GIGTickets
 {
@@ -91,8 +93,6 @@ namespace GIGTickets
                 options.JsonSerializerOptions.DictionaryKeyPolicy = null;
             });
              
- 
-
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -128,9 +128,9 @@ namespace GIGTickets
             //app.UseCors(a => a.SetIsOriginAllowed(x => _ = true).AllowAnyMethod().AllowAnyHeader().AllowCredentials());
 
             app.UseCors(options =>
-            options.WithOrigins(Configuration["ApplicationSettings:Client_URL"].ToString())
-            .AllowAnyMethod()
-            .AllowAnyHeader());
+                options.WithOrigins(Configuration["ApplicationSettings:Client_URL"].ToString())
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -143,6 +143,7 @@ namespace GIGTickets
 
             // AUTHENTICATION
             app.UseAuthentication();
+            app.UseDeveloperExceptionPage();
 
             app.UseEndpoints(endpoints =>
             {

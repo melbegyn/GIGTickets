@@ -8,47 +8,78 @@ using GIGTickets.Repository;
 
 namespace GIGTickets.Data.DataManager
 {
-    public class ConcertDataManager : IDataRepository<Concert, ConcertDto>
+    public class ConcertRepository : IConcertRepository, IDisposable
     {
-        readonly APIDBContext _context;
+        private APIDBContext context;
 
-        public ConcertDataManager(APIDBContext context)
+        public ConcertRepository(APIDBContext context)
         {
-            _context = context;
+            this.context = context;
+        }
+ 
+
+   
+
+        public void Update(Concert entityToUpdate, Concert entity)
+        {
+            
         }
 
-        IEnumerable<Concert> IDataRepository<Concert, ConcertDto>.GetAll()
+        public void Delete(Concert entity)
         {
-            return _context.Concert
+            throw new NotImplementedException();
+        }
+
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    context.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        public IEnumerable<Concert> GetConcerts()
+        {
+            return context.Concert
                    .Include(x => x.Tickets)
                    .ToList();
         }
 
-        Concert IDataRepository<Concert, ConcertDto>.Get(long id)
+        public Concert GetConcertByID(int concertId)
         {
-            var author = _context.Concert.SingleOrDefault(b => b.Id == id);
+            // return context.Students.Find(id);
+            var concert = context.Concert.SingleOrDefault(b => b.Id == concertId);
 
-            return author;
+            return concert;
         }
 
-        ConcertDto IDataRepository<Concert, ConcertDto>.GetDto(long id)
+        public void InsertConcert(Concert concert)
         {
-            _context.ChangeTracker.LazyLoadingEnabled = true;
-             
-                var concert = _context.Concert.SingleOrDefault(b => b.Id == id);
-
-                return ConcertDtoMapper.MapToDto(concert);
-            }
-
-        public void Add(Concert entity)
-        {
-            _context.Concert.Add(entity);
-            _context.SaveChanges();
+            context.Concert.Add(concert);
+            context.SaveChanges();
         }
 
-        public void Update(Concert entityToUpdate, Concert entity)
+        public void DeleteConcert(int concertId)
         {
-            entityToUpdate = _context.Concert
+            Concert concert = context.Concert.Find(concertId);
+            context.Concert.Remove(concert);
+        }
+
+        public void UpdateConcert(Concert concert)
+        {
+            /*entityToUpdate = _context.Concert
                    .Include(a => a.Tickets)
                    .Single(b => b.Id == entityToUpdate.Id);
 
@@ -81,16 +112,16 @@ namespace GIGTickets.Data.DataManager
             {
                 _context.Entry(addedBook).State = EntityState.Added;
             }
-
-            _context.SaveChanges();
+            */
+            context.Entry(concert).State = EntityState.Modified;
+             
         }
 
-        public void Delete(Concert entity)
+        public void Save()
         {
-            throw new NotImplementedException();
+            context.SaveChanges();
         }
     }
+}
      
 
-}
- 
