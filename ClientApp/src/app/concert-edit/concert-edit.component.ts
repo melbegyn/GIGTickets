@@ -106,7 +106,9 @@ export class ConcertEditComponent implements OnInit {
 
 
   update() {
-   
+
+
+
     
 
     this.concertForm.setControl('Tickets', this.fb.array(this.concertData.Tickets || []));
@@ -126,5 +128,9 @@ export class ConcertEditComponent implements OnInit {
       this.concertData = concert;
     });
   }
+
+
+  
+
 
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GIGTickets.Data;
 using GIGTickets.Models;
+using System.Net.Http;
 
 namespace GIGTickets.Controllers
 {
@@ -27,6 +28,38 @@ namespace GIGTickets.Controllers
         {
             return await _context.Ticket.ToListAsync();
         }
+
+
+        [Route("api/Ticket/{param1}")]
+        public ActionResult<List<Concert>> Get([FromQuery] int param1)
+        {
+            List<Ticket> ticketsList =  _context.Ticket.Where(f => f.ConcertId == param1).ToList();
+            //return  await _context.Ticket.Where(f => f.ConcertId == param1).ToListAsync();
+           
+            return Ok(ticketsList);
+        }
+
+        // GET: api/Ticket
+
+        [HttpGet]
+        [Route("AllTickets/{param1}")] //   /api/example/get1/1?param2=4
+        public ActionResult<IEnumerable<Ticket>> GetTicketsById([FromQuery]int param1)
+        {
+            List<Ticket> ticketsList = _context.Ticket.Where(f => f.Id == param1).ToList();
+           
+            return Ok(ticketsList);
+        }
+
+       /* [HttpGet("{concertId}")]
+        [Route("api/AllTickets/")]
+        public async Task<ActionResult<IEnumerable<Ticket>>> GetTicketsById(int concertId)
+        { 
+            List<Ticket> tickets = await _context.Ticket.Where(f => f.Id == concertId).ToListAsync();
+            return tickets;
+
+        }*/
+
+
 
         // GET: api/Ticket/5
         [HttpGet("{id}")]

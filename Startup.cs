@@ -90,11 +90,10 @@ namespace GIGTickets
             services.AddHttpContextAccessor();
 
             // ********** ADD MVC **********
-            // services.AddMvc();
-            //services.AddMvc(option => option.EnableEndpointRouting = false)
-            //    .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
-            //   .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceHandling.Preserve);
-
+               services.AddMvc(); 
+             //services.AddMvc(option => option.EnableEndpointRouting = false) 
+             //  .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+              
             // ********** ADD CORS FOR SECURITY REQUEST **********
             services.AddCors();
 
@@ -102,6 +101,7 @@ namespace GIGTickets
 	        //remove default json formatting
 	        services.AddControllers().AddJsonOptions(options =>
             {
+                //options.RespectBrowserAcceptHeader = true; // false by default
                 options.JsonSerializerOptions.PropertyNamingPolicy = null;
                 options.JsonSerializerOptions.DictionaryKeyPolicy = null;
             });

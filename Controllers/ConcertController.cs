@@ -26,7 +26,10 @@ namespace GIGTickets.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Concert>>> GetConcerts()
         {
+            //List <Ticket> ticketsList = await _context.Ticket.Where(f => f.ConcertId == 1).ToListAsync();
+
             return await _context.Concert.ToListAsync();
+           
         }
 
         // GET: api/Concert/5

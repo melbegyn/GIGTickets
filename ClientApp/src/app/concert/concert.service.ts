@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Concert } from '../shared/concert.model';
 import { map, share } from 'rxjs/operators';
+import { Ticket } from '../shared/ticket.model';
 
 
 const headers: HttpHeaders = new HttpHeaders();
@@ -17,6 +18,7 @@ export class ConcertService {
   readonly rootURL = environment.apiBaseURI;
  
   list: Concert[];
+  ticketList: Ticket[];
 
   constructor(private http: HttpClient) { }
 
@@ -43,6 +45,17 @@ export class ConcertService {
     
   }
 
+ getTicketsById(concertId) {
+   
+   console.log("HERE ")
+   this.http.get(this.rootURL + '/Ticket/' + concertId)
+     .toPromise()
+     .then(res => { 
+       this.ticketList = res as Ticket[];
+       console.log(JSON.stringify(this.ticketList));
+     }
+     );
+}
 
   getConcerts(form) {
     return this.http.get(this.rootURL + '/Concert/' + form);

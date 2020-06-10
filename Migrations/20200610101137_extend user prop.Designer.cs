@@ -4,14 +4,16 @@ using GIGTickets.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GIGTickets.Migrations
 {
     [DbContext(typeof(APIDBContext))]
-    partial class APIDBContextModelSnapshot : ModelSnapshot
+    [Migration("20200610101137_extend user prop")]
+    partial class extenduserprop
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,15 +69,15 @@ namespace GIGTickets.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TicketId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
+
+                    b.Property<int?>("ticketId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -87,7 +89,7 @@ namespace GIGTickets.Migrations
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.HasIndex("TicketId");
+                    b.HasIndex("ticketId");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -319,9 +321,9 @@ namespace GIGTickets.Migrations
 
             modelBuilder.Entity("GIGTickets.Models.ApplicationUser", b =>
                 {
-                    b.HasOne("GIGTickets.Models.Ticket", "Ticket")
+                    b.HasOne("GIGTickets.Models.Ticket", "ticket")
                         .WithMany()
-                        .HasForeignKey("TicketId");
+                        .HasForeignKey("ticketId");
                 });
 
             modelBuilder.Entity("GIGTickets.Models.Ticket", b =>

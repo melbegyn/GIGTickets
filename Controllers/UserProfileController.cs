@@ -46,6 +46,27 @@ namespace GIGTickets.Controllers
                 user.UserName
             };
         }
-    
+
+        // POST: api/UserProfile
+        [HttpPut("{id}")]
+        public async Task<ActionResult<ApplicationUser>> Put(String idString, [FromBody] ApplicationUser user)
+        {
+            string userId = User.Claims.FirstOrDefault(c => c.Type == "UserID").Value;
+
+            var userInDb = _context.Users.FirstOrDefault(c => c.Id == idString);
+             
+            await _userManager.UpdateAsync(user);
+
+            if (userInDb != null)
+            {
+                userInDb.Ticket = user.Ticket;
+            }
+
+            await _context.SaveChangesAsync();
+
+            return AcceptedAtAction("GetUserProfile", new { id = userInDb.Id }, userInDb);
+            // return AcceptedAtAction("GetConcert", new { id = concert.Id }, concert);
+        }
+
     }
 }
