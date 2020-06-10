@@ -9,6 +9,6 @@ export class Concert {
   ConcertDate: Date;
   NumberTicketsAvailable: number;
   TicketPrice: number;
-  TicketsList: Ticket[];
+  Tickets: Ticket[];
 
 }

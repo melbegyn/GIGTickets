@@ -80,7 +80,10 @@ namespace GIGTickets
 
 
             // ********** ADD MVC **********
-            services.AddMvc();
+            // services.AddMvc();
+            services.AddMvc(option => option.EnableEndpointRouting = false)
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+                .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             // ********** ADD CORS FOR SECURITY REQUEST **********
             services.AddCors();

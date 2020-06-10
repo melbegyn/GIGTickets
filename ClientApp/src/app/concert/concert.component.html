@@ -4,53 +4,58 @@
 
   <h2>Concert form</h2>
 
-  <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
-    <input type="hidden" name="Id" [value]="formData.Id">
+  <form [formGroup]="concertForm" (ngSubmit)="submit(concertForm.value)">
+    <!--<input type="hidden" name="Id" [value]="formData.Id">-->
     <div class="form-group">
-      <label for="tourName">Tour: </label>
-      <input name="TourName" #TourName="ngModel" [(ngModel)]="formData.TourName" type="text" class="form-control" required>
+      <label for="TourName">Tour: </label>
+      <input formControlName="TourName" type="text" class="form-control" required>
     </div>
 
     <div class="form-group">
-      <label for="artist">Artist: </label>
-      <input name="Artist" #Artist="ngModel" type="text" class="form-control" [(ngModel)]="formData.Artist" required>
+      <label for="Artist">Artist: </label>
+      <input formControlName="Artist" type="text" class="form-control" required>
     </div>
 
     <div class="form-group">
       <label for="stage">Stage: </label>
-      <input name="Stage" #Stage="ngModel" type="text" class="form-control" [(ngModel)]="formData.Stage" required>
+      <input formControlName="Stage" type="text" class="form-control" required>
     </div>
 
     <div class="form-group row">
       <label for="concertDate" class="col-2 col-form-label">Date: </label>
       <div class="col-10">
-        <input name="ConcertDate" #ConcertDate="ngModel" class="form-control" type="date" value="2020-07-19" [(ngModel)]="formData.ConcertDate" required>
+        <input formControlName="ConcertDate" class="form-control" type="date" value="2020-07-19" required>
       </div>
     </div>
 
 
     <div class="form-group">
       <label for="numberTicketsAvailable">Number of tickets: </label>
-      <input name="NumberTicketsAvailable" #NumberTicketsAvailable="ngModel" type="number" class="form-control" [(ngModel)]="formData.NumberTicketsAvailable" required>
+      <input formControlName="NumberTicketsAvailable" type="number" class="form-control" required>
     </div>
 
 
     <div class="form-group">
       <label for="ticketPrice">Ticket price: </label>
-      <input name="TicketPrice" #TicketPrice="ngModel" type="number" class="form-control" [(ngModel)]="formData.TicketPrice" required>
+      <input formControlName="TicketPrice" type="number" class="form-control" required>
     </div>
 
 
-    <!--    <div class="form-group">
-          <label for="Category">Category: </label>
-          <input name="Category" #Category="ngModel" type="text" class="form-control" [(ngModel)]="formData.TicketsList.Category" required>
-        </div>-->
-
-
-    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
+ 
+      <div formGroupName="Tickets">
+          <div *ngFor="let child of concertForm.get('Tickets').controls; let i = index">
+            <div [formGroupName]="i">
+              <label>{{i+1}}. Price: </label>
+              <input formControlName="Price" type="number" /><br>
+              <label>{{i+1}}. Category: </label>
+              <input formControlName="Category" type="text" />
+            </div>
+          </div>
+        
+        </div>
+     
+      <button type="submit" class="btn btn-primary" [disabled]="!concertForm.valid">Submit</button>
   </form>
 </div>
-
-
-
-
+ 
+<pre>{{concertForm.value | json }}</pre>

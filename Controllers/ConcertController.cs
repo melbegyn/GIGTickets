@@ -31,11 +31,16 @@ namespace GIGTickets.Controllers
 
         // GET: api/Concert/5
         [HttpGet("{id}")]
-        public ActionResult<Concert> GetConcert(int id)
+        public async Task<ActionResult<Concert>> GetConcert(int id)
         {
-            var concert = _context.Concert.FirstOrDefault(a => a.Id == id);
+            var concert = await _context.Concert.FindAsync(id);
 
-            return Ok(concert);
+            if (concert == null)
+            {
+                return NotFound();
+            }
+
+            return concert;
         }
 
 
@@ -47,7 +52,8 @@ namespace GIGTickets.Controllers
 
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetConcert", new { id = concert.Id }, concert);
+            // return CreatedAtAction("GetConcert", new { id = concert.Id }, concert);
+            return AcceptedAtAction("GetConcert", new { id = concert.Id }, concert);
         }
 
         // PUT: api/Concert/5

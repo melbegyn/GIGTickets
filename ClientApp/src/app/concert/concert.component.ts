@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core'; 
-import { ConcertService } from './concert.service'; 
-import { NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { ConcertService } from './concert.service';
+import { NgForm, FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Concert } from '../shared/concert.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Ticket } from '../shared/ticket.model';
@@ -13,150 +13,203 @@ import { Ticket } from '../shared/ticket.model';
 })
 export class ConcertComponent implements OnInit {
 
-  formData: Concert;
-  concertList;
+  concertForm: FormGroup;
+  fields: any;
 
- 
-  ticketsList: Array<Ticket> = [];
+  Tickets: FormArray; 
 
+  ticketForm: FormGroup;
 
   constructor(
-    public service: ConcertService,
-    private router: Router) {
+    private router: Router,
+    private actRoute: ActivatedRoute,
+    private concertService: ConcertService,
+    private fb: FormBuilder) {
 
-   // type Ticket = Array<{ id: number, text: string }>;
+    this.concertForm = this.fb.group({
 
-  
+      Id: 0,
+      TourName: ['', Validators.required],
+      Artist: ['', Validators.compose([Validators.required])],
+      Stage: ['', Validators.compose([Validators.required])],
+      ConcertDate: [null, Validators.compose([Validators.required])],
+      NumberTicketsAvailable: [null, Validators.compose([Validators.required])],
+      TicketPrice: [null, Validators.compose([Validators.required])],
+      Tickets: this.fb.array([
+        this.ticketForm = this.fb.group({
+          Id: 0,
+          ConcertId: 0,
+          Price: 0,
+          Category: ['', Validators.required]
 
+        })])
+
+
+    });
+   /* console.log("1")
+   
+    console.log("2")
+    // patch the values from your object
+    this.patch();
+    console.log("3")*/
 
   }
+
+
+ 
 
   ngOnInit() {
-     
-    this.formData = {
+
+    /*this.fields = {
       Id: 0,
-      TourName: '',
-      Artist: '',
-      Stage: '',
-      ConcertDate: null,
-      NumberTicketsAvailable: 0,
-      TicketPrice: 0,
-      TicketsList: [
-        {
-          Id: 0,
-          Category: '',
-          Price: 0,
-          ConcertId: 0
-        }
-      ]
-          
+      TourName: ['', Validators.required],
+      Artist: ['', Validators.compose([Validators.required])],
+      Stage: ['', Validators.compose([Validators.required])],
+      ConcertDate: [null, Validators.compose([Validators.required])],
+      NumberTicketsAvailable: [null, Validators.compose([Validators.required])],
+      TicketPrice: [null, Validators.compose([Validators.required])],
       
-    }
+      Tickets: {
+        Ticket: [
+          {
+            Id: 1,
+            Price: 20,
+            Category: 'VIP',
+            ConcertId: 0
 
-  }
-
-  onSubmit(form: NgForm) { 
-      this.addConcert(form); 
-  }
-
-/*  generate(): string {
-    let isUnique = false;
-    let tempId = '';
-
-    while (!isUnique) {
-      tempId = this.generator();
-      if (!this.idExists(tempId)) {
-        isUnique = true;
-        this.ids.push(tempId);
+          },
+          {
+            Id: 2,
+            Price: 30,
+            Category: 'VIP',
+            ConcertId: 0
+          }
+        ]
       }
-    }
-
-    return tempId;
-  }*/
-  counter(i: number) {
-    return new Array(i);
-  }
-
-
-
-  addConcert(form: NgForm) {
-    //console.log(form.value);
-
-     
-    console.log(" form.value.NumberTicketsAvailable " + form.value.NumberTicketsAvailable);
-
-    console.log(" form.value.category " + form.value.Category);
-
-    const nbOfTickets = form.value.NumberTicketsAvailable;
- 
-    for (var counter: number = 1; counter < nbOfTickets; counter++) {
-
-      console.log(counter);
-      const ticket: Ticket = {
-        Id: counter,
-        Price: form.value.TicketPrice,
-        Category: form.value.Category,
-        ConcertId: form.value.Id
-      }
-      this.ticketsList.push(ticket);
-    }
-
-    for (let ticket of this.ticketsList) {
-      console.log(" ticket" + ticket.Category);
-      console.log(" ticket" + ticket.Id);
-      console.log(" ticket" + ticket.ConcertId);
-      console.log(" ticket" + ticket.Price);
-    }
-    
-/*   
-      { id: 1, text: 'Sentence 1' },
-      { id: 2, text: 'Sentence 2' },
-      { id: 3, text: 'Sentence 3' },
-      { id: 4, text: 'Sentenc4 ' },
-    ];*/
-
- 
-    form.value.TicketsList = this.ticketsList;
+    };*/
+/*    this.concertForm = this.fb.group({
+      Tickets: this.fb.group({
+        Ticket: this.fb.array([])
+      })
+    });*/
+  //  this.patch()
 
     
-    console.log(" values " + JSON.stringify(form.value));
+  }
+
  
-    this.service.postConcert(form.value).subscribe(
+
+  submit(value) {
+    console.log(value);
+
+    this.concertService.postConcert(value).subscribe(
       res => {
         console.log(res);
-        this.resetForm(form);
-        this.service.refreshList();
+        //this.resetForm(this.concertForm);
+        this.concertService.refreshList();
         this.router.navigate(['backoffice']);
       },
       err => { console.log(err); }
     )  
   }
- 
 
-  resetForm(form?: NgForm) {
-    if (form != null)
-      form.form.reset({ id: this.formData.Id });
-    this.formData = {
-      Id: 0,
-      TourName: '',
-      Artist: '',
-      Stage: '',
-      ConcertDate: null,
-      NumberTicketsAvailable: 0,
-      TicketPrice: 0,
-      TicketsList: [
-        {
-          Id: 0,
-          Category: '',
-          Price: 0,
-          ConcertId: 0
-        }
-      ]
+  patch() {
+    const control = <FormArray>this.concertForm.get('Tickets.Ticket');
+     
+    this.fields.Tickets.Ticket.forEach(x => {
+      control.push(this.patchValues(x.Id, x.ConcertId, x.Price, x.Category))
+    })
+
+     
+    console.log(JSON.stringify(this.concertForm.value))
+  }
+
+
+  patchValues(Id, ConcertId, Price, Category) {
+    return this.fb.group({
+      id: [Id],
+      ConcertId: [ConcertId],
+      Price: [Price],
+      Category: [Category]
+    })
+  }
+   
+  onSubmit(form: NgForm) {
+    //this.addConcert(form); 
+  }
+
+  /* 
+    counter(i: number) {
+      return new Array(i);
     }
-  }  
+  
+  
+  
+    addConcert(form: NgForm) { 
+   
+      const nbOfTickets = form.value.NumberTicketsAvailable;
+   
+      for (var counter: number = 1; counter < nbOfTickets; counter++) {
+  
+        console.log(counter);
+        const ticket: Ticket = {
+          Id: counter,
+          Price: form.value.TicketPrice,
+          Category: form.value.Category,
+          ConcertId: form.value.Id
+        }
+       // this.ticketsList.push(ticket);
+      }
+  
+  
+   
+      form.value.TicketsList = this.ticketsList;
+  
+      for (let ticket of form.value.TicketsList) {
+        console.log(" ticket" + ticket.Category);
+        console.log(" ticket" + ticket.Id);
+        console.log(" ticket" + ticket.ConcertId);
+        console.log(" ticket" + ticket.Price);
+      }
+      
+      console.log(" values " + JSON.stringify(form.value));
+   
+      this.service.postConcert(form.value).subscribe(
+        res => {
+          console.log(res);
+          this.resetForm(form);
+          this.service.refreshList();
+          this.router.navigate(['backoffice']);
+        },
+        err => { console.log(err); }
+      )  
+    }
+   
+  */
+    resetForm(form?: NgForm) {
+      if (form != null)
+        form.form.reset({ id: this.concertForm.id });
+      this.formData = {
+        Id: 0,
+        TourName: '',
+        Artist: '',
+        Stage: '',
+        ConcertDate: null,
+        NumberTicketsAvailable: 0,
+        TicketPrice: 0,
+        TicketsList: [
+          {
+            Id: 0,
+            Category: '',
+            Price: 0,
+            ConcertId: 0
+          }
+        ]
+      } 
+    } 
 
- 
- 
 
- 
+
+
+
 }
