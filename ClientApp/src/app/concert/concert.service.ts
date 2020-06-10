@@ -20,11 +20,12 @@ export class ConcertService {
 
   constructor(private http: HttpClient) { }
 
- postConcert(formData) {
-    return this.http.post(this.rootURL + '/Concert', formData);
+  postConcert(concert) {
+    return this.http.post(this.rootURL + '/Concert', concert);
   }
 
-  putConcert(concert) {    
+  putConcert(concert) {
+    console.log("concert final " + JSON.stringify(concert.value))
     return this.http.put(this.rootURL + '/Concert/' + concert.Id, concert)
   }
 

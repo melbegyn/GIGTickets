@@ -16,6 +16,7 @@ namespace GIGTickets.Data
 
         public DbSet<Ticket> Ticket { get; set; }
 
+   
         protected override void OnModelCreating(ModelBuilder builder)
         {
           

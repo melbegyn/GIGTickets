@@ -35,6 +35,11 @@ namespace GIGTickets.Controllers
         {
             var concert = _context.Concert.FirstOrDefault(a => a.Id == id);
 
+            //var concert = _context.Concert.Include(p => p.Tickets).Where(p => p.Id == id).Find(id);
+           // var concert = _context.Concert
+           //      .Include(x => x.Tickets)
+           //      .SingleOrDefaultAsync(m => m.Id == id);
+
             return Ok(concert);
         }
 

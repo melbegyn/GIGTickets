@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ConcertService } from '../concert/concert.service';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 import { Concert } from '../shared/concert.model';
 import { HttpParams, HttpHeaders } from '@angular/common/http';
 
@@ -17,7 +17,9 @@ export class ConcertEditComponent implements OnInit {
   id: number;
   concertData: any;
   concertId: any;
+  Tickets: FormArray;
 
+  ticketForm: FormGroup;
 
   constructor(
     private router: Router,
@@ -38,22 +40,53 @@ export class ConcertEditComponent implements OnInit {
       Stage: ['', Validators.compose([Validators.required])],
       ConcertDate: [null, Validators.compose([Validators.required])],
       NumberTicketsAvailable: [null, Validators.compose([Validators.required])],
-      TicketPrice: [null, Validators.compose([Validators.required])]
+      TicketPrice: [null, Validators.compose([Validators.required])],
+      Tickets: this.fb.array([
+        this.ticketForm = this.fb.group({
+          Id: [null, Validators.compose([Validators.required])],
+          ConcertId: [null, Validators.compose([Validators.required])],
+          Price: [null, Validators.compose([Validators.required])],
+          Category: ['', Validators.required]
+
+        })])
+
     });
      
   }
 
   ngOnInit() {
 
+   // this.concertForm.controls['Tickets'] = this.fb.array([]);
+
+    console.log("this.id " + this.id)
+
     if (this.id > 0) {
       this.concertService.getConcert(this.id)
-        .subscribe(resp => this.concertForm.setValue(resp)
+        .subscribe(resp => {
+          this.concertData = resp;
+  
+          this.concertForm.setValue(resp)
+        } 
           , err => {
             console.log(err);
           });
+
+ 
+/*      this.concertForm.patchValue({
+        Id: this.id,
+        TourName: this.concertData.TourName,
+        Artist: this.concertData.Artist,
+        Stage: this.concertData.Stage,
+        ConcertDate: this.concertData.ConcertDate,
+        NumberTicketsAvailable: this.concertData.NumberTicketsAvailable,
+        TicketPrice: this.concertData.TicketPrice,
+      });
+      this.concertForm.setControl('Tickets', this.fb.array(this.concertData.Tickets || []));*/
     }
 
-    //console.log(" values " + JSON.stringify(this.concertForm.value));  
+   // this.concertForm.setControl('Tickets', this.fb.array([]));
+
+    console.log(" values " + JSON.stringify(this.concertForm.value));  
   }
 
 
@@ -73,15 +106,18 @@ export class ConcertEditComponent implements OnInit {
 
 
   update() {
+   
+    
 
-    console.log(" values " + JSON.stringify(this.concertForm.value));  
+    this.concertForm.setControl('Tickets', this.fb.array(this.concertData.Tickets || []));
 
+     
     this.concertService.putConcert(this.concertForm.value)
       .subscribe((data) => {
         this.router.navigate(['backoffice']);
       }, err => {
         console.log(err);
-      });
+      }); 
   }
 
 
