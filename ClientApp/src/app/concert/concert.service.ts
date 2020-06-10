@@ -29,10 +29,20 @@ export class ConcertService {
   }
 
   refreshList() {
+
+    console.log("LA 1 ")
     this.http.get(this.rootURL + '/Concert')
       .toPromise()
       .then(res => this.list = res as Concert[]);
+
+    //console.log("LA  !! " + this.list.values)
   }
+
+
+  getConcerts(form) {
+    return this.http.get(this.rootURL + '/Concert/' + form);
+  }
+
 
   getConcert(id) {
     return this.http.get(this.rootURL + '/Concert/' + id);

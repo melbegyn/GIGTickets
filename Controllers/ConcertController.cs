@@ -26,23 +26,17 @@ namespace GIGTickets.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Concert>>> GetConcerts()
         {
-            return await _context.Concert.Include(x => x.Tickets).ToListAsync();
+            return await _context.Concert.ToListAsync();
         }
 
         // GET: api/Concert/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Concert>> GetConcert(int id)
+        public ActionResult<Concert> GetConcert(int id)
         {
-            var concert = await _context.Concert.FindAsync(id);
+            var concert = _context.Concert.FirstOrDefault(a => a.Id == id);
 
-            if (concert == null)
-            {
-                return NotFound();
-            }
-
-            return concert;
+            return Ok(concert);
         }
-
 
         // POST: api/Concert
         [HttpPost]

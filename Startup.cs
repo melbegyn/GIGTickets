@@ -80,10 +80,10 @@ namespace GIGTickets
 
 
             // ********** ADD MVC **********
-            // services.AddMvc();
-            services.AddMvc(option => option.EnableEndpointRouting = false)
-                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
-                .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+           // services.AddMvc();
+            //services.AddMvc(option => option.EnableEndpointRouting = false)
+            //    .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+            //   .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceHandling.Preserve);
 
             // ********** ADD CORS FOR SECURITY REQUEST **********
             services.AddCors();
@@ -95,7 +95,13 @@ namespace GIGTickets
                 options.JsonSerializerOptions.PropertyNamingPolicy = null;
                 options.JsonSerializerOptions.DictionaryKeyPolicy = null;
             });
-             
+
+            services.AddMvc().AddJsonOptions(o =>
+            {
+                o.JsonSerializerOptions.PropertyNamingPolicy = null;
+                o.JsonSerializerOptions.DictionaryKeyPolicy = null;
+            });
+
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
