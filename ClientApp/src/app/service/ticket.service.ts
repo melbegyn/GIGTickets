@@ -13,8 +13,24 @@ export class TicketService {
 
   constructor(private http: HttpClient) { }
 
-  public getTicketsById(id): Observable<Ticket[]> {
-    const url = this.rootURL + '/Ticket/Add/' + id;
+  public getTicketsByConcert(id): Observable<Ticket[]> {
+    const url = this.rootURL + '/Ticket/Concert/' + id;
     return this.http.get<Ticket[]>(url);
   }
+
+  public getTicketsByUser(id): Observable<Ticket[]> {
+    const url = this.rootURL + '/Ticket/User/' + id;
+    return this.http.get<Ticket[]>(url);
+  }
+
+
+  putTicket(ticket) {
+    return this.http.put(this.rootURL + '/UserProfile/' + ticket.Id, ticket)
+  }
+/*
+  getTicketsById(concertId) {
+    return this.http.get(this.rootURL + '/Ticket/Add/' + concertId);
+  }*/
+
+ 
 }

@@ -22,22 +22,22 @@
       <input formControlName="Email" type="text" class="form-control" required>
     </div>
 
-    <div formGroupName="Tickets">
+<!--    <div formGroupName="Tickets">
       <div *ngFor="let child of userForm.get('Tickets').controls; let i = index">
         <div [formGroupName]="i">
-          <label>{{i+1}}. Price: </label>
+          <label>{ {i+1}}. Price: </label>
           <input formControlName="Price" type="number" /><br>
-          <label>{{i+1}}. Category: </label>
+          <label>{ {i+1}}. Category: </label>
           <input formControlName="Category" type="text" />
-          <label>{{i+1}}. Id: </label>
+          <label>{ {i+1}}. Id: </label>
           <input formControlName="Id" type="number" /><br>
-          <label>{{i+1}}. ConcertId: </label>
+          <label>{ {i+1}}. ConcertId: </label>
           <input formControlName="ConcertId" type="number" />
-          <label>{{i+1}}. UserId: </label>
+          <label>{ {i+1}}. UserId: </label>
           <input formControlName="UserId" type="number" />
         </div>
       </div>
-    </div>
+    </div>-->
 
     <button type="submit" class="btn btn-primary">Buy Ticket</button>
   </form>

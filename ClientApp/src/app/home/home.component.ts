@@ -14,9 +14,9 @@ import { User } from '../shared/user.model';
 })
 export class HomeComponent {
 
- // userDetails;
-
   currentUser: User;
+
+ // userDetails;
 
   constructor( 
     public concertService: ConcertService,

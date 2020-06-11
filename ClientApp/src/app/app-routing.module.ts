@@ -13,6 +13,7 @@ import { RegistrationComponent } from './user/registration/registration.componen
 import { LoginComponent } from './user/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { PaymentComponent } from './payment/payment.component';
+import { ProfileComponent } from './user/profile/profile.component';
 
 
 // all the paths of the pages
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'backoffice/create-concert', component: ConcertComponent },
   { path: 'backoffice/edit-concert/:id', component: ConcertEditComponent },
 
+  { path: 'profile', component: ProfileComponent },
  
 ];
  

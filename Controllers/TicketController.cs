@@ -30,11 +30,19 @@ namespace GIGTickets.Controllers
         } 
 
         //[HttpGet]
-        [HttpGet("Add/{value1}/")]
-        public async Task<ActionResult<IEnumerable<Ticket>>> GetAllTickets(int value1)
+        [HttpGet("Concert/{value1}/")]
+        public async Task<ActionResult<IEnumerable<Ticket>>> GetAllTicketsByConcert(int value1)
         {
             return await _context.Ticket.Where(f => f.ConcertId == value1).ToListAsync();
         }
+
+        //[HttpGet]
+        [HttpGet("User/{value1}/")]
+        public async Task<ActionResult<IEnumerable<Ticket>>> GetAllTicketsByUser(String value1)
+        {
+            return await _context.Ticket.Where(f => f.UserId == value1).ToListAsync();
+        }
+
 
 
         [Route("api/Ticket/{param1}")]

@@ -58,19 +58,5 @@ export class ConcertService {
     return this.http.delete(this.rootURL + '/Concert/' + id);
   }
 
-
-  // ********************* TICKETS PART !!!! *********************
-
-  putTicket(ticket) {
-    
-    return this.http.put(this.rootURL + '/UserProfile/' + ticket.Id, ticket)
-  }
    
-  getTicketsById(concertId) { 
-    return this.http.get(this.rootURL + '/Ticket/Add/' + concertId); 
-  }
-  getTicketsByIdMel(concertId) {
-    return this.http.get<Ticket[]>(this.rootURL + '/Ticket/Add/' + concertId); 
-  }
-
 }

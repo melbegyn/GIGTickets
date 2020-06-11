@@ -66,7 +66,7 @@ export class PaymentComponent implements OnInit {
 
 
 
-    ticketService.getTicketsById(this.concertId).subscribe(response => {
+    ticketService.getTicketsByConcert(this.concertId).subscribe(response => {
       response.map(item => {
         this.ticketList = response
       })
@@ -151,7 +151,7 @@ export class PaymentComponent implements OnInit {
 
     console.log(this.userForm);
 
-    this.concertService.putTicket(this.userForm.value).subscribe(ticket => {
+    this.ticketService.putTicket(this.userForm.value).subscribe(ticket => {
       
       this.toastr.success('Payment successful!');
       setInterval(() => {

@@ -1,0 +1,61 @@
+<p>profile works!</p>
+
+
+
+<form [formGroup]="userForm" (ngSubmit)="test()" #formDir="ngForm" novalidate>
+
+  <div class="form-group">
+    <label for="id">Id: </label>
+    <input formControlName="Id" type="text" class="form-control" required>
+
+  </div>
+  <div class="form-group">
+    <label for="tourName">Tour: </label>
+    <input formControlName="FullName" type="text" class="form-control" required>
+  </div>
+
+  <div class="form-group">
+    <label for="artist">Artist: </label>
+    <input formControlName="UserName" type="text" class="form-control" required>
+  </div>
+
+  <div class="form-group">
+    <label for="stage">Stage: </label>
+    <input formControlName="Email" type="text" class="form-control" required>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+  <div class="card m-5" style="width:18rem" *ngIf="currentUser">
+    FullName:  {{currentUser.FullName}} <br />
+    UserName:  {{currentUser.UserName}} <br />
+    Email : {{currentUser.Email}} <br />
+    Id  {{currentUser.Id}} <br />
+
+    <div>
+
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Price</th>
+        <th scope="col">ConcertId</th>
+        <th scope="col">Category</th>
+        <th scope="col">UserId</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ticket of ticketList">
+        <td>{{ticket.Id}}</td>
+        <td>{{ticket.Price}}</td>
+        <td>{{ticket.ConcertId}}</td>
+        <td>{{ticket.Category}}</td>
+        <td>{{ticket.UserId}}</td>
+      </tr>
+    </tbody>
+  </table>

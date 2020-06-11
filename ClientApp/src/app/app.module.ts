@@ -28,6 +28,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { AuthGuard } from './auth/auth.guard';
 import { TicketService } from './service/ticket.service';
 import { PaymentComponent } from './payment/payment.component';
+import { ProfileComponent } from './user/profile/profile.component';
 
  
 @NgModule({
@@ -42,7 +43,8 @@ import { PaymentComponent } from './payment/payment.component';
     UserComponent,
     RegistrationComponent,
     LoginComponent,
-    PaymentComponent, 
+    PaymentComponent,
+    ProfileComponent, 
   ],
   imports: [
     BrowserModule,
