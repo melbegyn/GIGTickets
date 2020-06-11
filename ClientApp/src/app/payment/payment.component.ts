@@ -104,11 +104,11 @@ export class PaymentComponent implements OnInit {
     console.log(this.concertId)
   }
 
-  setTicketsValues() {
+/*  setTicketsValues() {
     this.Tickets.setValue([
       { Price: "111", Category: "Mohan", Id: "Java", ConcertId: 0 } 
     ]);
-  }
+  }*/
 
 
   deleteRow(index: number) {
@@ -120,6 +120,8 @@ export class PaymentComponent implements OnInit {
     this.Tickets = this.userForm.get('Tickets') as FormArray;
     this.Tickets.push(this.createTicket());
   }
+
+  get formData() { return <FormArray>this.userForm.get('Ticket'); } 
 
   createTicket(): FormGroup {
 
@@ -158,8 +160,7 @@ export class PaymentComponent implements OnInit {
   ngOnInit() {
 
     console.log(this.concertData);
-
-    this.numberOfTickets = 2;
+     
 
     this.userService.getUserProfile().subscribe((data) => {
       this.currentUser = data as User;
@@ -206,9 +207,7 @@ export class PaymentComponent implements OnInit {
     console.log(this.userForm);
 
     let numberOfTicket = this.Tickets.controls.length;
-
-    console.log("numberOfTicket " + numberOfTicket);
-
+ 
     this.concertService.getConcert(this.concertId).subscribe(concert => {
 
       console.log(concert.NumberTicketsAvailable);

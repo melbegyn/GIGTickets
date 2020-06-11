@@ -21,58 +21,71 @@ export class ConcertComponent implements OnInit {
   constructor(
     private router: Router,
     private actRoute: ActivatedRoute,
-    private concertService: ConcertService,
+    public concertService: ConcertService,
     private fb: FormBuilder) {
 
     this.concertForm = this.fb.group({
 
       Id: 0,
-      TourName: ['', Validators.required],
-      Artist: ['', Validators.required],
-      Stage: ['', Validators.required],
-      ConcertDate: ['', Validators.required],
-      NumberTicketsAvailable: ['', Validators.required],
-      TicketPrice: ['', Validators.required],
-      Tickets: this.fb.array([
-        this.ticketForm = this.fb.group({
-          Id: 0,
-          ConcertId: 0,
-          UserId: 0,
-          Price: ['', Validators.required],
-          Category: ['', Validators.required]
-
-        })])
+      TourName: new FormControl('', Validators.required),
+      Artist: new FormControl('', Validators.required),
+      Picture: new FormControl('', Validators.required),
+      Stage: new FormControl('', Validators.required),
+      ConcertDate: new FormControl(null, Validators.required),
+      NumberTicketsAvailable: new FormControl(0, Validators.required),
+      TicketPrice: new FormControl(0, Validators.required),
+      Tickets: this.fb.array([ 
+         // this.createTicket()
+        ])
 
 
     });
+    this.Tickets = this.concertForm.get('Tickets') as FormArray;
+    this.Tickets.push(this.createTicket());
 
-    this.loadForm;
+    //this.loadForm;
   }
 
-  get formData() { return <FormArray>this.concertForm.get('Ticket');  }
+  getFormData() { return (<FormArray>this.concertForm.get('Tickets')).controls; }
+
 
   ngOnInit() {
 
   }
 
-  saveProduct(values) {
-    const concertData = new FormData();
-    concertData.append('TourName', values.TourName);
-    concertData.append('Stage', values.Stage);
-    concertData.append('Artist', values.Artist);
-    concertData.append('NumberTicketsAvailable', values.NumberTicketsAvailable);
-    concertData.append('TicketPrice', values.TicketPrice);
-    concertData.append('Tickets', values.Tickets);
-    this.concertService.postConcert(concertData).subscribe(result => {
-      this.router.navigate(['backoffice']);
-    });
+ 
+
+
+  deleteRow(index: number) {
+    this.Tickets.removeAt(index);
   }
 
+ 
 
+  addTicket(): void {
 
-  add(value) {
-    console.log(value)
-    this.concertService.postConcert(value).subscribe(
+  
+    this.Tickets = this.concertForm.get('Tickets') as FormArray;
+    this.Tickets.push(this.createTicket());
+  }
+
+  createTicket(): FormGroup {
+
+    return this.fb.group({
+      Id: 0,
+      ConcertId: 0,
+      UserId: 0,
+      Price: new FormControl(0, Validators.required),
+      Category: new FormControl('', Validators.required)
+
+    });
+
+  }
+
+  create( ) {
+  
+   
+     this.concertService.postConcert(this.concertForm.value).subscribe(
       res => {
         this.router.navigate(['backoffice']);
       },
@@ -99,16 +112,16 @@ export class ConcertComponent implements OnInit {
   }
 
 
-  onSubmit(form: NgForm) {
-    this.addConcert(form); 
+  onSubmit() {
+    this.addConcert(); 
   }
 
  
- addConcert(form: NgForm) { 
-
-   this.concertService.postConcert(form.value).subscribe(
+ addConcert() { 
+    
+   this.concertService.postConcert(this.concertForm.value).subscribe(
      res => {
-       console.log(res);
+        
        
        this.concertService.refreshList();
        this.router.navigate(['backoffice']);
