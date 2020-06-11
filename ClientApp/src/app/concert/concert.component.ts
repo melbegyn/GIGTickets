@@ -13,9 +13,14 @@ import { Ticket } from '../shared/ticket.model';
 })
 export class ConcertComponent implements OnInit {
 
-  concertForm: FormGroup;
+  public concertForm: FormGroup;
+ // TicketsArray: FormArray;
+
+  arrayItems: {
+    id: number;
+    title: string;
+  }[];
   fields: any;
-  Tickets: FormArray;
   ticketForm: FormGroup;
 
   constructor(
@@ -24,61 +29,80 @@ export class ConcertComponent implements OnInit {
     public concertService: ConcertService,
     private fb: FormBuilder) {
 
-    this.concertForm = this.fb.group({
-
-      Id: 0,
-      TourName: new FormControl('', Validators.required),
-      Artist: new FormControl('', Validators.required),
-      Picture: new FormControl('', Validators.required),
-      Stage: new FormControl('', Validators.required),
-      ConcertDate: new FormControl(null, Validators.required),
-      NumberTicketsAvailable: new FormControl(0, Validators.required),
-      TicketPrice: new FormControl(0, Validators.required),
-      Tickets: this.fb.array([ 
-         // this.createTicket()
-        ])
-
-
-    });
-    this.Tickets = this.concertForm.get('Tickets') as FormArray;
-    this.Tickets.push(this.createTicket());
+   
+   // this.Tickets = this.concertForm.get('Tickets') as FormArray;
+  //  this.Tickets.push(this.createTicket());
 
     //this.loadForm;
   }
 
-  getFormData() { return (<FormArray>this.concertForm.get('Tickets')).controls; }
+  get TicketsFormArray(): FormArray {
+    return this.concertForm.get('Tickets') as FormArray;
+}
+
+  //getFormData() { return (<FormArray>this.concertForm.get('Tickets')).controls; }
 
 
   ngOnInit() {
+    this.arrayItems = [];
 
+/*    this.user = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      account: this.fb.group({
+        email: ['', Validators.required],
+        confirm: ['', Validators.required]
+      })
+    });*/
+
+    this.concertForm = this.fb.group({
+
+      Id: 0,
+      TourName: ['', Validators.required],
+      Artist: ['', Validators.required],
+      Picture: ['', Validators.required],
+      Stage: ['', Validators.required],
+      ConcertDate: [null, Validators.required],
+      NumberTicketsAvailable: [0, Validators.required],
+      TicketPrice: [0, Validators.required],
+      Tickets: this.fb.array([
+         this.createTicket()
+      ])
+
+
+    });
+
+   
   }
 
  
 
-
   deleteRow(index: number) {
-    this.Tickets.removeAt(index);
+    //this.Tickets.removeAt(index);
+    this.TicketsFormArray.removeAt(index);
   }
 
  
 
   addTicket(): void {
-
-  
-    this.Tickets = this.concertForm.get('Tickets') as FormArray;
-    this.Tickets.push(this.createTicket());
+    //let fg = this.fb.group(new Employee());
+    //this.empFormArray.push(this.createTicket());	 
+      
+    this.TicketsFormArray.push(this.createTicket());
   }
 
   createTicket(): FormGroup {
 
-    return this.fb.group({
+   return this.fb.group({
       Id: 0,
       ConcertId: 0,
-      UserId: 0,
-      Price: new FormControl(0, Validators.required),
-      Category: new FormControl('', Validators.required)
+      UserId: null,
+      Price: '',
+      Category: ''
 
     });
+     
+  //  return this.fb.group(new Ticket());
+
 
   }
 
@@ -94,10 +118,13 @@ export class ConcertComponent implements OnInit {
   }
 
   loadForm(data) {
-    const control = this.concertForm.get("Tickets") as FormArray;
+    /*const control = this.concertForm.get("Tickets") as FormArray;
     this.fields.Tickets.forEach(x => {
       control.push(this.patchValues(x.Id, x.ConcertId, x.Price, x.Category, x.UserId))
-    })
+    })*/
+
+    this.TicketsFormArray.push(this.createTicket());
+
   }
 
 
@@ -107,15 +134,45 @@ export class ConcertComponent implements OnInit {
       ConcertId: [ConcertId],
       Price: [Price],
       Category: [Category],
-      UserId: [UserId]
+      UserId: null
     })
   }
 
 
-  onSubmit() {
-    this.addConcert(); 
-  }
+/*  onSubmit() {
 
+    if (this.concertForm.valid) {
+      console.log("Form Submitted!");
+      this.addConcert(); 
+      this.concertForm.reset();
+    }
+      console.log("valid!");
+    
+    
+    console.log(this.concertForm.value)
+  
+  }*/
+  onSubmit( form) {
+    
+    console.log(form);
+  //  let serializedForm = JSON.stringify(form);
+   
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    //let options = new RequestOptions({ headers: headers });
+
+   // return this.http.post('/api/referer/insert', body, options).subscribe();
+
+    this.concertService.postConcert(form.getRawValue()).subscribe(
+      res => {
+
+
+        this.concertService.refreshList();
+        this.router.navigate(['backoffice']);
+      },
+      err => { console.log(err); }
+    )  
+
+  }
  
  addConcert() { 
     

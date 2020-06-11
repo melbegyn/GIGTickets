@@ -4,7 +4,7 @@
 
   <h2>Concert form</h2>
 
-  <form #form="ngForm" [formGroup]="concertForm" (ngSubmit)="onSubmit()">
+  <form novalidate (ngSubmit)="onSubmit(concertForm)" [formGroup]="concertForm">
     <input type="hidden" name="Id" formControlName="Id" />
     <div class="form-group">
       <label for="TourName">Tour: </label>
@@ -12,7 +12,7 @@
     </div>
 
     <div class="form-group">
-      <label for="Picture">Tour: </label>
+      <label for="Picture">Path picture: </label>
       <input formControlName="Picture" type="text" class="form-control" required>
     </div>
 
@@ -45,29 +45,22 @@
       <input formControlName="TicketPrice" type="number" class="form-control" required>
     </div>
 
-
-    <div formGroupName="Tickets">
-      <div *ngFor="let child of concertForm.get('Tickets').controls; let i = index">
-        <div [formGroupName]="i">
-          <label>{{i+1}}. Price: </label>
-          <input formControlName="Price" type="number" /><br>
-          <label>{{i+1}}. Category: </label>
-          <input formControlName="Category" type="text" />
-          <!--<label>{ {i+1}}. Id: </label>
-        <input formControlName="Id" type="number" /><br>-->
-          <!--  <label>{ {i+1}}. ConcertId: </label>
-          <input formControlName="ConcertId" type="number" />-->
-          <!--      <label>{ {i+1}}. UserId: </label>
-              <input formControlName="UserId" type="number" />-->
-
-          <button type="button" (click)="deleteRow(i)" *ngIf="Tickets.controls.length > 1">
-            Delete
-          </button>
-        </div>
+    <div formArrayName="Tickets">
+      <div *ngFor="let item of TicketsFormArray.controls; let pointIndex=index" [formGroupName]="pointIndex">
+        <label> 
+          Price:
+        </label>
+        <input formControlName="Price" type="number" />
+        <label>
+          Category:
+        </label>
+        <input formControlName="Category" type="text" />
       </div>
     </div>
+
+
     <button type="button" (click)="addTicket()">Add new ticket</button>
-    <button type="submit" class="btn btn-primary">Create event</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!concertForm.valid">Create event</button>
   </form>
 </div>
 
