@@ -51,39 +51,70 @@ namespace GIGTickets.Controllers
 
         // PUT: api/UserProfile
         [HttpPut("{id}")]
+        [Route("api/UserProfile/{id}")]
         public async Task<ActionResult<ApplicationUser>> Put(String idString, [FromBody] ApplicationUser user)
         {
+
             string userId = User.Claims.FirstOrDefault(c => c.Type == "UserID").Value;
+           
 
-            var userInDb = _context.Users.FirstOrDefault(c => c.Id == user.Id);
-              
-            if (user.Tickets != null && user.Tickets.Count > 0)
+       
+
+            
+            var userInDb = _context.Users.FirstOrDefault(c => c.Id == userId);
+            // Update it with the values from the view model
+            userInDb.FullName = user.FullName;
+            userInDb.UserName = user.UserName;
+            userInDb.Email = user.Email;
+            userInDb.Tickets = user.Tickets;
+            userInDb.PhoneNumber = user.PhoneNumber;
+            //userInDb.Number = model.Number; //custom property
+             
+
+            // Apply the changes if any to the db
+           
+
+
+            try
             {
-
-                foreach (Ticket ticket in user.Tickets)
-
+                await _userManager.UpdateAsync(userInDb);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(userId))
                 {
-                    userInDb.Tickets.Add(ticket);
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
                 }
             }
+             
 
- 
+            // if (user.Tickets != null && user.Tickets.Count > 0)
+            // {
 
-            //await _userManager.UpdateAsync(userInDb);
-            _context.Entry(userInDb).State = EntityState.Modified;
-            /*if (userInDb != null)
-            {
-                userInDb.Ticket = user.Ticket;
-            } */
+//  foreach (Ticket ticket in user.Tickets)
 
-           
-                await _context.SaveChangesAsync();
-        
+//     {
+//        user.Tickets.Add(ticket);
+//    }
+// }
+/*
 
-            //return Ok;
-            return AcceptedAtAction("GetUserProfile", new { id = user.Id }, user);
-            // return AcceptedAtAction("GetUserProfile", new { id = userInDb.Id }, userInDb);
+            _context.Entry(user).State = EntityState.Modified;
+*/
+
+
+        return NoContent();
         }
 
-    }
-}
+
+        private bool UserExists(String id)
+        {
+            return _context.Users.Any(e => e.Id == id);
+        }
+   }
+ }
+ 

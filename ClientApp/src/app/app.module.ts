@@ -26,6 +26,7 @@ import { UserService } from './service/user.service';
 
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { AuthGuard } from './auth/auth.guard';
+import { TicketService } from './service/ticket.service';
 
  
 @NgModule({
@@ -73,7 +74,8 @@ import { AuthGuard } from './auth/auth.guard';
       useClass: AuthInterceptor,
       multi: true
     } ,
-    ConcertService
+    ConcertService,
+    TicketService
   ], 
   bootstrap: [AppComponent]
 })
