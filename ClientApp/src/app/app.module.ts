@@ -43,7 +43,8 @@ import { AuthGuard } from './auth/auth.guard';
   ],
   imports: [
     BrowserModule,
-    FormsModule,  
+    FormsModule,
+    ReactiveFormsModule,  
     RouterModule.forRoot([
       { path: '', redirectTo: '/user/login', pathMatch: 'full' },
       {
@@ -55,10 +56,11 @@ import { AuthGuard } from './auth/auth.guard';
       },
       { path: 'home', component: HomeComponent, canActivate: [AuthGuard] }
     ]),
-    ReactiveFormsModule,
+    
     AppRoutingModule,
     HttpClientModule,
     AngularFontAwesomeModule,
+
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       progressBar: true

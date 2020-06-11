@@ -5,7 +5,7 @@
   <h2>Concert form</h2>
 
   <form [formGroup]="concertForm" (ngSubmit)="add(concertForm.value)">
-    <!--<input type="hidden" name="Id" [value]="formData.Id">-->
+    <input type="hidden" name="Id" [value]="concertForm.Id" />
     <div class="form-group">
       <label for="TourName">Tour: </label>
       <input formControlName="TourName" type="text" class="form-control" required>
@@ -40,19 +40,23 @@
       <input formControlName="TicketPrice" type="number" class="form-control" required>
     </div>
 
-      <div formGroupName="Tickets">
-          <div *ngFor="let child of concertForm.get('Tickets')['controls']; let i = index">
-            <div [formGroupName]="i">
-              <label>{{i+1}}. Price: </label>
-              <input formControlName="Price" type="number" /><br>
-              <label>{{i+1}}. Category: </label>
-              <input formControlName="Category" type="text" />
-            </div>
-          </div>
+    <div formGroupName="Tickets">
+      <div *ngFor="let child of concertForm.get('Tickets').controls; let i = index">
+        <div [formGroupName]="i">
+          <label>{{i+1}}. Price: </label>
+          <input formControlName="Price" type="number" /><br>
+          <label>{{i+1}}. Category: </label>
+          <input formControlName="Category" type="text" />
+          <label>{{i+1}}. UserId: </label>
+          <input formControlName="UserId" type="number" />
+          <label>{{i+1}}. ConcertId: </label>
+          <input formControlName="ConcertId" type="number" />
+        </div>
       </div>
-     
-      <button type="submit" class="btn btn-primary" [disabled]="!concertForm.valid">Submit</button>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
- 
+
 <pre>{{concertForm.value | json }}</pre>

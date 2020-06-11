@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ConcertService } from './concert.service';
-import { NgForm, FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { NgForm, FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { Concert } from '../shared/concert.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Ticket } from '../shared/ticket.model';
@@ -16,8 +16,7 @@ export class ConcertComponent implements OnInit {
   concertForm: FormGroup;
   fields: any;
 
-  Tickets: FormArray; 
-
+  Tickets: FormArray;
   ticketForm: FormGroup;
 
   constructor(
@@ -30,33 +29,36 @@ export class ConcertComponent implements OnInit {
 
       Id: 0,
       TourName: ['', Validators.required],
-      Artist: ['', Validators.compose([Validators.required])],
-      Stage: ['', Validators.compose([Validators.required])],
-      ConcertDate: [null, Validators.compose([Validators.required])],
-      NumberTicketsAvailable: [null, Validators.compose([Validators.required])],
-      TicketPrice: [null, Validators.compose([Validators.required])],
+      Artist: ['', Validators.required],
+      Stage: ['', Validators.required],
+      ConcertDate: ['', Validators.required],
+      NumberTicketsAvailable: ['', Validators.required],
+      TicketPrice: ['', Validators.required],
       Tickets: this.fb.array([
         this.ticketForm = this.fb.group({
           Id: 0,
           ConcertId: 0,
-          Price: 0,
+          UserId: 0,
+          Price: ['', Validators.required],
           Category: ['', Validators.required]
 
         })])
 
 
     });
-   /* console.log("1")
+
+    this.loadForm;
+    /* console.log("1")
+    
+     console.log("2")
+     // patch the values from your object
    
-    console.log("2")
-    // patch the values from your object
-    this.patch();
-    console.log("3")*/
+     console.log("3")*/
 
   }
 
 
- 
+
 
   ngOnInit() {
 
@@ -87,53 +89,60 @@ export class ConcertComponent implements OnInit {
         ]
       }
     };*/
-/*    this.concertForm = this.fb.group({
-      Tickets: this.fb.group({
-        Ticket: this.fb.array([])
-      })
-    });*/
-  //  this.patch()
+    /*    this.concertForm = this.fb.group({
+          Tickets: this.fb.group({
+            Ticket: this.fb.array([])
+          })
+        });*/
+    //  this.patch()
 
-    
   }
 
- 
 
-  add(value) {
-    console.log(value);
 
+  add(value: NgForm) {
+    //const data = JSON.stringify(formData.value);
+    //this.employeeDetails.getRawValue()
     this.concertService.postConcert(value).subscribe(
       res => {
-        console.log(res);
+
         //this.resetForm(this.concertForm);
-        this.concertService.refreshList();
+        //this.concertService.refreshList();
         this.router.navigate(['backoffice']);
       },
       err => { console.log(err); }
-    )  
+    )
   }
 
-  patch() {
-    const control = <FormArray>this.concertForm.get('Tickets.Ticket');
-     
-    this.fields.Tickets.Ticket.forEach(x => {
-      control.push(this.patchValues(x.Id, x.ConcertId, x.Price, x.Category))
+  loadForm(data) {
+    const control = this.concertForm.get("Tickets") as FormArray;
+    this.fields.Tickets.forEach(x => {
+      control.push(this.patchValues(x.Id, x.ConcertId, x.Price, x.Category, x.UserId))
     })
 
-     
-    console.log(JSON.stringify(this.concertForm.value))
+  }
+  patch() {
+
+    const control = this.concertForm.get("Tickets") as FormArray;
+    this.fields.Tickets.forEach(x => {
+      control.push(this.patchValues(x.Id, x.ConcertId, x.Price, x.Category, x.UserId))
+    })
+
+
   }
 
 
-  patchValues(Id, ConcertId, Price, Category) {
+  patchValues(Id, ConcertId, Price, Category, UserId) {
     return this.fb.group({
       id: [Id],
       ConcertId: [ConcertId],
       Price: [Price],
-      Category: [Category]
+      Category: [Category],
+      UserId: [UserId]
     })
   }
-   
+
+
   onSubmit(form: NgForm) {
     //this.addConcert(form); 
   }
@@ -186,27 +195,27 @@ export class ConcertComponent implements OnInit {
     }
    
   */
-   /* resetForm(form?: NgForm) {
-      if (form != null)
-        form.form.reset({ id: this.concertForm.id });
-      this.formData = {
-        Id: 0,
-        TourName: '',
-        Artist: '',
-        Stage: '',
-        ConcertDate: null,
-        NumberTicketsAvailable: 0,
-        TicketPrice: 0,
-        TicketsList: [
-          {
-            Id: 0,
-            Category: '',
-            Price: 0,
-            ConcertId: 0
-          }
-        ]
-      } 
-    } */
+  /* resetForm(form?: NgForm) {
+     if (form != null)
+       form.form.reset({ id: this.concertForm.id });
+     this.formData = {
+       Id: 0,
+       TourName: '',
+       Artist: '',
+       Stage: '',
+       ConcertDate: null,
+       NumberTicketsAvailable: 0,
+       TicketPrice: 0,
+       TicketsList: [
+         {
+           Id: 0,
+           Category: '',
+           Price: 0,
+           ConcertId: 0
+         }
+       ]
+     } 
+   } */
 
 
 

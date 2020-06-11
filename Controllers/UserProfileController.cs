@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace GIGTickets.Controllers
 {
@@ -41,31 +42,47 @@ namespace GIGTickets.Controllers
             //var user = await _userManager.GetUserAsync(HttpContext.User);
             return new
             {
+                user.Id,
                 user.FullName,
                 user.Email,
                 user.UserName
             };
         }
 
-        // POST: api/UserProfile
+        // PUT: api/UserProfile
         [HttpPut("{id}")]
         public async Task<ActionResult<ApplicationUser>> Put(String idString, [FromBody] ApplicationUser user)
         {
             string userId = User.Claims.FirstOrDefault(c => c.Type == "UserID").Value;
 
-            var userInDb = _context.Users.FirstOrDefault(c => c.Id == idString);
-             
-            await _userManager.UpdateAsync(user);
+            var userInDb = _context.Users.FirstOrDefault(c => c.Id == user.Id);
+              
+            if (user.Tickets != null && user.Tickets.Count > 0)
+            {
 
+                foreach (Ticket ticket in user.Tickets)
+
+                {
+                    userInDb.Tickets.Add(ticket);
+                }
+            }
+
+ 
+
+            //await _userManager.UpdateAsync(userInDb);
+            _context.Entry(userInDb).State = EntityState.Modified;
             /*if (userInDb != null)
             {
                 userInDb.Ticket = user.Ticket;
-            }*/
+            } */
 
-            await _context.SaveChangesAsync();
+           
+                await _context.SaveChangesAsync();
+        
 
-            return AcceptedAtAction("GetUserProfile", new { id = userInDb.Id }, userInDb);
-            // return AcceptedAtAction("GetConcert", new { id = concert.Id }, concert);
+            //return Ok;
+            return AcceptedAtAction("GetUserProfile", new { id = user.Id }, user);
+            // return AcceptedAtAction("GetUserProfile", new { id = userInDb.Id }, userInDb);
         }
 
     }

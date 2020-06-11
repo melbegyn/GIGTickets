@@ -38,10 +38,10 @@ namespace GIGTickets.Controllers
 
 
         [Route("api/Ticket/{param1}")]
-        public ActionResult<IEnumerable<Concert>> Get([FromQuery] int param1)
+        public async Task<ActionResult<IEnumerable<Ticket>>> Get([FromQuery] int param1)
         {
            
-            var ticketsList =  _context.Ticket.Where(f => f.ConcertId == param1);
+            var ticketsList = await _context.Ticket.Where(f => f.ConcertId == param1).ToListAsync();
             //return  await _context.Ticket.Where(f => f.ConcertId == param1).ToListAsync();
             // var users = _context.Users.Where(u => u == user);
             List<Ticket> dd = new List<Ticket>();

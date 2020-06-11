@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Concert } from '../shared/concert.model';
-import { map, share } from 'rxjs/operators';
+import { Concert } from '../shared/concert.model'; 
 import { Ticket } from '../shared/ticket.model';
 
-
+ 
 const headers: HttpHeaders = new HttpHeaders();
 headers.set('Content-Type', 'application/json;charset=UTF-8');
 
@@ -18,11 +17,12 @@ export class ConcertService {
   readonly rootURL = environment.apiBaseURI;
  
   list: Concert[];
-  ticketList: Ticket[];
+ 
 
   constructor(private http: HttpClient) { }
 
   postConcert(concert) {
+ 
     return this.http.post(this.rootURL + '/Concert', concert);
   }
 
@@ -40,22 +40,9 @@ export class ConcertService {
         this.list = res as Concert[];
           console.log(JSON.stringify(this.list));
       }
-    );
-
-    
+    );    
   }
 
- getTicketsById(concertId) {
-   
-   console.log("HERE ")
-   this.http.get(this.rootURL + '/Ticket/Add/' + concertId)
-     .toPromise()
-     .then(res => { 
-       this.ticketList = res as Ticket[];
-       console.log(JSON.stringify(this.ticketList));
-     }
-     );
-}
 
   getConcerts(form) {
     return this.http.get(this.rootURL + '/Concert/' + form);
@@ -65,9 +52,25 @@ export class ConcertService {
   getConcert(id) {
     return this.http.get(this.rootURL + '/Concert/' + id);
   }
-   
+
   deleteConcert(id) {
+    // confirm ?
     return this.http.delete(this.rootURL + '/Concert/' + id);
+  }
+
+
+  // ********************* TICKETS PART !!!! *********************
+
+  putTicket(ticket) {
+    
+    return this.http.put(this.rootURL + '/UserProfile/' + ticket.Id, ticket)
+  }
+   
+  getTicketsById(concertId) { 
+    return this.http.get(this.rootURL + '/Ticket/Add/' + concertId); 
+  }
+  getTicketsByIdMel(concertId) {
+    return this.http.get<Ticket[]>(this.rootURL + '/Ticket/Add/' + concertId); 
   }
 
 }
