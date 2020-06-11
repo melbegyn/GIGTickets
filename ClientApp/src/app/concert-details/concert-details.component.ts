@@ -38,14 +38,9 @@ export class ConcertDetailsComponent implements OnInit {
   concertData: any; // Getting Concert details
   //ticketsListData: Ticket[];
 
-  userForm: FormGroup;
-  fields: any;
-  Tickets: FormArray;
-   
-  ticketForm: FormGroup;
+
  
-   
-  ticketList = new Array<Ticket>();
+
  
   constructor(
     public concertService: ConcertService,
@@ -56,68 +51,21 @@ export class ConcertDetailsComponent implements OnInit {
     private userService: UserService) {
 
 
-    this.userForm = this.fb.group({
-
-      Id: ['', Validators.required],
-      FullName: ['', Validators.required],
-      UserName: ['', Validators.required],
-      Email: ['', Validators.compose([Validators.required])],
-      Tickets: this.fb.array([
-        this.ticketForm = this.fb.group({
-          Id: ['', Validators.required],
-          ConcertId: ['', Validators.required],
-          UserId: ['', Validators.required],
-          Price: ['', Validators.required],
-          Category: ['', Validators.required]
-
-        })])
-
-    });
-
-    this.loadForm;
 
     this.concertId = this.actRoute.snapshot.params['id'];
-    this.loadProductDetails(this.concertId);
+    this.loadConcertDetails(this.concertId);
 
-    ticketService.getTicketsById(this.concertId).subscribe(response => {
-      this.ticketList = response.map(item => {
-        return new Ticket(
-          item.Id,
-          item.Price,
-          item.Category,
-          item.ConcertId,
-          item.UserId
-        );
-      });
-
-      this.ticketForm.controls['Price'].setValue(response[0].Price);
-      this.ticketForm.controls['Category'].setValue(response[0].Category);
-      this.ticketForm.controls['Id'].setValue(response[0].Id);
-      this.ticketForm.controls['ConcertId'].setValue(response[0].ConcertId);
-/*      if (response[0].UserId != null) {
-        this.ticketForm.controls['UserId'].setValue(response[0].UserId);
-      }*/
-
-      
-
-    });
  
   
     //this.patch(); 
 
   }
 
-  loadForm(data) {
-   
-    const ticketsFormArray = this.userForm.get("Tickets") as FormArray;
-
-    this.fields.Tickets.forEach(x => {
-      ticketsFormArray.push(this.patchValues(x.Id, x.ConcertId, x.Price, x.Category, x.UserId))
-    })
-
- 
+  loadConcertDetails(concertId) {
+    this.concertService.getConcert(concertId).subscribe(concert => {
+      this.concertData = concert;
+    });
   }
-
 /*  getData(): Observable<any> {
     return this.concertService.getTicketsByIdMel(this.concertId).pipe(map(res => res));
   }
@@ -129,14 +77,7 @@ export class ConcertDetailsComponent implements OnInit {
     this.userService.getUserProfile().subscribe((data) => {
       this.currentUser = data as User;
 
-      this.userForm.controls['Id'].setValue(this.currentUser.Id);
-      this.userForm.controls['FullName'].setValue(this.currentUser.FullName);
-      this.userForm.controls['UserName'].setValue(this.currentUser.UserName);
-      this.userForm.controls['Email'].setValue(this.currentUser.Email);
-
-      this.ticketForm.controls['UserId'].setValue(this.currentUser.Id);
-       
-       
+     
     }, (err) => {
       console.log(err);
     });
@@ -144,46 +85,8 @@ export class ConcertDetailsComponent implements OnInit {
      
   }
 
-
-  loadProductDetails(concertId) {
-    this.concertService.getConcert(concertId).subscribe(concert => {
-      this.concertData = concert;
-    });
-  }
-
+   
  
-  patch() { 
-
-
-    const control = <FormArray>this.userForm.get('Tickets.Ticket');
-
-    this.fields.Tickets.Ticket.forEach(x => {
-      control.push(this.patchValues(x.Id, x.ConcertId, x.Price, x.Category, x.UserId))
-    })
-     
-  }
-
-
-  patchValues(Id, ConcertId, Price, Category, UserId) {
-    return this.fb.group({
-      id: [Id],
-      ConcertId: [ConcertId],
-      Price: [Price],
-      Category: [Category],
-      UserId: [UserId]
-    })
-  }
-
-
-  buyTicket() {
- 
-    console.log(this.userForm);
-
-    this.concertService.putTicket(this.userForm.value).subscribe(ticket => {
-      this.router.navigateByUrl('/home');
-    });  
-
-  }
 
   navigation(link) {
     this.router.navigate([link]);

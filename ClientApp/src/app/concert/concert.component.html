@@ -5,7 +5,7 @@
   <h2>Concert form</h2>
 
   <form [formGroup]="concertForm" (ngSubmit)="add(concertForm.value)">
-    <input type="hidden" name="Id" [value]="concertForm.Id" />
+    <input type="hidden" name="Id" formControlName="Id" />
     <div class="form-group">
       <label for="TourName">Tour: </label>
       <input formControlName="TourName" type="text" class="form-control" required>
@@ -40,8 +40,9 @@
       <input formControlName="TicketPrice" type="number" class="form-control" required>
     </div>
 
+
     <div formGroupName="Tickets">
-      <div *ngFor="let child of concertForm.get('Tickets').controls; let i = index">
+      <div formArrayName="Tickets" *ngFor="let field of formData.controls; let i = index">
         <div [formGroupName]="i">
           <label>{{i+1}}. Price: </label>
           <input formControlName="Price" type="number" /><br>

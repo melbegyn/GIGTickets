@@ -4,14 +4,16 @@ using GIGTickets.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GIGTickets.Migrations
 {
     [DbContext(typeof(APIDBContext))]
-    partial class APIDBContextModelSnapshot : ModelSnapshot
+    [Migration("20200611055148_delete by cascade the tickets")]
+    partial class deletebycascadethetickets
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -127,36 +129,14 @@ namespace GIGTickets.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 200,
+                            Id = 100,
                             Artist = "Elton John",
                             ConcertDate = new DateTime(2008, 5, 1, 5, 34, 42, 0, DateTimeKind.Local),
-                            NumberTicketsAvailable = 2,
+                            NumberTicketsAvailable = 5,
                             Picture = "rocketman.png",
                             Stage = "American Center Airline",
                             TicketPrice = 199m,
                             TourName = "Rocketman Tour"
-                        },
-                        new
-                        {
-                            Id = 201,
-                            Artist = "Elton John",
-                            ConcertDate = new DateTime(2008, 5, 1, 5, 34, 42, 0, DateTimeKind.Local),
-                            NumberTicketsAvailable = 1,
-                            Picture = "rocketman.png",
-                            Stage = "American Center Airline",
-                            TicketPrice = 86m,
-                            TourName = "Rocketman Tour"
-                        },
-                        new
-                        {
-                            Id = 202,
-                            Artist = "Johnny Hallyday",
-                            ConcertDate = new DateTime(2008, 5, 1, 5, 34, 42, 0, DateTimeKind.Local),
-                            NumberTicketsAvailable = 2,
-                            Picture = "rocketman.png",
-                            Stage = "Stage France",
-                            TicketPrice = 230m,
-                            TourName = "Motar Tour"
                         });
                 });
 
@@ -191,38 +171,17 @@ namespace GIGTickets.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = 7,
                             Category = "VIP",
-                            ConcertId = 200,
+                            ConcertId = 100,
                             Price = 199m
                         },
                         new
                         {
-                            Id = 2,
-                            Category = "Fosse",
-                            ConcertId = 200,
-                            Price = 199m
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Category = "Cat 3",
-                            ConcertId = 201,
-                            Price = 86m
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Category = "Cat 4",
-                            ConcertId = 202,
-                            Price = 230m
-                        },
-                        new
-                        {
-                            Id = 5,
+                            Id = 20,
                             Category = "VIP",
-                            ConcertId = 202,
-                            Price = 230m
+                            ConcertId = 100,
+                            Price = 199m
                         });
                 });
 
@@ -371,8 +330,7 @@ namespace GIGTickets.Migrations
 
                     b.HasOne("GIGTickets.Models.ApplicationUser", "User")
                         .WithMany("Tickets")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

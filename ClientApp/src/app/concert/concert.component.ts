@@ -49,6 +49,7 @@ export class ConcertComponent implements OnInit {
     this.loadForm;
   }
 
+  get formData() { return <FormArray>this.concertForm.get('Ticket');  }
 
   ngOnInit() {
 

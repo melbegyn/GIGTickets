@@ -1,7 +1,7 @@
 <app-nav-menu></app-nav-menu>
 
 
-<div>
+ 
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 col-lg-12 col-md-12 sol-sm-12">
@@ -23,83 +23,18 @@
             <td>{{concertData?.NumberTicketsAvailable}}</td>
           </tr>
           <tr>
-            <i class="fa fa-shopping-cart" aria-hidden="true"></i>  Buy ticket
-
           </tr>
         </table>
         <br>
+        <a [routerLink]="['/home/concert/recap-payment', concertData.Id]">
+          Buy ticket!
+        </a> 
+
+        <button class="btn btn-warning" (click)="navigation('/recap-payment')">Buy ticket!</button>
+
         <button class="btn btn-warning" (click)="navigation('')">Go Back</button>
       </div>
     </div>
   </div>
 
 
-  FORM TO SEND
-
-  <form [formGroup]="userForm" (ngSubmit)="buyTicket()">
-    <input type="hidden" name="Id" [value]="userForm.Id"> 
-    <div class="form-group">
-      <label for="fullName">FullName: </label>
-      <input formControlName="FullName" type="text" class="form-control" required>
-    </div>
-
-    <div class="form-group">
-      <label for="userName">UserName: </label>
-      <input formControlName="UserName" type="text" class="form-control" required>
-    </div>
-
-    <div class="form-group">
-      <label for="email">Email: </label>
-      <input formControlName="Email" type="text" class="form-control" required>
-    </div>
-
-    <div formGroupName="Tickets">
-      <div *ngFor="let child of userForm.get('Tickets').controls; let i = index">
-        <div [formGroupName]="i">
-          <label>{{i+1}}. Price: </label>
-          <input formControlName="Price" type="number" /><br>
-          <label>{{i+1}}. Category: </label>
-          <input formControlName="Category" type="text" />
-          <label>{{i+1}}. Id: </label>
-          <input formControlName="Id" type="number" /><br>
-          <label>{{i+1}}. ConcertId: </label>
-          <input formControlName="ConcertId" type="number" />
-          <label>{{i+1}}. UserId: </label>
-          <input formControlName="UserId" type="number" />
-        </div>
-      </div>
-    </div>
-
-    <button type="submit" class="btn btn-primary"  >Buy Ticket</button>
-  </form>
-</div>
-
-
-
-DISPLAY
-<table>
-  <thead>
-    <tr>
-      <th scope="col">id</th>
-      <th scope="col">Price</th>
-      <th scope="col">Category</th>
-      <th scope="col">ConcertId</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let ticket of ticketList">
-      <td>{{ticket.Id}}</td>
-      <td>{{ticket.Price}}</td>
-      <td>{{ticket.Category}}</td>
-      <td>{{ticket.ConcertId}}</td>
-      <td>{{ticket.UserId}}</td>
-
-    </tr>
-    <tr>
-      <i class="fa fa-shopping-cart" aria-hidden="true"></i>  Buy ticket
-
-    </tr>
-  </tbody>
-</table>
-
-<pre>{{userForm.value | json }}</pre>
