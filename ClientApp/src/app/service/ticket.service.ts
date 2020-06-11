@@ -18,7 +18,7 @@ export class TicketService {
     return this.http.get<Ticket[]>(url);
   }
 
-  public getTicketsByUser(id): Observable<Ticket[]> {
+  public getTicketsByUser(id) {
     const url = this.rootURL + '/Ticket/User/' + id;
     return this.http.get<Ticket[]>(url);
   }

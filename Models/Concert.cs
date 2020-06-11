@@ -37,6 +37,7 @@ namespace GIGTickets.Models
         public int TicketPrice { get; set; }
 
         //[ForeignKey("ConcertId")]
+         
         public virtual ICollection<Ticket> Tickets { get; set; }
 
 

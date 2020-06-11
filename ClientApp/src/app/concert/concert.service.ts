@@ -19,7 +19,12 @@ export class ConcertService {
   list: Concert[];
  
 
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient) {
+    
+
+
+  }
 
   postConcert(concert) {
  
@@ -44,13 +49,18 @@ export class ConcertService {
   }
 
 
-  getConcerts(form) {
-    return this.http.get(this.rootURL + '/Concert/' + form);
+  getConcerts() {
+    return this.http.get<Concert[]>(this.rootURL + '/Concert/');
   }
 
 
+/*  getConcerts(form) {
+    return this.http.get(this.rootURL + '/Concert/' + form);
+  }
+*/
+
   getConcert(id) {
-    return this.http.get(this.rootURL + '/Concert/' + id);
+    return this.http.get<Concert>(this.rootURL + '/Concert/' + id);
   }
 
   deleteConcert(id) {

@@ -120,7 +120,7 @@ export class ConcertEditComponent implements OnInit {
         this.router.navigate(['backoffice']);
       }, err => {
         console.log(err);
-      }); 
+    }); 
   }
 
 

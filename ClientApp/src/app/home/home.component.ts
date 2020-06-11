@@ -6,6 +6,7 @@ import { UserService } from '../service/user.service';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { User } from '../shared/user.model';
+import { TicketService } from '../service/ticket.service';
 
 
 @Component({
@@ -15,33 +16,50 @@ import { User } from '../shared/user.model';
 export class HomeComponent {
 
   currentUser: User;
-
+  items: any;
  // userDetails;
+  concertsData: Concert[];
+  parameter: any[];
+
 
   constructor( 
     public concertService: ConcertService,
-    private service: UserService) {
+    private service: UserService,
+    private ticketService: TicketService) {
+    this.concertService.getConcerts().toPromise().then(data => {
+      console.log(data);
+      this.parameter = data;   // FILL THE ARRAY WITH DATA.
+      console.log(this.parameter);
+       
+     /* for (let key in data)
+        this.concertsData.push(data[key]);*/
+      /*  if (data.hasOwnProperty(key))
+          this.items.push(data[);*/
+    });
 
   }
+
+  public getData() {
+    this.concertService.getConcerts().subscribe((data: Concert[]) => this.items = data);
+  }
+
+
+  get transformedBody() {
+    return Object.keys(this.items);
+  }
+
 
   ngOnInit() {
 
     
     this.service.getUserProfile().subscribe((data) => {
-      //this.userDetails = data;
-      //console.log("this " + data);
       this.currentUser = data as User;
       
     }, (err) => {
       console.log(err);
     });
 
-
-    
-     
-
-
-    this.concertService.refreshList();
+    this.concertService.refreshList(); 
      
 
   } 

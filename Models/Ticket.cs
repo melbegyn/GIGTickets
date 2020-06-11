@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace GIGTickets.Models
 {
@@ -27,6 +28,7 @@ namespace GIGTickets.Models
 
         //[Required]
         public String UserId { get; set; }
+   
         public ApplicationUser User { get; set; }
     }
 }
