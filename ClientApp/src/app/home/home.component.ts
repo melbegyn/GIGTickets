@@ -4,6 +4,8 @@ import { Concert } from '../shared/model/concert.model';
 import { ConcertService } from '../shared/service/concert.service';
 import { UserService } from '../shared/service/user.service';
 import { TicketService } from '../shared/service/ticket.service';
+import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -15,18 +17,22 @@ export class HomeComponent {
   currentUser: User;
   items: any;
   concertsData: Concert[];
-  parameter: any[];
-
+  parameter: any[]; 
 
   constructor( 
     public concertService: ConcertService,
     private service: UserService,
+    private router: Router,
     private ticketService: TicketService) {
     this.concertService.getConcerts().toPromise().then(data => { 
       //console.log(data); 
-    });
-
+    }); 
+    
+    //this.concertService.getConcerts().pipe(map(res => { })).toPromise();
+ 
   }
+
+   
 
   public getData() {
     this.concertService.getConcerts().subscribe((data: Concert[]) => this.items = data);
@@ -47,6 +53,7 @@ export class HomeComponent {
     });*/
 
     this.concertService.refreshList();  
+   
   } 
 
 }

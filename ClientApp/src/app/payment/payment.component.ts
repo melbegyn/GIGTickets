@@ -64,24 +64,23 @@ export class PaymentComponent implements OnInit {
        
       for (let i in response) {
         this.Tickets = this.userForm.get("Tickets") as FormArray;
-         
-        this.Tickets.push(
-          this.fb.group(
 
-            {
+        if (response[i].UserId == null) {
+          this.Tickets.push(
+            this.fb.group(
 
-              Id: [response[i].Id, Validators.required],
-              ConcertId: [response[i].ConcertId, Validators.required],
-              UserId: [response[i].UserId, Validators.required],
-              Price: [response[i].Price, Validators.required],
-              Category: [response[i].Category, Validators.required]
-            })
-        );
+              {
 
-      }
-      
-    });
-
+                Id: [response[i].Id, Validators.required],
+                ConcertId: [response[i].ConcertId, Validators.required],
+                UserId: [response[i].UserId, Validators.required],
+                Price: [response[i].Price, Validators.required],
+                Category: [response[i].Category, Validators.required]
+              })
+          );
+        }
+      } 
+    }); 
    // console.log(this.concertId)
   }
 

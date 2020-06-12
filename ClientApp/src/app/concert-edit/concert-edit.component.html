@@ -60,14 +60,17 @@
     <div formArrayName="Tickets">
       <br />
       <h2>Tickets:</h2>
-      <i class="fa fa-check-square-o" aria-hidden="true"></i>
-      <small class="text-muted"> Feel free to edit the tickets not sold yet! </small>
+      
       <div *ngFor="let item of TicketsFormArray.controls;  index as i">
+        <i class="fa fa-check-square-o" aria-hidden="true"></i>
+        <small class="text-muted"> Feel free to edit the tickets not sold yet! </small>
+
         <div [formGroupName]="i">
-          <br />
-          <h4>Ticket {{i+1}}</h4>
+
 
           <div *ngIf="concertForm.controls.Tickets.controls[i].controls.UserId.value == null">
+            <br />
+            <h4>Ticket {{i+1}}</h4>
 
             <div class="form-group">
               Ticket price:
