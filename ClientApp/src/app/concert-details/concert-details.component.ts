@@ -1,23 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router'; 
-import { ConcertService } from '../concert/concert.service';
-import { Concert } from '../shared/concert.model';
-import { Ticket } from '../shared/ticket.model';
-import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { User } from '../shared/user.model';
-import { UserService } from '../service/user.service';
-import { HttpClientModule } from '@angular/common/http';
-import { Observable } from 'rxjs'; 
-import {
-  map,
-  debounceTime,
-  distinctUntilChanged,
-  switchMap,
-  
-  tap
-} from "rxjs/operators";
-import { TicketService } from '../service/ticket.service';
-
+import { Router, ActivatedRoute } from '@angular/router'; 
+import { ConcertService } from '../shared/service/concert.service';
+import { TicketService } from '../shared/service/ticket.service';
+import { UserService } from '../shared/service/user.service';
+import { FormBuilder } from '@angular/forms'; 
+import { User } from '../shared/model/user.model';
+import { Concert } from '../shared/model/concert.model';
+ 
 @Component({
   selector: 'app-concert-details',
   templateUrl: './concert-details.component.html',
@@ -28,19 +17,12 @@ import { TicketService } from '../service/ticket.service';
 export class ConcertDetailsComponent implements OnInit {
 
   // necessary
-  id: number;
-
+  id: number; 
   userId: number;
-  currentUser: User;
-   
-
+  currentUser: User; 
   concertId: any; // Getting Concert id from URL
   concertData: Concert; // Getting Concert details
-  //ticketsListData: Ticket[];
-
-
  
-
  
   constructor(
     public concertService: ConcertService,
@@ -49,15 +31,9 @@ export class ConcertDetailsComponent implements OnInit {
     private actRoute: ActivatedRoute,
     private fb: FormBuilder,
     private userService: UserService) {
-
-
-
+     
     this.concertId = this.actRoute.snapshot.params['id'];
-    this.loadConcertDetails(this.concertId);
-
- 
-  
-    //this.patch(); 
+    this.loadConcertDetails(this.concertId); 
 
   }
 
@@ -82,15 +58,11 @@ export class ConcertDetailsComponent implements OnInit {
      
   }
 
-   
- 
-
+    
   navigation(link) {
     this.router.navigate([link]);
   }
-
- 
-
+   
 }
 
  

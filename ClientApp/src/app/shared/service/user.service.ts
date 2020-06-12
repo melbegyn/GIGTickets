@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
-import { User } from '../shared/user.model';
+import { HttpClient } from '@angular/common/http'; 
+import { environment } from '../../../environments/environment';
+import { User } from '../model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +53,6 @@ export class UserService {
   }
 
   getUserProfile() {
-    return this.http.get(this.rootURL + '/UserProfile');
+    return this.http.get<User>(this.rootURL + '/UserProfile');
   }
 }

@@ -1,17 +1,13 @@
 <app-nav-menu></app-nav-menu>
 
 
-<div class="container" style="width: 60%;">
+<div class="container" style="width: 60%;padding-bottom:3em;">
 
   <h2><i class="fa fa-pencil" aria-hidden="true"></i> Edit concert</h2>
 
   <form [formGroup]="concertForm" (ngSubmit)="onSubmit(this.concertForm.value)" novalidate>
 
-<!-- <div class="form-group">
-      <label for="id">Id: </label>
-      <input formControlName="Id" type="text" class="form-control" required>
-    </div>-->
-
+ 
     <div class="form-group">
       Tour name:
       <input formControlName="TourName" type="text" class="form-control" required>
@@ -38,7 +34,7 @@
             Date:
           </div>
           <div class="col-10">
-            <input formControlName="ConcertDate" [value]="ConcertDate"  class="form-control" type="date" required>
+            <input formControlName="ConcertDate" class="form-control" type="date" required>
           </div>
       </div>
     </div>
@@ -68,8 +64,7 @@
           <br />
           <h4>Ticket {{i+1}}</h4>
 
-          <!--<div *ngIf="concertForm.controls.Tickets.controls[i].controls.UserId.value == null">-->
-          <div>
+           <div *ngIf="concertForm.controls.Tickets.controls[i].controls.UserId.value == null">           
 
             <div class="form-group">
               Ticket price:
@@ -94,4 +89,4 @@
 
 
 
- <pre>{{concertForm.value | json }}</pre> 
+<!-- <pre>{ {concertForm.value | json }}</pre> -->

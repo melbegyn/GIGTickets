@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../service/user.service';
-import { User } from '../../shared/user.model';
-import { Ticket } from '../../shared/ticket.model';
-import { TicketService } from '../../service/ticket.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Concert } from '../../shared/concert.model';
-import { ConcertService } from '../../concert/concert.service';
+import { Component, OnInit } from '@angular/core'; 
+import { FormGroup, FormBuilder, Validators } from '@angular/forms'; 
+import { Concert } from '../../shared/model/concert.model';
+import { User } from '../../shared/model/user.model';
+import { Ticket } from '../../shared/model/ticket.model';
+import { UserService } from '../../shared/service/user.service';
+import { TicketService } from '../../shared/service/ticket.service';
+import { ConcertService } from '../../shared/service/concert.service';
 
 @Component({
   selector: 'app-profile',
@@ -16,12 +16,9 @@ export class ProfileComponent implements OnInit {
 
   currentUser: User;
   ticketList = new Array<Ticket>();
-  idUser: string;
-
-
+  idUser: string; 
   ticket = Ticket;
-  concertList = new Array<Concert>();
-
+  concertList = new Array<Concert>(); 
   userForm: FormGroup;
 
   constructor(

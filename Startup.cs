@@ -7,15 +7,8 @@ using Microsoft.Extensions.Hosting;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore; 
- 
-using Microsoft.AspNetCore.SpaServices;
+using Microsoft.AspNetCore.Authentication.JwtBearer; 
+using Microsoft.AspNetCore.Identity;  
 using GIGTickets.Models;
 using Microsoft.IdentityModel.Tokens;
 using System;

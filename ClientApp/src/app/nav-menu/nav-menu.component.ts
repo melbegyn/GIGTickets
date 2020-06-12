@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { ConcertService } from './../concert/concert.service';
-import { HttpClient } from '@angular/common/http';
-import { Concert } from '../shared/concert.model';
-import { UserService } from '../service/user.service';
 import { Router } from '@angular/router';
-import { User } from '../shared/user.model';
+import { User } from '../shared/model/user.model';
+import { UserService } from '../shared/service/user.service';
+import { ConcertService } from '../shared/service/concert.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -12,9 +10,7 @@ import { User } from '../shared/user.model';
   styleUrls: ['./nav-menu.component.css']
 })
 export class NavMenuComponent {
-
    
-
   currentUser: User;
 
 
@@ -29,13 +25,10 @@ export class NavMenuComponent {
 
     this.service.getUserProfile().subscribe((data) => {
       this.currentUser = data as User;
-
-    }, (err) => {
-
+    }, (err) => { 
         this.router.navigate(['/user/login']);
-      console.log(err);
-    });
-
+        //console.log(err);
+    }); 
     this.concertService.refreshList(); 
   }
 
@@ -53,4 +46,6 @@ export class NavMenuComponent {
   toggle() {
     this.isExpanded = !this.isExpanded;
   }
+
+
 }

@@ -23,19 +23,18 @@
 
           <span><i class="fa fa-map-marker" aria-hidden="true"></i> {{concert.Stage}} - <i class="fa fa-calendar" aria-hidden="true"></i> {{concert.ConcertDate | date }}</span>
 
-          <span *ngIf="concert.NumberTicketsAvailable == 1">
-             <p><dt><i class="fa fa-exclamation-circle" aria-hidden="true"></i> 1 ticket left !</dt></p>
-          </span>
-          <span *ngIf="concert.NumberTicketsAvailable > 1">
-              <p> Tickets available : {{concert.NumberTicketsAvailable}} </p>
-          </span>
-
-
+          <p *ngIf="concert.NumberTicketsAvailable == 1" style="font-weight:bold;">
+               <i class="fa fa-exclamation-circle" aria-hidden="true"></i> 1 ticket left ! 
+          </p>
+          <p *ngIf="concert.NumberTicketsAvailable > 1">
+              Tickets available : {{concert.NumberTicketsAvailable}} 
+          </p>
+           
           <div class="row" style="padding-top:10px;">
 
             <div class="col-sm-4">
-              <span class="text-danger" *ngIf="concert.NumberTicketsAvailable == 0">
-                <dt><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Sold out!</dt>
+              <span style="font-weight:bold;" class="text-danger" *ngIf="concert.NumberTicketsAvailable == 0">
+                <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Sold out!
               </span>
               <span *ngIf="concert.NumberTicketsAvailable > 0">
                 <a class="btn btn-primary" [routerLink]="['/home/concert', concert.Id]">

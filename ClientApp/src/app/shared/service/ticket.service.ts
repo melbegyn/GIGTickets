@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { Injectable } from '@angular/core'; 
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Ticket } from '../shared/ticket.model';
+import { Observable } from 'rxjs'; 
+import { Ticket } from '../model/ticket.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -22,15 +22,9 @@ export class TicketService {
     const url = this.rootURL + '/Ticket/User/' + id;
     return this.http.get<Ticket[]>(url);
   }
-
-
+   
   putTicket(ticket) {
     return this.http.put(this.rootURL + '/UserProfile/' + ticket.Id, ticket)
   }
-/*
-  getTicketsById(concertId) {
-    return this.http.get(this.rootURL + '/Ticket/Add/' + concertId);
-  }*/
-
  
 }

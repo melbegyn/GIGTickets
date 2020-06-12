@@ -1,12 +1,9 @@
 import { Component, Inject } from '@angular/core';
-import { ConcertService } from './../concert/concert.service';
-import { HttpClient } from '@angular/common/http';
-import { Concert } from '../shared/concert.model';
-import { UserService } from '../service/user.service';
-import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
-import { User } from '../shared/user.model';
-import { TicketService } from '../service/ticket.service';
+import { User } from '../shared/model/user.model';
+import { Concert } from '../shared/model/concert.model';
+import { ConcertService } from '../shared/service/concert.service';
+import { UserService } from '../shared/service/user.service';
+import { TicketService } from '../shared/service/ticket.service';
 
 
 @Component({
@@ -17,7 +14,6 @@ export class HomeComponent {
 
   currentUser: User;
   items: any;
- // userDetails;
   concertsData: Concert[];
   parameter: any[];
 
@@ -26,15 +22,8 @@ export class HomeComponent {
     public concertService: ConcertService,
     private service: UserService,
     private ticketService: TicketService) {
-    this.concertService.getConcerts().toPromise().then(data => {
-      console.log(data);
- 
-      console.log(this.parameter);
-       
-     /* for (let key in data)
-        this.concertsData.push(data[key]);*/
-      /*  if (data.hasOwnProperty(key))
-          this.items.push(data[);*/
+    this.concertService.getConcerts().toPromise().then(data => { 
+      //console.log(data); 
     });
 
   }
@@ -50,18 +39,14 @@ export class HomeComponent {
 
 
   ngOnInit() {
-
-    
+     
     this.service.getUserProfile().subscribe((data) => {
-      this.currentUser = data as User;
-      
+      this.currentUser = data as User; 
     }, (err) => {
       console.log(err);
     });
 
-    this.concertService.refreshList(); 
-     
-
+    this.concertService.refreshList();  
   } 
 
 }

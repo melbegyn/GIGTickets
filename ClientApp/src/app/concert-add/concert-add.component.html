@@ -5,9 +5,9 @@
 
 <div class="container" style="width: 60%;">
 
-  <br /> 
+  <br />
   <h2><i class="fa fa-plus" aria-hidden="true"></i> Create concert</h2>
-  <br /> 
+  <br />
 
   <form novalidate (ngSubmit)="onSubmit(concertForm)" [formGroup]="concertForm">
     <input type="hidden" name="Id" formControlName="Id" />
@@ -74,7 +74,7 @@
 
         </div>
 
-        <button type="button" class="btn btn-danger" (click)="deleteTicket(i)" *ngIf ="TicketsFormArray.controls.length > 1">
+        <button type="button" class="btn btn-danger" (click)="deleteTicket(i)" *ngIf="TicketsFormArray.controls.length > 1">
           <i class="fa fa-trash-o" aria-hidden="true"></i> Delete
         </button>
         <br />

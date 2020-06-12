@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { ConcertService } from '../concert/concert.service';
-import { TicketService } from '../service/ticket.service';
+import { Component, OnInit } from '@angular/core'; 
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
-import { UserService } from '../service/user.service';
-import { User } from '../shared/user.model';
-import { ToastrService } from 'ngx-toastr';
-import { Ticket } from '../shared/ticket.model';
-import { Concert } from '../shared/concert.model';
+import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms'; 
+import { ToastrService } from 'ngx-toastr'; 
+import { User } from '../shared/model/user.model';
+import { Ticket } from '../shared/model/ticket.model';
+import { ConcertService } from '../shared/service/concert.service';
+import { TicketService } from '../shared/service/ticket.service';
+import { UserService } from '../shared/service/user.service';
 
 @Component({
   selector: 'app-payment',
@@ -16,8 +15,7 @@ import { Concert } from '../shared/concert.model';
 })
 export class PaymentComponent implements OnInit {
 
-  // necessary
-  //id: number;
+ 
   concertId: any; // Getting Concert id from URL
   concertData: any; // Getting Concert details
 
@@ -50,32 +48,23 @@ export class PaymentComponent implements OnInit {
       UserName: ['', Validators.required],
       homeAddress: ['', Validators.required],
       Email: ['', Validators.compose([Validators.required])],
-      Tickets: this.fb.array([
-        ])
+      Tickets: this.fb.array([])
 
-    }); // this.createTicket()
+    }); 
 
     this.loadForm;
 
     this.concertId = this.actRoute.snapshot.params['id'];
     this.loadConcertDetails(this.concertId);
-
-   
-
-
+     
     ticketService.getTicketsByConcert(this.concertId).subscribe(response => {
       response.map(item => {
         this.ticketList = response
       })
-
-
-
-
+       
       for (let i in response) {
         this.Tickets = this.userForm.get("Tickets") as FormArray;
-
-
-
+         
         this.Tickets.push(
           this.fb.group(
 
@@ -90,27 +79,13 @@ export class PaymentComponent implements OnInit {
         );
 
       }
-     
-       
-
-      /*this.userForm.get("Tickets.Price").setValue(response[0].Price);
-
-      this.Tickets.controls['Price'].setValue(response[0].Price);
-      this.Tickets.controls['Category'].setValue(response[0].Category);
-      this.Tickets.controls['Id'].setValue(response[0].Id);
-      this.Tickets.controls['ConcertId'].setValue(response[0].ConcertId);*/
-       
+      
     });
 
-    console.log(this.concertId)
+   // console.log(this.concertId)
   }
 
-/*  setTicketsValues() {
-    this.Tickets.setValue([
-      { Price: "111", Category: "Mohan", Id: "Java", ConcertId: 0 } 
-    ]);
-  }*/
-
+ 
 
   deleteTicket(index: number) {
     this.Tickets.removeAt(index);
@@ -137,8 +112,7 @@ export class PaymentComponent implements OnInit {
 
   }
 
-
-
+   
   loadForm(data) {
 
     const ticketsFormArray = this.userForm.get("Tickets") as FormArray;
@@ -146,12 +120,10 @@ export class PaymentComponent implements OnInit {
     this.fields.Tickets.forEach(x => {
       ticketsFormArray.push(this.patchValues(x.Id, x.ConcertId, x.Price, x.Category, x.UserId))
     })
-
-
+     
   }
 
-
-
+   
   loadConcertDetails(concertId) {
     this.concertService.getConcert(concertId).subscribe(concert => {
       this.concertData = concert;
@@ -160,7 +132,7 @@ export class PaymentComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log(this.concertData);
+    //console.log(this.concertData);
      
 
     this.userService.getUserProfile().subscribe((data) => {
@@ -170,10 +142,8 @@ export class PaymentComponent implements OnInit {
       this.userForm.controls['FullName'].setValue(this.currentUser.FullName);
       this.userForm.controls['UserName'].setValue(this.currentUser.UserName);
       this.userForm.controls['Email'].setValue(this.currentUser.Email);
-      this.userForm.controls['homeAddress'].setValue(this.currentUser.homeAddress);
-
-      this.ticketForm.controls['UserId'].setValue(this.currentUser.Id);
-
+      this.userForm.controls['homeAddress'].setValue(this.currentUser.homeAddress); 
+      this.ticketForm.controls['UserId'].setValue(this.currentUser.Id); 
 
     }, (err) => {
       console.log(err);
@@ -181,15 +151,12 @@ export class PaymentComponent implements OnInit {
   }
 
 
-  patch() {
-
-
+  patch() { 
     const control = <FormArray>this.userForm.get('Tickets.Ticket');
 
     this.fields.Tickets.Ticket.forEach(x => {
       control.push(this.patchValues(x.Id, x.ConcertId, x.Price, x.Category, x.UserId))
-    })
-
+    }) 
   }
 
 
@@ -206,7 +173,7 @@ export class PaymentComponent implements OnInit {
 
   buyTicket() {
 
-    console.log(this.userForm);
+    //console.log(this.userForm);
 
     let numberOfTicket = this.Tickets.controls.length;
  
@@ -215,8 +182,7 @@ export class PaymentComponent implements OnInit {
       console.log(concert.NumberTicketsAvailable);
 
       concert.NumberTicketsAvailable = concert.NumberTicketsAvailable - numberOfTicket;
-   
-
+    
       console.log(concert.NumberTicketsAvailable);
 
       this.concertService.putConcert(concert)
@@ -233,8 +199,7 @@ export class PaymentComponent implements OnInit {
       setInterval(() => {
           this.router.navigateByUrl('/home');
       }, 5000);
-     
-        
+      
     }); 
 
   }
