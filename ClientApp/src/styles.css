@@ -16,10 +16,9 @@ code {
 }*/
 
 /* You can add global styles to this file, and also import other style files */
-body {
+/*body {
   background-color: #04c582;
-  ;
-}
+}*/
 
 input.form-control, input.form-control:focus {
   background-color: #636b7b;
@@ -32,13 +31,13 @@ input.form-control, input.form-control:focus {
   }
 
 button[type=submit].btn {
-  border-radius: 20px;
-  background-color: #04c582;
-  color: #fff;
+  /*border-radius: 20px;*/
+  background-color: #009CDE;
+  color: white;
 }
 
 div.form-group label:not(.text-danger) {
-  color: #545d6a;
+  color: white;
   font-weight: 700;
 }
 

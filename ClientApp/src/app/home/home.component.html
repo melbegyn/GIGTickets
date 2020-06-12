@@ -1,55 +1,6 @@
 <app-nav-menu></app-nav-menu>
 
  
-
-<div class="card m-5" style="width:18rem" *ngIf="currentUser">
-  {{currentUser.FullName}}
-  {{currentUser.UserName}}
-  {{currentUser.Email}}
-  {{currentUser.Id}}
-</div>
-
-
-<!--
-<table>
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>TourName</th>
-      <th>Artist</th>
-      <th>Stage</th>
-      <th>ConcertDate</th>
-      <th>NumberTicketsAvailable</th>
-      <th>TicketPrice</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let concert of concertService.list  ">
-      <td>{ {concert.Id}}</td>
-      <td>{ {concert.TourName}}</td>
-      <td>{ {concert.Artist}}</td>
-      <td>{ {concert.Stage}}</td>
-      <td>{ {concert.ConcertDate}}</td>
-      <td>{ {concert.NumberTicketsAvailable}}</td>
-      <td>{ {concert.TicketPrice}}</td>
-      <td>
-
-        <div *ngFor="let ticket of concert.Tickets ">
-          la
-           { {ticket.Price}}
-
-        </div>
-      </td>
-      <td>
-
-        <a [routerLink]="['/home/concert', concert.Id]">
-          more info
-        </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
--->
 <div *ngFor="let concert of concertService.list  ">
    
 
