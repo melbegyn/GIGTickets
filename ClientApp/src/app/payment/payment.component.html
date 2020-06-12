@@ -1,78 +1,124 @@
 <app-nav-menu></app-nav-menu>
 
 
-
-
-  FORM TO SEND
-<div>
-  <form [formGroup]="userForm" (ngSubmit)="buyTicket()">
-    <!--<input type="hidden" name="Id" formControlName="Id">-->
-    <div class="form-group">
-      <label for="fullName">FullName: </label>
-      <input formControlName="FullName" type="text" class="form-control" required>
-    </div>
-
-    <div class="form-group">
-      <label for="userName">UserName: </label>
-      <input formControlName="UserName" type="text" class="form-control" required>
-    </div>
-
-    <div class="form-group">
-      <label for="email">Email: </label>
-      <input formControlName="Email" type="text" class="form-control" required>
-    </div>
-
-    <div formGroupName="Tickets">
-      <div *ngFor="let child of userForm.get('Tickets').controls; let i = index">
-        <div [formGroupName]="i">
-          <label>{{i+1}}. Price: </label>
-          <input formControlName="Price" type="number" /><br>
-          <label>{{i+1}}. Category: </label>
-          <input formControlName="Category" type="text" />
-          <label>{{i+1}}. Id: </label>
-          <input formControlName="Id" type="number" /><br>
-          <label>{{i+1}}. ConcertId: </label>
-          <input formControlName="ConcertId" type="number" />
-          <label>{{i+1}}. UserId: </label>
-          <input formControlName="UserId" type="number" />
-
-          <button type="button" (click)="deleteRow(i)" *ngIf="Tickets.controls.length > 1">
-            Delete
-          </button>
+<div class="container">
+        <div class="py-5 text-center">
+ 
+          <h2>Checkout Payment</h2>
+          <p class="lead"> </p>
         </div>
-      </div>
-    </div>
-    <button type="button" (click)="addTicket()">Add new ticket</button>
-    <button type="submit" class="btn btn-primary">Buy Ticket</button>
-  </form>
+
+       
+
+
+        <form [formGroup]="userForm" (ngSubmit)="buyTicket()">
+
+          <div class="row ">
+
+            <!-- FIRST COL-->
+            <div class="col-md-7 order-md-1">
+              <h4 class="mb-3">Billing address</h4>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="FullName">Full name: </label>
+                  <input type="text" formControlName="FullName" class="form-control" required>
+                  <div class="invalid-feedback">
+                    Valid first name is required.
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="UserName">User name: </label>
+                  <input type="text" formControlName="UserName" class="form-control" required>
+                  <div class="invalid-feedback">
+                    Valid first name is required.
+                  </div>
+                </div>
+              </div>
+               
+              <div class="mb-3">
+                <label for="Email">Email</label>
+                <input type="text" formControlName="Email" class="form-control">
+                <div class="invalid-feedback">
+                  Please enter a valid email address for shipping updates.
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+                <div class="invalid-feedback">
+                  Please enter your shipping address.
+                </div>
+              </div>
+
+
+              <hr class="mb-4">
+
+
+            </div>
+
+
+
+            <!-- SECOND COL-->
+            <div class="col-md-5 order-md-2 mb-4" formGroupName="Tickets">
+              <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">Your cart</span>
+                <span class="badge badge-secondary badge-pill">3</span>
+              </h4>
+              <ul class="list-group mb-3" *ngFor="let child of userForm.get('Tickets').controls; let i = index">
+
+
+                <li [formGroupName]="i" class="list-group-item d-flex justify-content-between lh-condensed">
+                  <div>
+                    
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h6 class="my-0">Price </h6>
+                        <input formControlName="Price" type="number" style="width: 60px; border: 1px solid white;" />
+                      </div>
+                      <div class="col-sm-3">
+                        <h6 class="my-0">Category </h6>
+                        <input formControlName="Category" type="text" style=" width: 60px;border: 1px solid white;" />
+                      </div>
+                      <div class="col-sm-4">
+                        <h6 class="my-0">Action </h6>
+                        <button type="button"  class="btn btn-primary" (click)="deleteRow(i)" *ngIf="Tickets.controls.length > 1">
+                          Delete
+                        </button>
+                      </div>
+                      <span class="text-muted">Ticket {{i+1}}</span>
+                    </div>
+                    
+
+                    <!--<h6 class="my-0">Product name</h6>
+                    <small class="text-muted">Brief description</small>-->
+                  </div>
+                 
+                </li>
+                 
+                <!--<li class="list-group-item d-flex justify-content-between">
+                  <span>Total (USD)</span>
+                  <strong>$20</strong>
+                </li>-->
+              </ul>
+
+
+            </div>
+             
+
+          </div>
+          <button class="btn btn-primary btn-lg btn-block" type="submit">Buy tickets</button>
+        </form>
+
+        
+
+      <!--  <footer class="my-5 pt-5 text-muted text-center text-small">
+          <p class="mb-1">&copy; 2017-2018 Company Name</p>
+          <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacy</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Support</a></li>
+          </ul>
+        </footer>-->
 </div>
-
-
-
-  DISPLAY
-<table>
-  <thead>
-    <tr>
-      <th scope="col">id</th>
-      <th scope="col">Price</th>
-      <th scope="col">Category</th>
-      <th scope="col">ConcertId</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let ticket of ticketList">
-      <td>{{ticket.Id}}</td>
-      <td>{{ticket.Price}}</td>
-      <td>{{ticket.Category}}</td>
-      <td>{{ticket.ConcertId}}</td>
-      <td>{{ticket.UserId}}</td>
-
-    </tr>
-    <tr>
-      <i class="fa fa-shopping-cart" aria-hidden="true"></i>  Buy ticket
-
-    </tr>
-  </tbody>
-</table>
-
-<pre>{{userForm.value | json }}</pre>
