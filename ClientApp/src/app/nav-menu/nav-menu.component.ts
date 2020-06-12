@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Concert } from '../shared/concert.model';
 import { UserService } from '../service/user.service';
 import { Router } from '@angular/router';
+import { User } from '../shared/user.model';
 
 @Component({
   selector: 'app-nav-menu',
@@ -14,6 +15,9 @@ export class NavMenuComponent {
 
    
 
+  currentUser: User;
+
+
   constructor(
     private router: Router, 
     private service: UserService) {
@@ -21,7 +25,15 @@ export class NavMenuComponent {
   }
 
   ngOnInit() {
- 
+
+    this.service.getUserProfile().subscribe((data) => {
+      this.currentUser = data as User;
+
+    }, (err) => {
+      console.log(err);
+    });
+
+    this.concertService.refreshList(); 
   }
 
   onLogout() {

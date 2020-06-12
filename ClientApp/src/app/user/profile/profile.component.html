@@ -71,6 +71,7 @@
         <table class="table margin-bottom-none">
           <thead>
             <tr>
+              <th></th>
               <th>Price</th>
               <th>Category</th>
 
@@ -79,8 +80,8 @@
           <tbody>
             <tr *ngFor="let ticket of ticketList">
 
+              <td><i class="fa fa-ticket" aria-hidden="true"></i></td>
               <td>{{ticket.Price}}</td>
-
               <td>{{ticket.Category}}</td>
 
             </tr>

@@ -4,12 +4,15 @@
 
 <div class="container" style="width: 60%;">
 
+
+  <br />
   <h2>Coming events 2020/2021</h2>
+  <br />
 
   <div *ngFor="let concert of concertService.list" class="card mb-3" style="padding: 0.7em;">
 
     <div class="row ">
-      <div class="col-md-4" >
+      <div class="col-md-4">
         <img src="/assets/img/farewell_tour.png" style="width: 100%;">
       </div>
       <div class="col-md-7">
@@ -20,7 +23,7 @@
 
           <span class=" ">{{concert.Stage}} -  {{concert.ConcertDate | date }}</span>
           <p class=" "> Tickets available : {{concert.NumberTicketsAvailable}} </p>
-         
+
 
 
           <div class="row" style="padding-top:10px;">
@@ -43,7 +46,7 @@
               <p class="card-text">From {{concert.TicketPrice}} $</p>
             </div>
           </div>
-         
+
 
         </div>
       </div>

@@ -28,7 +28,7 @@ export class HomeComponent {
     private ticketService: TicketService) {
     this.concertService.getConcerts().toPromise().then(data => {
       console.log(data);
-      this.parameter = data;   // FILL THE ARRAY WITH DATA.
+ 
       console.log(this.parameter);
        
      /* for (let key in data)
