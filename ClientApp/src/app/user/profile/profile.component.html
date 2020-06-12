@@ -1,59 +1,104 @@
 <app-nav-menu></app-nav-menu>
 
-<form [formGroup]="userForm" (ngSubmit)="test()" #formDir="ngForm" novalidate>
-
-  <div class="form-group">
-    <label for="id">Id: </label>
-    <input formControlName="Id" type="text" class="form-control" required>
-
-  </div>
-  <div class="form-group">
-    <label for="tourName">Tour: </label>
-    <input formControlName="FullName" type="text" class="form-control" required>
-  </div>
-
-  <div class="form-group">
-    <label for="artist">Artist: </label>
-    <input formControlName="UserName" type="text" class="form-control" required>
-  </div>
-
-  <div class="form-group">
-    <label for="stage">Stage: </label>
-    <input formControlName="Email" type="text" class="form-control" required>
-  </div>
-
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
 
 
-  <div class="card m-5" style="width:18rem" *ngIf="currentUser">
-    FullName:  {{currentUser.FullName}} <br />
-    UserName:  {{currentUser.UserName}} <br />
-    Email : {{currentUser.Email}} <br />
-    Id  {{currentUser.Id}} <br />
+<div class="container padding-bottom-3x mb-2">
+  <div class="row">
+    <div class="col-lg-4">
+      <aside class="user-info-wrapper">
+        <div class="user-cover" style="background-image: url(https://bootdey.com/img/Content/bg1.jpg);">
+          <div class="info-label" data-toggle="tooltip" title=""><i class="icon-medal"></i>Profile</div>
+        </div>
+        <div class="user-info">
+          <div class="user-avatar">
+            <a class="edit-avatar" href="#"></a><img src="/assets/img/user_profile_icon.png" alt="User">
+          </div>
+          <div class="user-data">
+            <h4>{{currentUser.UserName}}</h4><span>{{currentUser.FullName}}</span>
+          </div>
+        </div>
+      </aside>
+      <nav class="list-group">
+        <a class="list-group-item" href="#"><i class="fa fa-user"></i> {{currentUser.UserName}}</a>
+        <a class="list-group-item with-badge" href="#"><i class="fa fa-envelope" aria-hidden="true"></i> {{currentUser.Email}}</a>
 
-    <div>
+        <a class="list-group-item" href="#"><i class="fa fa-address-card"></i>Addresses</a>
+        <!--<a class="list-group-item with-badge" href="#"><i class="fa fa-heart"></i>Wishlist<span class="badge badge-primary badge-pill">3</span></a>
+      <a class="list-group-item with-badge active" href="#"><i class="fa fa-tag"></i>My Tickets<span class="badge badge-primary badge-pill">4</span></a>
+  -->
+      </nav>
+    </div>
+    <div class="col-lg-8">
+
+      <form [formGroup]="userForm" (ngSubmit)="test()" #formDir="ngForm" novalidate>
+
+        <!--    <div class="form-group">
+      <label for="id">Id: </label>
+      <input formControlName="Id" type="text" class="form-control" required>
+
+    </div>
+    <div class="form-group">
+      <label for="tourName">Tour: </label>
+      <input formControlName="FullName" type="text" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+      <label for="artist">Artist: </label>
+      <input formControlName="UserName" type="text" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+      <label for="stage">Stage: </label>
+      <input formControlName="Email" type="text" class="form-control" required>
+    </div>-->
+
+        <button type="submit" class="btn btn-primary">See my orders</button>
+        <br />
+      </form>
+
+      <div class="padding-top-2x mt-2 hidden-lg-up"></div>
+
+
+
+
+
+      <div class="table-responsive margin-bottom-2x" *ngIf="ticketList.length > 0 ">
+        <br />
+        <h3>My tickets</h3>
+        <br />
+
+
+        <table class="table margin-bottom-none">
+          <thead>
+            <tr>
+              <th>Price</th>
+              <th>Category</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ticket of ticketList">
+
+              <td>{{ticket.Price}}</td>
+
+              <td>{{ticket.Category}}</td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Messages-->
+
+
+
 
     </div>
   </div>
+</div>
 
-  <table>
-    <thead>
-      <tr>
-        <th scope="col">id</th>
-        <th scope="col">Price</th>
-        <th scope="col">ConcertId</th>
-        <th scope="col">Category</th>
-        <th scope="col">UserId</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let ticket of ticketList">
-        <td>{{ticket.Id}}</td>
-        <td>{{ticket.Price}}</td>
-        <td>{{ticket.ConcertId}}</td>
-        <td>{{ticket.Category}}</td>
-        <td>{{ticket.UserId}}</td>
-      </tr>
-    </tbody>
-  </table>
+
+
+
+
+
+
