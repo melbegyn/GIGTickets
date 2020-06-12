@@ -40,11 +40,11 @@ export class HomeComponent {
 
   ngOnInit() {
      
-    this.service.getUserProfile().subscribe((data) => {
-      this.currentUser = data as User; 
+    /* this.service.getUserProfile().subscribe((data) => {
+     this.currentUser = data as User; 
     }, (err) => {
       console.log(err);
-    });
+    });*/
 
     this.concertService.refreshList();  
   } 

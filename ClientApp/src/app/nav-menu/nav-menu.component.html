@@ -1,13 +1,15 @@
 <header>
   <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
     <div class="container">
-      <a class="navbar-brand" [routerLink]="['/home']">GIGTickets</a>
+      <a class="navbar-brand" [routerLink]="['/home']"> 
+      </a>
+      <img src="/assets/img/gigtickets-logo-icon.png" style="width: 20%;">
       <button class="navbar-toggler"
               type="button"
               data-toggle="collapse"
               data-target=".navbar-collapse"
               aria-label="Toggle navigation"
-              [attr.aria-expanded]="isExpanded" 
+              [attr.aria-expanded]="isExpanded"
               (click)="toggle()">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -19,7 +21,7 @@
               [routerLinkActiveOptions]="{ exact: true }">
             <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
           </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="currentUser.UserName!==undefined && currentUser.UserName === 'adminuser'">
+          <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="currentUser?.UserName!==undefined && currentUser.UserName === 'adminuser'">
             <a class="nav-link text-dark" [routerLink]="['/backoffice']">Back office</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']" style="padding-right: 25px;">
@@ -27,8 +29,8 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" [routerLink]="['/profile']" style=" padding-right: 20px;color: #aed3e1;">
-                <img src="/assets/img/user_profile_icon.png" alt="User" style="width:25px;">
-                Hello {{currentUser?.UserName}} !
+              <img src="/assets/img/user_profile_icon.png" alt="User" style="width:25px;">
+              Hello {{currentUser?.UserName}} !
             </a>
           </li>
           <li class="nav-item">
