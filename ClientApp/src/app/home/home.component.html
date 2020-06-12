@@ -22,8 +22,13 @@
 
 
           <span><i class="fa fa-map-marker" aria-hidden="true"></i> {{concert.Stage}} - <i class="fa fa-calendar" aria-hidden="true"></i> {{concert.ConcertDate | date }}</span>
-          <p> Tickets available : {{concert.NumberTicketsAvailable}} </p>
 
+          <span *ngIf="concert.NumberTicketsAvailable == 1">
+             <p><dt><i class="fa fa-exclamation-circle" aria-hidden="true"></i> 1 ticket left !</dt></p>
+          </span>
+          <span *ngIf="concert.NumberTicketsAvailable > 1">
+              <p> Tickets available : {{concert.NumberTicketsAvailable}} </p>
+          </span>
 
 
           <div class="row" style="padding-top:10px;">
@@ -37,11 +42,9 @@
                   See tickets
                 </a>
               </span>
-              <span *ngIf="concert.NumberTicketsAvailable == 1">
-                <dt><i class="fa fa-exclamation-circle" aria-hidden="true"></i> 1 ticket left !</dt>
-              </span>
+
             </div>
-            <div class="col-sm-4" style="padding-top:5px;"  *ngIf="concert.NumberTicketsAvailable > 0">
+            <div class="col-sm-4" style="padding-top:5px;" *ngIf="concert.NumberTicketsAvailable > 0">
               <p class="card-text">From {{concert.TicketPrice}}.00 $</p>
             </div>
           </div>
