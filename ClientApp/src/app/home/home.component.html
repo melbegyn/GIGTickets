@@ -1,31 +1,57 @@
 <app-nav-menu></app-nav-menu>
 
- 
-<div *ngFor="let concert of concertService.list  ">
-   
 
-    {{concert.Id}}
-    {{concert.TourName}}
-    {{concert.Artist}}
-    {{concert.Stage}}
-    {{concert.ConcertDate}}
-    {{concert.NumberTicketsAvailable}}
-    {{concert.TicketPrice}}
 
-    <span *ngIf="concert.NumberTicketsAvailable > 0">
-       
-      <a [routerLink]="['/home/concert', concert.Id]">
-        more info 
-      </a>
- 
+<div class="container" style="width: 60%;">
 
-    </span>
+  <h2>Coming events 2020/2021</h2>
 
-    <span *ngIf="concert.NumberTicketsAvailable == 0">
-        Not more tickets! Sold out !
+  <div *ngFor="let concert of concertService.list" class="card mb-3" style="padding: 0.7em;">
 
-    </span>
+    <div class="row ">
+      <div class="col-md-4" >
+        <img src="/assets/img/farewell_tour.png" style="width: 100%;">
+      </div>
+      <div class="col-md-7">
+        <div class="card-block">
+          <h4 class="card-title">{{concert.TourName}} | {{concert.Artist}}</h4>
 
-  
+
+
+          <span class=" ">{{concert.Stage}}</span>
+          <p class=" "> Tickets available : {{concert.NumberTicketsAvailable}} </p>
+         
+
+
+          <div class="row" style="padding-top:10px;">
+
+            <div class="col-sm-3">
+
+              <span *ngIf="concert.NumberTicketsAvailable == 0">
+                Sold out !
+              </span>
+              <span *ngIf="concert.NumberTicketsAvailable > 0">
+
+                <a class="btn btn-primary" [routerLink]="['/home/concert', concert.Id]">
+                  more info
+                </a>
+
+
+              </span>
+            </div>
+            <div class="col-sm-3">
+              <p class="card-text">From {{concert.TicketPrice}} $</p>
+            </div>
+          </div>
+         
+
+        </div>
+      </div>
+
+    </div>
+
 
   </div>
+
+
+</div>
