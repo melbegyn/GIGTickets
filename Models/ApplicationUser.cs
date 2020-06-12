@@ -26,14 +26,6 @@ namespace GIGTickets.Models
 
 
         public virtual ICollection<Ticket> Tickets { get; set; }
-
-
-        // inherited data
-        //public string UserName { get; set; }
-
-        // inherited data
-        //public string Email { get; set; }
-        // public string Password { get; set; }
-
+         
     }
 }

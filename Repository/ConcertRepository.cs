@@ -15,10 +15,7 @@ namespace GIGTickets.Data.DataManager
         public ConcertRepository(APIDBContext context)
         {
             this.context = context;
-        }
- 
-
-   
+        } 
 
         public void Update(Concert entityToUpdate, Concert entity)
         {

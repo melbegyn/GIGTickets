@@ -58,10 +58,7 @@ namespace GIGTickets.Controllers
 
             string userId = User.Claims.FirstOrDefault(c => c.Type == "UserID").Value;
            
-
-       
-
-            
+             
             var userInDb = _context.Users.FirstOrDefault(c => c.Id == userId);
             // Update it with the values from the view model
             userInDb.FullName = user.FullName;
@@ -70,12 +67,7 @@ namespace GIGTickets.Controllers
             userInDb.Tickets = user.Tickets;
             userInDb.homeAddress = user.homeAddress;
             userInDb.PhoneNumber = user.PhoneNumber;
-            //userInDb.Number = model.Number; //custom property
-             
-
-            // Apply the changes if any to the db
-           
-
+            
 
             try
             {
@@ -92,22 +84,7 @@ namespace GIGTickets.Controllers
                     throw;
                 }
             }
-             
-
-            // if (user.Tickets != null && user.Tickets.Count > 0)
-            // {
-
-//  foreach (Ticket ticket in user.Tickets)
-
-//     {
-//        user.Tickets.Add(ticket);
-//    }
-// }
-/*
-
-            _context.Entry(user).State = EntityState.Modified;
-*/
-
+              
 
         return NoContent();
         }

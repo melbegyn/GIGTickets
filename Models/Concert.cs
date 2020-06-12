@@ -35,13 +35,8 @@ namespace GIGTickets.Models
         [Required]
         [Column(TypeName = "decimal(18, 2)")]
         public int TicketPrice { get; set; }
-
-        //[ForeignKey("ConcertId")]
          
         public virtual ICollection<Ticket> Tickets { get; set; }
-
-
-
-
+         
     }
 }

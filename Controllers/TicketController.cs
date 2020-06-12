@@ -49,41 +49,17 @@ namespace GIGTickets.Controllers
         public async Task<ActionResult<IEnumerable<Ticket>>> Get([FromQuery] int param1)
         {
            
-            var ticketsList = await _context.Ticket.Where(f => f.ConcertId == param1).ToListAsync();
-            //return  await _context.Ticket.Where(f => f.ConcertId == param1).ToListAsync();
-            // var users = _context.Users.Where(u => u == user);
+            var ticketsList = await _context.Ticket.Where(f => f.ConcertId == param1).ToListAsync(); 
             List<Ticket> dd = new List<Ticket>();
 
             foreach (Ticket t in ticketsList.ToList()) {
                 dd.Add(t);
             }
-
-
-            
+             
             return Ok(dd);
         }
 
-        // GET: api/Ticket
-
-/*        [HttpGet]
-        [Route("AllTickets/{param1}")] //   /api/example/get1/1?param2=4
-        public ActionResult<IEnumerable<Ticket>> GetTicketsById([FromQuery]int param1)
-        {
-            List<Ticket> ticketsList = _context.Ticket.Where(f => f.Id == param1).ToList();
-           
-            return Ok(ticketsList);
-        }*/
-
-       /* [HttpGet("{concertId}")]
-        [Route("api/AllTickets/")]
-        public async Task<ActionResult<IEnumerable<Ticket>>> GetTicketsById(int concertId)
-        { 
-            List<Ticket> tickets = await _context.Ticket.Where(f => f.Id == concertId).ToListAsync();
-            return tickets;
-
-        }*/
- 
-
+          
         // GET: api/Ticket/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Ticket>> GetTicket(int id)
@@ -99,8 +75,6 @@ namespace GIGTickets.Controllers
         } 
 
         // PUT: api/Ticket/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTicket(int id, Ticket ticket)
         {
@@ -130,9 +104,7 @@ namespace GIGTickets.Controllers
             return NoContent();
         }
 
-        // POST: api/Ticket
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        // POST: api/Ticket 
         [HttpPost]
         public async Task<ActionResult<Ticket>> PostTicket(Ticket ticket)
         {

@@ -33,12 +33,11 @@ namespace GIGTickets
         public void ConfigureServices(IServiceCollection services)
         {
 
-            // ********** AUTHENTICATION **********
+            // ********** AUTHENTICATION /// JWT **********
 
             //Inject AppSettings
             services.Configure<AppSettings>(Configuration.GetSection("ApplicationSettings"));
-
-
+             
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<APIDBContext>();
 
@@ -52,13 +51,12 @@ namespace GIGTickets
                 }
             );
 
-            //Jwt Authentication
+            // Jwt Authentication
             var key = Encoding.UTF8.GetBytes(Configuration["ApplicationSettings:JWT_Secret"].ToString());
-
-       
-
+             
+            // For Postman + extern
             services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme)
-       .AddCertificate();
+            .AddCertificate();
 
             services.AddAuthentication(x =>
             {
@@ -83,14 +81,12 @@ namespace GIGTickets
             services.AddHttpContextAccessor();
 
             // ********** ADD MVC **********
-             //  services.AddMvc(); 
+            //  services.AddMvc(); 
             // services.AddMvc(option => option.EnableEndpointRouting = false) 
-             //  .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-              
+            //  .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);  
             // ********** ADD CORS FOR SECURITY REQUEST **********
             services.AddCors();
-
-           
+             
 	        //remove default json formatting
 	        services.AddControllers().AddJsonOptions(options =>
             {
@@ -104,9 +100,7 @@ namespace GIGTickets
                 o.JsonSerializerOptions.PropertyNamingPolicy = null;
                 o.JsonSerializerOptions.DictionaryKeyPolicy = null;
             });
-
- 
-
+             
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -117,11 +111,8 @@ namespace GIGTickets
             // ********** ADD DBCONTEXT **********
             // available for all the controllers
             services.AddDbContext<APIDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
-
-
-            services.AddTransient<InitUsersDB>();
-            // ********** DATA SEED **********
-            //services.AddTransient<DataSeed>();
+            // TO INIT ADMIN USER
+            services.AddTransient<InitUsersDB>(); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -136,9 +127,7 @@ namespace GIGTickets
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
-            }
-
-   
+            } 
 
             // Cors configuration
             //app.UseCors(a => a.SetIsOriginAllowed(x => _ = true).AllowAnyMethod().AllowAnyHeader().AllowCredentials());
@@ -147,12 +136,9 @@ namespace GIGTickets
                 options.WithOrigins(Configuration["ApplicationSettings:Client_URL"].ToString())
                     .AllowAnyMethod()
                     .AllowAnyHeader());
-
-
+             
             string test = Configuration["ApplicationSettings:Client_URL"].ToString();
-
-            Console.Write(test);
-
+             
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             if (!env.IsDevelopment())
@@ -164,20 +150,16 @@ namespace GIGTickets
 
             // AUTHENTICATION
             app.UseAuthentication();
+
             app.UseDeveloperExceptionPage();
 
             app.UseCertificateForwarding(); 
 
             app.UseAuthorization();
-             
-
+              
             app.UseEndpoints(endpoints =>
-            {
-                //endpoints.MapControllerRoute(
-                //    name: "default",
-                //   pattern: "{controller}/{action=Index}/{id?}");
-                endpoints.MapControllers();
-
+            { 
+                endpoints.MapControllers(); 
             });
 
             app.UseSpa(spa =>
@@ -193,6 +175,7 @@ namespace GIGTickets
                 }
             });
 
+            // INIT IN DB ADMIN USER
             initUsersDB.Initialize();
         }
     }

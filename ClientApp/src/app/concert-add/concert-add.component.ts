@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core'; 
-import { NgForm, FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router'; 
 import { ConcertService } from '../shared/service/concert.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class ConcertAddComponent implements OnInit {
     private router: Router,
     private actRoute: ActivatedRoute,
     public concertService: ConcertService,
+    private toastr: ToastrService,
     private fb: FormBuilder) { }
 
   get TicketsFormArray(): FormArray {
@@ -96,15 +98,18 @@ export class ConcertAddComponent implements OnInit {
 
     console.log(form);  
     this.concertService.postConcert(form.getRawValue()).subscribe(
-      res => { 
-        this.concertService.refreshList();
-        this.router.navigate(['backoffice']);
+      res => {
+        this.toastr.success('Concert created!');
+        setInterval(() => {
+          this.router.navigateByUrl('/backoffice');
+        }, 5000);
+         
       },
       err => { console.log(err); }
     ) 
   }
 
-  addConcert() {
+/*  addConcert() {
 
     this.concertService.postConcert(this.concertForm.value).subscribe(
       res => { 
@@ -113,7 +118,7 @@ export class ConcertAddComponent implements OnInit {
       },
       err => { console.log(err); }
     )
-  }
+  }*/
    
 
 }

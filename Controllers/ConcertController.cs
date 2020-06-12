@@ -25,9 +25,7 @@ namespace GIGTickets.Controllers
         // GET: api/Concert
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Concert>>> GetConcerts()
-        {
-            // return await _context.Concert.Include(p => p.Tickets).Where(p => p.Id == ).ToListAsync();
-           // return await _context.Concert.Include(a => a.Tickets).ToListAsync();
+        { 
              return await _context.Concert.ToListAsync();
 
         }
@@ -37,12 +35,7 @@ namespace GIGTickets.Controllers
         public ActionResult<Concert> GetConcert(int id)
         {
             var concert = _context.Concert.FirstOrDefault(a => a.Id == id);
-
-            //var concert = _context.Concert.Include(p => p.Tickets).Where(p => p.Id == id).Find(id);
-           // var concert = _context.Concert
-           //      .Include(x => x.Tickets)
-           //      .SingleOrDefaultAsync(m => m.Id == id);
-
+             
             return Ok(concert);
         }
 
@@ -53,10 +46,8 @@ namespace GIGTickets.Controllers
             _context.Concert.Add(concert);
 
             await _context.SaveChangesAsync();
-
-            // return CreatedAtAction("GetConcert", new { id = concert.Id }, concert);
-            return NoContent();
-            //return AcceptedAtAction("GetConcert", new { id = concert.Id }, concert);
+             
+            return NoContent(); 
         }
 
         // PUT: api/Concert/5
@@ -100,8 +91,7 @@ namespace GIGTickets.Controllers
                     throw;
                 }
             }
-
-            //  return AcceptedAtAction("GetConcert", new { id = concert.Id }, concert);
+             
             return NoContent();
         }
 

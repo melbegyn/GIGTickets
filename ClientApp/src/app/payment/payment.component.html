@@ -66,6 +66,11 @@
           <span class="text-muted">Your cart</span>
           <span class="badge badge-secondary badge-pill"> Recap</span>
         </h4>
+        <span *ngIf="Tickets.controls.length > 1">
+          <i class="fa fa-info-circle" aria-hidden="true"></i>
+          <small class="text-muted"> Don't want to buy all the tickets ? Delete the ticket that you don't want!</small>
+        </span>
+
         <ul class="list-group mb-3" *ngFor="let child of userForm.get('Tickets').controls; let i = index">
 
 
@@ -92,36 +97,20 @@
                 <span class="text-muted">Ticket {{i+1}}</span>
               </div>
 
-
-              <!--<h6 class="my-0">Product name</h6>
-              <small class="text-muted">Brief description</small>-->
             </div>
 
           </li>
 
-          <!--<li class="list-group-item d-flex justify-content-between">
-            <span>Total (USD)</span>
-            <strong>$20</strong>
-          </li>-->
         </ul>
 
-
       </div>
-
-
+       
     </div>
+
     <button class="btn btn-primary btn-lg btn-block" type="submit">Buy tickets</button>
   </form>
 
 
-
-  <!--  <footer class="my-5 pt-5 text-muted text-center text-small">
-      <p class="mb-1">&copy; 2017-2018 Company Name</p>
-      <ul class="list-inline">
-        <li class="list-inline-item"><a href="#">Privacy</a></li>
-        <li class="list-inline-item"><a href="#">Terms</a></li>
-        <li class="list-inline-item"><a href="#">Support</a></li>
-      </ul>
-    </footer>-->
+ 
 </div>
-<pre>{{userForm.value | json }}</pre> 
+<!--<pre>{ {userForm.value | json }}</pre> -->
