@@ -20,7 +20,8 @@ export class NavMenuComponent {
 
   constructor(
     private router: Router, 
-    private service: UserService) {
+    private service: UserService,
+    private concertService: ConcertService) {
 
   }
 
