@@ -4,6 +4,8 @@ import { User } from '../../shared/user.model';
 import { Ticket } from '../../shared/ticket.model';
 import { TicketService } from '../../service/ticket.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Concert } from '../../shared/concert.model';
+import { ConcertService } from '../../concert/concert.service';
 
 @Component({
   selector: 'app-profile',
@@ -16,11 +18,16 @@ export class ProfileComponent implements OnInit {
   ticketList = new Array<Ticket>();
   idUser: string;
 
+
+  ticket = Ticket;
+  concertList = new Array<Concert>();
+
   userForm: FormGroup;
 
   constructor(
     private userService: UserService,
     private ticketService: TicketService,
+    private concertService: ConcertService,
     private fb: FormBuilder) { }
 
 
@@ -59,19 +66,29 @@ export class ProfileComponent implements OnInit {
   }
 
 
-  test() {
+  getTicketsOfUser() {
     console.log(this.userForm.value.Id);
     console.log(this.userForm.controls.Id.value);
     console.log(this.userForm.value['Id']);
     this.idUser = this.userForm.get('Id').value;
 
-
-    console.log("this.idUser controle from " + this.userForm.get('Id').value);
-    console.log("this.idUser " + this.idUser);
+     
     this.ticketService.getTicketsByUser(this.idUser)
       .toPromise()
       .then(res => {
         this.ticketList = res as Ticket[];
+       
+        for (let re in res as Ticket[]) {
+
+          this.concertService.getConcert(this.ticketList[re].ConcertId).subscribe(rest => {
+            this.concertList.push(rest);
+             
+              console.log(JSON.stringify(this.ticketList));
+            }
+            );
+        }
+         
+
         console.log(JSON.stringify(this.ticketList));
       }
       );

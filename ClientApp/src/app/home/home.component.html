@@ -29,17 +29,16 @@
           <div class="row" style="padding-top:10px;">
 
             <div class="col-sm-4">
-
               <span class="text-danger" *ngIf="concert.NumberTicketsAvailable == 0">
                 <dt><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Sold out!</dt>
               </span>
               <span *ngIf="concert.NumberTicketsAvailable > 0">
-
                 <a class="btn btn-primary" [routerLink]="['/home/concert', concert.Id]">
                   See tickets
                 </a>
-
-
+              </span>
+              <span *ngIf="concert.NumberTicketsAvailable == 1">
+                <dt><i class="fa fa-exclamation-circle" aria-hidden="true"></i> 1 ticket left !</dt>
               </span>
             </div>
             <div class="col-sm-4" style="padding-top:5px;"  *ngIf="concert.NumberTicketsAvailable > 0">

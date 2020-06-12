@@ -30,36 +30,12 @@
     </div>
     <div class="col-lg-7">
 
-      <form [formGroup]="userForm" (ngSubmit)="test()" #formDir="ngForm" novalidate>
-
-        <!--    <div class="form-group">
-      <label for="id">Id: </label>
-      <input formControlName="Id" type="text" class="form-control" required>
-
-    </div>
-    <div class="form-group">
-      <label for="tourName">Tour: </label>
-      <input formControlName="FullName" type="text" class="form-control" required>
-    </div>
-
-    <div class="form-group">
-      <label for="artist">Artist: </label>
-      <input formControlName="UserName" type="text" class="form-control" required>
-    </div>
-
-    <div class="form-group">
-      <label for="stage">Stage: </label>
-      <input formControlName="Email" type="text" class="form-control" required>
-    </div>-->
-
+      <form [formGroup]="userForm" (ngSubmit)="getTicketsOfUser()" #formDir="ngForm" novalidate> 
         <button type="submit" class="btn btn-primary">See my orders</button>
         <br />
       </form>
 
       <div class="padding-top-2x mt-2 hidden-lg-up"></div>
-
-
-
 
 
       <div class="table-responsive margin-bottom-2x" *ngIf="ticketList.length > 0 ">
@@ -74,26 +50,35 @@
               <th></th>
               <th>Price</th>
               <th>Category</th>
-
+              <th></th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let ticket of ticketList">
+            <tr *ngFor="let ticket of ticketList" >
 
-              <td><i class="fa fa-ticket" aria-hidden="true"></i></td>
-              <td>{{ticket.Price}}</td>
-              <td>{{ticket.Category}}</td>
+              <td style="border-bottom: 1px solid white;"><i class="fa fa-ticket" aria-hidden="true"></i></td>
+              <td style="border-bottom: 1px solid white;">{{ticket.Price}}.00 $</td>
+              <td style="border-bottom: 1px solid white;">{{ticket.Category}}</td>
+              <td style="border-bottom: 1px solid white;"> </td>
 
+            </tr>
+
+            <tr *ngFor="let concert of concertList">
+
+              <td><i class="fa fa-music" aria-hidden="true"></i> </td>
+              <td>{{concert.Stage}}</td>
+              <td>{{concert.TourName}}</td>
+              <td>{{concert.Artist}}</td>
             </tr>
           </tbody>
         </table>
       </div>
       <!-- Messages-->
 
-      <div class="table-responsive margin-bottom-2x" *ngIf="ticketList!==undefined && ticketList.length == 0 ">
+    <!--  <div class="table-responsive margin-bottom-2x" *ngIf="ticketList.length == 0 ">
 
         You haven't buy tickets yet ! 
-        </div>
+        </div>-->
 
 
 

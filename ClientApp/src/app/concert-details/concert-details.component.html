@@ -11,7 +11,7 @@
     </div> 
     <div class="card-body">
       <h5 class="card-title">{{concertData?.Artist}} | {{concertData?.TourName}}</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">Number of ticket: {{concertData?.NumberTicketsAvailable}}</li>
@@ -19,11 +19,13 @@
       <li class="list-group-item">Date: {{concertData?.ConcertDate | date}}</li>
     </ul>
     <div class="card-body">
-      <a [routerLink]="['/home/concert/recap-payment', concertData.Id]">
+
+      <hr class="mb-4">
+      <a class="btn-primary  " style="padding: 0.5em;text-decoration:none;" [routerLink]="['/home/concert/recap-payment', concertData.Id]">
         Buy ticket!
       </a>
 
-      
+
     </div>
   </div>
 

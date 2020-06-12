@@ -48,6 +48,7 @@ export class PaymentComponent implements OnInit {
       Id: ['', Validators.required],
       FullName: ['', Validators.required],
       UserName: ['', Validators.required],
+      homeAddress: ['', Validators.required],
       Email: ['', Validators.compose([Validators.required])],
       Tickets: this.fb.array([
         ])
@@ -169,6 +170,7 @@ export class PaymentComponent implements OnInit {
       this.userForm.controls['FullName'].setValue(this.currentUser.FullName);
       this.userForm.controls['UserName'].setValue(this.currentUser.UserName);
       this.userForm.controls['Email'].setValue(this.currentUser.Email);
+      this.userForm.controls['homeAddress'].setValue(this.currentUser.homeAddress);
 
       this.ticketForm.controls['UserId'].setValue(this.currentUser.Id);
 
