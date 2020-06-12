@@ -1,83 +1,87 @@
-<p>concert-edit works!</p>
+<app-nav-menu></app-nav-menu>
 
 
+<div class="container" style="width: 60%;">
 
-<div class="container" style="margin:10px;">
-
-  <h2>Concert form</h2>
+  <h2><i class="fa fa-pencil" aria-hidden="true"></i> Edit concert</h2>
 
   <form [formGroup]="concertForm" (ngSubmit)="update()" #formDir="ngForm" novalidate>
 
-    <div class="form-group">
+<!-- <div class="form-group">
       <label for="id">Id: </label>
       <input formControlName="Id" type="text" class="form-control" required>
+    </div>-->
 
-    </div>
     <div class="form-group">
-      <label for="tourName">Tour: </label>
+      Tour name:
       <input formControlName="TourName" type="text" class="form-control" required>
     </div>
 
     <div class="form-group">
-      <label for="artist">Artist: </label>
+      Artist name:
       <input formControlName="Artist" type="text" class="form-control" required>
     </div>
 
     <div class="form-group">
-      <label for="artist">Picture: </label>
+      Picture path: 
       <input formControlName="Picture" type="text" class="form-control" required>
     </div>
 
     <div class="form-group">
-      <label for="stage">Stage: </label>
+      Stage: 
       <input formControlName="Stage" type="text" class="form-control" required>
     </div>
 
-    <div class="form-group row">
-      <label for="concertDate" class="col-2 col-form-label">Date: </label>
-      <div class="col-10">
-        <input formControlName="ConcertDate" class="form-control" type="date" required>
+    <div class="form-group">
+      <div class="row">
+          <div class="col-2">
+            Date:
+          </div>
+          <div class="col-10">
+            <input formControlName="ConcertDate" class="form-control" type="date" required>
+          </div>
       </div>
     </div>
 
 
     <div class="form-group">
-      <label for="nbTicketsAvailable">Number of tickets: </label>
-      <input readonly  formControlName="NumberTicketsAvailable" type="number" class="form-control" required>
+      Number of tickets: 
+      <input readonly formControlName="NumberTicketsAvailable" type="number" class="form-control" required>
     </div>
 
     <div class="form-group">
-      <label for="ticketPrice">Ticket price: </label>
+      Ticket price:
       <input formControlName="TicketPrice" type="number" class="form-control" required>
     </div>
 
     <div formArrayName="Tickets">
-      <div *ngFor="let item of TicketsFormArray.controls;  index as i" >
+      <br />
+      <h2>Tickets:</h2>
+      <div *ngFor="let item of TicketsFormArray.controls;  index as i">
         <div [formGroupName]="i">
+          <br />
+          <h4>Ticket {{i+1}}</h4>
+
           <div *ngIf="concertForm.controls.Tickets.controls[i].controls.UserId.value == null">
 
-            <label>
-              UserId:
-            </label>
-            <input formControlName="UserId" type="text" />
+            <div class="form-group">
+              Ticket price:
+              <input formControlName="Price" type="number" class="form-control" required>
+            </div>
 
-            <label>
-              Price:
-            </label>
-            <input formControlName="Price" type="number" />
-            <label>
+            <div class="form-group">
               Category:
-            </label>
-            <input formControlName="Category" type="text" />
+              <input formControlName="Category" type="text" class="form-control" required>
+            </div>
 
           </div>
- 
+
         </div>
       </div>
     </div>
 
-     
-    <button type="submit" class="btn btn-primary"  >Create event</button>
+
+    <button type="submit" class="btn btn-primary">Update event</button>
   </form>
 </div>
 
