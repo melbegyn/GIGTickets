@@ -75,6 +75,9 @@ namespace GIGTickets.Migrations
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
+                    b.Property<string>("homeAddress")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -127,36 +130,69 @@ namespace GIGTickets.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 200,
+                            Id = 1,
                             Artist = "Elton John",
-                            ConcertDate = new DateTime(2008, 5, 1, 5, 34, 42, 0, DateTimeKind.Local),
+                            ConcertDate = new DateTime(2020, 6, 26, 5, 34, 42, 0, DateTimeKind.Local),
                             NumberTicketsAvailable = 2,
-                            Picture = "rocketman.png",
+                            Picture = "farewell_tour.png",
                             Stage = "American Center Airline",
                             TicketPrice = 199m,
-                            TourName = "Rocketman Tour"
+                            TourName = "Farewell Tour"
                         },
                         new
                         {
-                            Id = 201,
-                            Artist = "Elton John",
-                            ConcertDate = new DateTime(2008, 5, 1, 5, 34, 42, 0, DateTimeKind.Local),
+                            Id = 2,
+                            Artist = "Céline Dion",
+                            ConcertDate = new DateTime(2020, 11, 18, 4, 34, 42, 0, DateTimeKind.Local),
                             NumberTicketsAvailable = 1,
-                            Picture = "rocketman.png",
+                            Picture = "courage_tour.png",
                             Stage = "American Center Airline",
-                            TicketPrice = 86m,
-                            TourName = "Rocketman Tour"
+                            TicketPrice = 85m,
+                            TourName = "Courage Tour"
                         },
                         new
                         {
-                            Id = 202,
-                            Artist = "Johnny Hallyday",
-                            ConcertDate = new DateTime(2008, 5, 1, 5, 34, 42, 0, DateTimeKind.Local),
+                            Id = 3,
+                            Artist = "Harry Styles",
+                            ConcertDate = new DateTime(2020, 9, 15, 5, 34, 42, 0, DateTimeKind.Local),
                             NumberTicketsAvailable = 2,
-                            Picture = "rocketman.png",
-                            Stage = "Stage France",
+                            Picture = "love_on_tour.png",
+                            Stage = "The O2 Arena",
                             TicketPrice = 230m,
-                            TourName = "Motar Tour"
+                            TourName = "Love on Tour"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Artist = "Rammstein",
+                            ConcertDate = new DateTime(2020, 12, 5, 4, 34, 42, 0, DateTimeKind.Local),
+                            NumberTicketsAvailable = 1,
+                            Picture = "europe_stadium_tour.png",
+                            Stage = "Stade de France",
+                            TicketPrice = 150m,
+                            TourName = "Europe Stadium Tour"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Artist = "Backstreet Boys",
+                            ConcertDate = new DateTime(2021, 4, 14, 5, 34, 42, 0, DateTimeKind.Local),
+                            NumberTicketsAvailable = 0,
+                            Picture = "dna__world_tour.png",
+                            Stage = "Jones Beach Theatre",
+                            TicketPrice = 90m,
+                            TourName = "DNA World Tour"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Artist = "Green Day",
+                            ConcertDate = new DateTime(2021, 7, 25, 5, 34, 42, 0, DateTimeKind.Local),
+                            NumberTicketsAvailable = 1,
+                            Picture = "mega_tour.png",
+                            Stage = "The Forum",
+                            TicketPrice = 75m,
+                            TourName = "Mega Tour"
                         });
                 });
 
@@ -193,36 +229,71 @@ namespace GIGTickets.Migrations
                         {
                             Id = 1,
                             Category = "VIP",
-                            ConcertId = 200,
+                            ConcertId = 1,
                             Price = 199m
                         },
                         new
                         {
                             Id = 2,
-                            Category = "Fosse",
-                            ConcertId = 200,
+                            Category = "VIP",
+                            ConcertId = 1,
                             Price = 199m
                         },
                         new
                         {
                             Id = 3,
-                            Category = "Cat 3",
-                            ConcertId = 201,
-                            Price = 86m
+                            Category = "Standing",
+                            ConcertId = 2,
+                            Price = 85m
                         },
                         new
                         {
                             Id = 4,
-                            Category = "Cat 4",
-                            ConcertId = 202,
+                            Category = "Cat 2",
+                            ConcertId = 3,
                             Price = 230m
                         },
                         new
                         {
                             Id = 5,
-                            Category = "VIP",
-                            ConcertId = 202,
+                            Category = "Cat 3",
+                            ConcertId = 3,
                             Price = 230m
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Category = "VIP",
+                            ConcertId = 4,
+                            Price = 150m
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Category = "Cat 4",
+                            ConcertId = 4,
+                            Price = 150m
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Category = "Cat 4",
+                            ConcertId = 4,
+                            Price = 150m
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Category = "Cat 3",
+                            ConcertId = 5,
+                            Price = 90m
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Category = "Standing",
+                            ConcertId = 6,
+                            Price = 75m
                         });
                 });
 

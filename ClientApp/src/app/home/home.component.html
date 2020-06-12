@@ -13,7 +13,7 @@
 
     <div class="row ">
       <div class="col-md-4">
-        <img src="/assets/img/farewell_tour.png" style="width: 100%;">
+        <img src="/assets/img/{{concert.Picture}}" style="width: 100%;">
       </div>
       <div class="col-md-7">
         <div class="card-block">
@@ -21,29 +21,29 @@
 
 
 
-          <span class=" ">{{concert.Stage}} -  {{concert.ConcertDate | date }}</span>
-          <p class=" "> Tickets available : {{concert.NumberTicketsAvailable}} </p>
+          <span><i class="fa fa-map-marker" aria-hidden="true"></i> {{concert.Stage}} -  {{concert.ConcertDate | date }}</span>
+          <p> Tickets available : {{concert.NumberTicketsAvailable}} </p>
 
 
 
           <div class="row" style="padding-top:10px;">
 
-            <div class="col-sm-3">
+            <div class="col-sm-4">
 
-              <span *ngIf="concert.NumberTicketsAvailable == 0">
-                Sold out !
+              <span class="text-danger" *ngIf="concert.NumberTicketsAvailable == 0">
+                <dt><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Sold out!</dt>
               </span>
               <span *ngIf="concert.NumberTicketsAvailable > 0">
 
                 <a class="btn btn-primary" [routerLink]="['/home/concert', concert.Id]">
-                  more info
+                  See tickets
                 </a>
 
 
               </span>
             </div>
-            <div class="col-sm-3">
-              <p class="card-text">From {{concert.TicketPrice}} $</p>
+            <div class="col-sm-4" style="padding-top:5px;"  *ngIf="concert.NumberTicketsAvailable > 0">
+              <p class="card-text">From {{concert.TicketPrice}}.00 $</p>
             </div>
           </div>
 

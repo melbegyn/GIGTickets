@@ -41,7 +41,8 @@ namespace GIGTickets.Controllers
             {
                 UserName = model.UserName,
                 Email = model.Email,
-                FullName = model.FullName
+                FullName = model.FullName,
+                homeAddress = model.homeAddress
             };
 
             try
@@ -63,7 +64,10 @@ namespace GIGTickets.Controllers
         public async Task<IActionResult> Login(Login model)
         {
             var user = await _userManager.FindByNameAsync(model.UserName);
-            if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
+            var isCorrect = await _userManager.CheckPasswordAsync(user, model.Password);
+
+
+            if (user != null && isCorrect)
             {
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {

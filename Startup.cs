@@ -125,12 +125,14 @@ namespace GIGTickets
             // available for all the controllers
             services.AddDbContext<APIDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
 
+
+            services.AddTransient<InitUsersDB>();
             // ********** DATA SEED **********
             //services.AddTransient<DataSeed>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, InitUsersDB initUsersDB)
         {
             if (env.IsDevelopment())
             {
@@ -197,6 +199,8 @@ namespace GIGTickets
                     spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                 }
             });
+
+            initUsersDB.Initialize();
         }
     }
 

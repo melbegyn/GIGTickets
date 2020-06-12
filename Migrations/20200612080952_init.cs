@@ -40,7 +40,8 @@ namespace GIGTickets.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    FullName = table.Column<string>(type: "nvarchar(150)", nullable: false)
+                    FullName = table.Column<string>(type: "nvarchar(150)", nullable: false),
+                    homeAddress = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -197,23 +198,38 @@ namespace GIGTickets.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
                 table: "Concert",
                 columns: new[] { "Id", "Artist", "ConcertDate", "NumberTicketsAvailable", "Picture", "Stage", "TicketPrice", "TourName" },
-                values: new object[] { 100, "Elton John", new DateTime(2008, 5, 1, 5, 34, 42, 0, DateTimeKind.Local), 5, "rocketman.png", "American Center Airline", 199m, "Rocketman Tour" });
+                values: new object[,]
+                {
+                    { 1, "Elton John", new DateTime(2020, 6, 26, 5, 34, 42, 0, DateTimeKind.Local), 2, "farewell_tour.png", "American Center Airline", 199m, "Farewell Tour" },
+                    { 2, "Céline Dion", new DateTime(2020, 11, 18, 4, 34, 42, 0, DateTimeKind.Local), 1, "courage_tour.png", "American Center Airline", 85m, "Courage Tour" },
+                    { 3, "Harry Styles", new DateTime(2020, 9, 15, 5, 34, 42, 0, DateTimeKind.Local), 2, "love_on_tour.png", "The O2 Arena", 230m, "Love on Tour" },
+                    { 4, "Rammstein", new DateTime(2020, 12, 5, 4, 34, 42, 0, DateTimeKind.Local), 1, "europe_stadium_tour.png", "Stade de France", 150m, "Europe Stadium Tour" },
+                    { 5, "Backstreet Boys", new DateTime(2021, 4, 14, 5, 34, 42, 0, DateTimeKind.Local), 0, "dna__world_tour.png", "Jones Beach Theatre", 90m, "DNA World Tour" },
+                    { 6, "Green Day", new DateTime(2021, 7, 25, 5, 34, 42, 0, DateTimeKind.Local), 1, "mega_tour.png", "The Forum", 75m, "Mega Tour" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Ticket",
                 columns: new[] { "Id", "Category", "ConcertId", "Price", "UserId" },
-                values: new object[] { 7, "VIP", 100, 199m, null });
-
-            migrationBuilder.InsertData(
-                table: "Ticket",
-                columns: new[] { "Id", "Category", "ConcertId", "Price", "UserId" },
-                values: new object[] { 20, "VIP", 100, 199m, null });
+                values: new object[,]
+                {
+                    { 1, "VIP", 1, 199m, null },
+                    { 2, "VIP", 1, 199m, null },
+                    { 3, "Standing", 2, 85m, null },
+                    { 4, "Cat 2", 3, 230m, null },
+                    { 5, "Cat 3", 3, 230m, null },
+                    { 6, "VIP", 4, 150m, null },
+                    { 7, "Cat 4", 4, 150m, null },
+                    { 8, "Cat 4", 4, 150m, null },
+                    { 9, "Cat 3", 5, 90m, null },
+                    { 10, "Standing", 6, 75m, null }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

@@ -19,7 +19,7 @@
               [routerLinkActiveOptions]="{ exact: true }">
             <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
           </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="currentUser.UserName.value == 'admin'">
+          <li class="nav-item" [routerLinkActive]="['link-active']" *ngIf="currentUser.UserName!==undefined && currentUser.UserName === 'adminuser'">
             <a class="nav-link text-dark" [routerLink]="['/backoffice']">Back office</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']" style="padding-right: 25px;">

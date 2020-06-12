@@ -35,7 +35,7 @@ export class ConcertDetailsComponent implements OnInit {
    
 
   concertId: any; // Getting Concert id from URL
-  concertData: any; // Getting Concert details
+  concertData: Concert; // Getting Concert details
   //ticketsListData: Ticket[];
 
 
@@ -64,14 +64,11 @@ export class ConcertDetailsComponent implements OnInit {
   loadConcertDetails(concertId) {
     this.concertService.getConcert(concertId).subscribe(concert => {
       this.concertData = concert;
+ 
     });
   }
-/*  getData(): Observable<any> {
-    return this.concertService.getTicketsByIdMel(this.concertId).pipe(map(res => res));
-  }
 
- */
-
+ 
   ngOnInit() {
 
     this.userService.getUserProfile().subscribe((data) => {

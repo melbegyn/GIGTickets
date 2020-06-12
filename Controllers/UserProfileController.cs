@@ -45,7 +45,8 @@ namespace GIGTickets.Controllers
                 user.Id,
                 user.FullName,
                 user.Email,
-                user.UserName
+                user.UserName,
+                user.homeAddress
             };
         }
 
@@ -67,6 +68,7 @@ namespace GIGTickets.Controllers
             userInDb.UserName = user.UserName;
             userInDb.Email = user.Email;
             userInDb.Tickets = user.Tickets;
+            userInDb.homeAddress = user.homeAddress;
             userInDb.PhoneNumber = user.PhoneNumber;
             //userInDb.Number = model.Number; //custom property
              

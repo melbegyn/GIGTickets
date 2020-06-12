@@ -22,7 +22,9 @@ namespace GIGTickets.Models
         public string FullName { get; set; }
 
         // Extended data
-        //public Ticket Ticket { get; set; }
+        public String homeAddress { get; set; }
+
+
         public virtual ICollection<Ticket> Tickets { get; set; }
 
 

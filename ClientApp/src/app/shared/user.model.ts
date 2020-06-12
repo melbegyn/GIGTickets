@@ -6,5 +6,6 @@ export class User {
   FullName: string;
   UserName: string;
   Email: string;
+  homeAddress: string;
   Tickets: Ticket[];
 }
