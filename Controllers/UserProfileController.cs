@@ -31,15 +31,13 @@ namespace GIGTickets.Controllers
         [Authorize]
         //GET : /api/UserProfile
         public async Task<Object> GetUserProfile()
-        {
-            //string userId = User.Claims.First(c => c.Type == "UserID").Value;
+        { 
             string userId = User.Claims.FirstOrDefault(c => c.Type == "UserID").Value;
 
             var user = _context.Users.FirstOrDefault(c => c.Id == userId);
 
             var email = user.Email;
-
-            //var user = await _userManager.GetUserAsync(HttpContext.User);
+             
             return new
             {
                 user.Id,

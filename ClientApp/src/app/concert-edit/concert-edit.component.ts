@@ -41,7 +41,7 @@ export class ConcertEditComponent implements OnInit {
       Artist: ['', Validators.compose([Validators.required])],
       Stage: ['', Validators.compose([Validators.required])],
       Picture: ['', Validators.compose([Validators.required])],
-      ConcertDate: [null, Validators.compose([Validators.required])],
+      EventDate: [null, Validators.compose([Validators.required])],
       NumberTicketsAvailable: [null, Validators.compose([Validators.required])],
       TicketPrice: [null, Validators.compose([Validators.required])],
       Tickets: this.fb.array([])
@@ -155,6 +155,9 @@ export class ConcertEditComponent implements OnInit {
  
   }
 
+  navigation(link) {
+    this.router.navigate([link]);
+  }
 
   getConcert(id) {
     this.concertService.getConcert(id).subscribe(concert => {

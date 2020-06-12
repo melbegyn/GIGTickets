@@ -54,13 +54,13 @@ namespace GIGTickets.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TourName = table.Column<string>(nullable: false),
+                    EventDate = table.Column<DateTime>(nullable: false),
+                    NumberTicketsAvailable = table.Column<int>(nullable: false),
+                    TicketPrice = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
                     Artist = table.Column<string>(nullable: false),
                     Stage = table.Column<string>(nullable: false),
-                    Picture = table.Column<string>(nullable: false),
-                    ConcertDate = table.Column<DateTime>(nullable: false),
-                    NumberTicketsAvailable = table.Column<int>(nullable: false),
-                    TicketPrice = table.Column<decimal>(type: "decimal(18, 2)", nullable: false)
+                    TourName = table.Column<string>(nullable: false),
+                    Picture = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -203,13 +203,13 @@ namespace GIGTickets.Migrations
 
             migrationBuilder.InsertData(
                 table: "Concert",
-                columns: new[] { "Id", "Artist", "ConcertDate", "NumberTicketsAvailable", "Picture", "Stage", "TicketPrice", "TourName" },
+                columns: new[] { "Id", "Artist", "EventDate", "NumberTicketsAvailable", "Picture", "Stage", "TicketPrice", "TourName" },
                 values: new object[,]
                 {
                     { 1, "Elton John", new DateTime(2020, 6, 26, 5, 34, 42, 0, DateTimeKind.Local), 2, "farewell_tour.png", "American Center Airline", 199m, "Farewell Tour" },
                     { 2, "Céline Dion", new DateTime(2020, 11, 18, 4, 34, 42, 0, DateTimeKind.Local), 1, "courage_tour.png", "American Center Airline", 85m, "Courage Tour" },
                     { 3, "Harry Styles", new DateTime(2020, 9, 15, 5, 34, 42, 0, DateTimeKind.Local), 2, "love_on_tour.png", "The O2 Arena", 230m, "Love on Tour" },
-                    { 4, "Rammstein", new DateTime(2020, 12, 5, 4, 34, 42, 0, DateTimeKind.Local), 1, "europe_stadium_tour.png", "Stade de France", 150m, "Europe Stadium Tour" },
+                    { 4, "Rammstein", new DateTime(2020, 12, 5, 4, 34, 42, 0, DateTimeKind.Local), 3, "europe_stadium_tour.png", "Stade de France", 150m, "Europe Stadium Tour" },
                     { 5, "Backstreet Boys", new DateTime(2021, 4, 14, 5, 34, 42, 0, DateTimeKind.Local), 0, "dna__world_tour.png", "Jones Beach Theatre", 90m, "DNA World Tour" },
                     { 6, "Green Day", new DateTime(2021, 7, 25, 5, 34, 42, 0, DateTimeKind.Local), 1, "mega_tour.png", "The Forum", 75m, "Mega Tour" }
                 });

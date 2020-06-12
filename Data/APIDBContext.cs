@@ -54,7 +54,7 @@ namespace GIGTickets.Data
                       Artist = "Elton John",
                       TourName = "Farewell Tour",
                       Stage = "American Center Airline",
-                      ConcertDate = DateTime.Parse("2020-06-26T07:34:42-5:00"),
+                      EventDate = DateTime.Parse("2020-06-26T07:34:42-5:00"),
                       NumberTicketsAvailable = 2,
                       TicketPrice = 199,
                       Picture = "farewell_tour.png"
@@ -65,7 +65,7 @@ namespace GIGTickets.Data
                       Artist = "Céline Dion",
                       TourName = "Courage Tour",
                       Stage = "American Center Airline",
-                      ConcertDate = DateTime.Parse("2020-11-18T07:34:42-5:00"),
+                      EventDate = DateTime.Parse("2020-11-18T07:34:42-5:00"),
                       NumberTicketsAvailable = 1,
                       TicketPrice = 85,
                       Picture = "courage_tour.png"
@@ -76,7 +76,7 @@ namespace GIGTickets.Data
                       Artist = "Harry Styles",
                       TourName = "Love on Tour",
                       Stage = "The O2 Arena",
-                      ConcertDate = DateTime.Parse("2020-09-15T07:34:42-5:00"),
+                      EventDate = DateTime.Parse("2020-09-15T07:34:42-5:00"),
                       NumberTicketsAvailable = 2,
                       TicketPrice = 230,
                       Picture = "love_on_tour.png"
@@ -87,8 +87,8 @@ namespace GIGTickets.Data
                     Artist = "Rammstein",
                     TourName = "Europe Stadium Tour",
                     Stage = "Stade de France",
-                    ConcertDate = DateTime.Parse("2020-12-05T07:34:42-5:00"),
-                    NumberTicketsAvailable = 1,
+                    EventDate = DateTime.Parse("2020-12-05T07:34:42-5:00"),
+                    NumberTicketsAvailable = 3,
                     TicketPrice = 150,
                     Picture = "europe_stadium_tour.png"
                 },
@@ -98,7 +98,7 @@ namespace GIGTickets.Data
                     Artist = "Backstreet Boys",
                     TourName = "DNA World Tour",
                     Stage = "Jones Beach Theatre",
-                    ConcertDate = DateTime.Parse("2021-04-14T07:34:42-5:00"),
+                    EventDate = DateTime.Parse("2021-04-14T07:34:42-5:00"),
                     NumberTicketsAvailable = 0,
                     TicketPrice = 90,
                     Picture = "dna__world_tour.png"
@@ -109,7 +109,7 @@ namespace GIGTickets.Data
                     Artist = "Green Day",
                     TourName = "Mega Tour",
                     Stage = "The Forum",
-                    ConcertDate = DateTime.Parse("2021-07-25T07:34:42-5:00"),
+                    EventDate = DateTime.Parse("2021-07-25T07:34:42-5:00"),
                     NumberTicketsAvailable = 1,
                     TicketPrice = 75,
                     Picture = "mega_tour.png"
@@ -134,9 +134,6 @@ namespace GIGTickets.Data
                         new Ticket { Id = 6, ConcertId = 4, UserId = null, Category = "VIP", Price = 150 },
                         new Ticket { Id = 7, ConcertId = 4, UserId = null, Category = "Cat 4", Price = 150 },
                         new Ticket { Id = 8, ConcertId = 4, UserId = null, Category = "Cat 4", Price = 150 },
-
-                        // Backstreet Boys
-                        new Ticket { Id = 9, ConcertId = 5, UserId = null, Category = "Cat 3", Price = 90 }, 
 
                         // Green Day
                         new Ticket { Id = 10, ConcertId = 6, UserId = null, Category = "Standing", Price = 75 }

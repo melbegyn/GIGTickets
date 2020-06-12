@@ -5,6 +5,8 @@
 
 <div class="container" style="width: 60%;">
 
+  <button class="btn btn-warning" (click)="navigation('/backoffice')">< Back</button>
+  <br />
   <br />
   <h2><i class="fa fa-plus" aria-hidden="true"></i> Create concert</h2>
   <br />
@@ -18,7 +20,7 @@
 
     <div class="form-group">
       Picture path: <br />
-      <i class="fa fa-info-circle" aria-hidden="true"></i>  
+      <i class="fa fa-info-circle" aria-hidden="true"></i>
       <small class="text-muted"> The best dimensions for the picture: 926x522 pixels. Otherwise, add this default picture path: default_tour.png.</small>
       <input formControlName="Picture" type="text" class="form-control" required>
     </div>
@@ -39,7 +41,7 @@
           Date:
         </div>
         <div class="col-10">
-          <input formControlName="ConcertDate" class="form-control" type="date" required>
+          <input formControlName="EventDate" class="form-control" type="date" required>
         </div>
       </div>
     </div>

@@ -54,21 +54,16 @@ export class ProfileComponent implements OnInit {
     }, (err) => {
       console.log(err);
     });
-   
-    console.log(this.userForm.value.Id);
-    console.log(this.userForm.controls.Id.value);
-    console.log(this.userForm.value['Id']);
-    this.idUser = this.userForm.get('Id').value;
-
+    
+    this.idUser = this.userForm.get('Id').value; 
   }
 
+  ShowDiv(divVal: string) {
+    this.currDiv = divVal;
+  }
 
-  getTicketsOfUser() {
-    console.log(this.userForm.value.Id);
-    console.log(this.userForm.controls.Id.value);
-    console.log(this.userForm.value['Id']);
+  getTicketsOfUser() { 
     this.idUser = this.userForm.get('Id').value;
-
      
     this.ticketService.getTicketsByUser(this.idUser)
       .toPromise()
@@ -78,17 +73,12 @@ export class ProfileComponent implements OnInit {
         for (let re in res as Ticket[]) {
 
           this.concertService.getConcert(this.ticketList[re].ConcertId).subscribe(rest => {
-            this.concertList.push(rest);
-             
-              console.log(JSON.stringify(this.ticketList));
-            }
-            );
-        }
-         
-
-        console.log(JSON.stringify(this.ticketList));
-      }
-      );
+            this.concertList.push(rest); 
+            //console.log(JSON.stringify(this.ticketList));
+          });
+        } 
+        //console.log(JSON.stringify(this.ticketList));
+    });
   }
 
 }

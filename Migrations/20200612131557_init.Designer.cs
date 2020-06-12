@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GIGTickets.Migrations
 {
     [DbContext(typeof(APIDBContext))]
-    [Migration("20200612080952_init")]
+    [Migration("20200612131557_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -104,7 +104,7 @@ namespace GIGTickets.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ConcertDate")
+                    b.Property<DateTime>("EventDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("NumberTicketsAvailable")
@@ -134,7 +134,7 @@ namespace GIGTickets.Migrations
                         {
                             Id = 1,
                             Artist = "Elton John",
-                            ConcertDate = new DateTime(2020, 6, 26, 5, 34, 42, 0, DateTimeKind.Local),
+                            EventDate = new DateTime(2020, 6, 26, 5, 34, 42, 0, DateTimeKind.Local),
                             NumberTicketsAvailable = 2,
                             Picture = "farewell_tour.png",
                             Stage = "American Center Airline",
@@ -145,7 +145,7 @@ namespace GIGTickets.Migrations
                         {
                             Id = 2,
                             Artist = "Céline Dion",
-                            ConcertDate = new DateTime(2020, 11, 18, 4, 34, 42, 0, DateTimeKind.Local),
+                            EventDate = new DateTime(2020, 11, 18, 4, 34, 42, 0, DateTimeKind.Local),
                             NumberTicketsAvailable = 1,
                             Picture = "courage_tour.png",
                             Stage = "American Center Airline",
@@ -156,7 +156,7 @@ namespace GIGTickets.Migrations
                         {
                             Id = 3,
                             Artist = "Harry Styles",
-                            ConcertDate = new DateTime(2020, 9, 15, 5, 34, 42, 0, DateTimeKind.Local),
+                            EventDate = new DateTime(2020, 9, 15, 5, 34, 42, 0, DateTimeKind.Local),
                             NumberTicketsAvailable = 2,
                             Picture = "love_on_tour.png",
                             Stage = "The O2 Arena",
@@ -167,8 +167,8 @@ namespace GIGTickets.Migrations
                         {
                             Id = 4,
                             Artist = "Rammstein",
-                            ConcertDate = new DateTime(2020, 12, 5, 4, 34, 42, 0, DateTimeKind.Local),
-                            NumberTicketsAvailable = 1,
+                            EventDate = new DateTime(2020, 12, 5, 4, 34, 42, 0, DateTimeKind.Local),
+                            NumberTicketsAvailable = 3,
                             Picture = "europe_stadium_tour.png",
                             Stage = "Stade de France",
                             TicketPrice = 150m,
@@ -178,7 +178,7 @@ namespace GIGTickets.Migrations
                         {
                             Id = 5,
                             Artist = "Backstreet Boys",
-                            ConcertDate = new DateTime(2021, 4, 14, 5, 34, 42, 0, DateTimeKind.Local),
+                            EventDate = new DateTime(2021, 4, 14, 5, 34, 42, 0, DateTimeKind.Local),
                             NumberTicketsAvailable = 0,
                             Picture = "dna__world_tour.png",
                             Stage = "Jones Beach Theatre",
@@ -189,7 +189,7 @@ namespace GIGTickets.Migrations
                         {
                             Id = 6,
                             Artist = "Green Day",
-                            ConcertDate = new DateTime(2021, 7, 25, 5, 34, 42, 0, DateTimeKind.Local),
+                            EventDate = new DateTime(2021, 7, 25, 5, 34, 42, 0, DateTimeKind.Local),
                             NumberTicketsAvailable = 1,
                             Picture = "mega_tour.png",
                             Stage = "The Forum",

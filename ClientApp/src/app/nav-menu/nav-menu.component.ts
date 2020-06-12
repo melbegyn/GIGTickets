@@ -29,7 +29,7 @@ export class NavMenuComponent {
         this.router.navigate(['/user/login']);
         //console.log(err);
     }); 
-    this.concertService.refreshList(); 
+    //this.concertService.refreshList(); 
   }
 
   onLogout() {

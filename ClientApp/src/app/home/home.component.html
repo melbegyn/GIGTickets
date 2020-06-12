@@ -19,9 +19,7 @@
         <div class="card-block">
           <h4 class="card-title">{{concert.TourName}} | <span style="color: #388fcd;">{{concert.Artist}}</span></h4>
 
-
-
-          <span><i class="fa fa-map-marker" aria-hidden="true"></i> {{concert.Stage}} - <i class="fa fa-calendar" aria-hidden="true"></i> {{concert.ConcertDate | date }}</span>
+          <span><i class="fa fa-map-marker" aria-hidden="true"></i> {{concert.Stage}} - <i class="fa fa-calendar" aria-hidden="true"></i> {{concert.EventDate | date }}</span>
 
           <p *ngIf="concert.NumberTicketsAvailable == 1" style="font-weight:bold;">
                <i class="fa fa-exclamation-circle" aria-hidden="true"></i> 1 ticket left ! 

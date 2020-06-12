@@ -36,7 +36,7 @@ export class ConcertAddComponent implements OnInit {
       Artist: ['', Validators.required],
       Picture: ['', Validators.required],
       Stage: ['', Validators.required],
-      ConcertDate: [null, Validators.required],
+      EventDate: [null, Validators.required],
       NumberTicketsAvailable: [0, Validators.required],
       TicketPrice: [0, Validators.required],
       Tickets: this.fb.array([
@@ -107,6 +107,10 @@ export class ConcertAddComponent implements OnInit {
       },
       err => { console.log(err); }
     ) 
+  }
+
+  navigation(link) {
+    this.router.navigate([link]);
   }
 
 /*  addConcert() {

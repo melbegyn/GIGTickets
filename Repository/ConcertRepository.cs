@@ -83,7 +83,7 @@ namespace GIGTickets.Data.DataManager
             // update the properties
             entityToUpdate.TourName = entity.TourName;
             entityToUpdate.Stage = entity.Stage;
-            entityToUpdate.ConcertDate = entity.ConcertDate;
+            entityToUpdate.EventDate = entity.EventDate;
             entityToUpdate.NumberTicketsAvailable = entity.NumberTicketsAvailable;
             entityToUpdate.TicketPrice = entity.TicketPrice;
             entityToUpdate.Artist = entity.Artist;

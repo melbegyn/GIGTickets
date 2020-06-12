@@ -19,7 +19,7 @@ export class ConcertListComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    //this.concertService.refreshList();
+    this.concertService.refreshList();
   }
 
   onDelete(id) {

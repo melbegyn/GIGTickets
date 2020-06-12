@@ -7,7 +7,7 @@ export class Concert {
   Artist: string;
   Stage: string;
   Picture: string;
-  ConcertDate: Date;
+  EventDate: Date;
   NumberTicketsAvailable: number;
   TicketPrice: number;
   Tickets: Ticket[];

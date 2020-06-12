@@ -68,7 +68,7 @@
         </h4>
         <span *ngIf="Tickets.controls.length > 1">
           <i class="fa fa-info-circle" aria-hidden="true"></i>
-          <small class="text-muted"> Don't want to buy all the tickets ? Delete the ticket that you don't want!</small>
+          <small class="text-muted"> Don't want to buy all the tickets ? Delete the ticket(s) that you don't want!</small>
         </span>
 
         <ul class="list-group mb-3" *ngFor="let child of userForm.get('Tickets').controls; let i = index">

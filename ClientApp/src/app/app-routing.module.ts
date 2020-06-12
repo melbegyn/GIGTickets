@@ -28,17 +28,17 @@ const routes: Routes = [
     ]
   },
 
-
+  // user view
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'home/concert/:id', component: ConcertDetailsComponent },
   { path: 'home/concert/recap-payment/:id', component: PaymentComponent },
 
+  { path: 'profile', component: ProfileComponent },
+
   // admin view
   { path: 'backoffice', component: ConcertListComponent, canActivate: [AuthGuard] },
   { path: 'backoffice/create-concert', component: ConcertAddComponent },
-  { path: 'backoffice/edit-concert/:id', component: ConcertEditComponent },
-
-  { path: 'profile', component: ProfileComponent },
+  { path: 'backoffice/edit-concert/:id', component: ConcertEditComponent }
  
 ];
  

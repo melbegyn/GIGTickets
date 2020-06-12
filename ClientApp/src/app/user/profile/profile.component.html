@@ -4,7 +4,7 @@
 
 <div class="container padding-bottom-3x mb-2">
   <div class="row">
-    <div class="col-lg-5">
+    <div class="col-lg-4">
       <aside class="user-info-wrapper">
         <div class="user-cover" style="background-image: url(https://bootdey.com/img/Content/bg1.jpg);">
           <div class="info-label" data-toggle="tooltip" title=""><i class="icon-medal"></i>Profile</div>
@@ -14,75 +14,70 @@
             <a class="edit-avatar" href="#"></a><img src="/assets/img/user_profile_icon.png" alt="User">
           </div>
           <div class="user-data">
-            <h4>{{currentUser.UserName}}</h4><span>{{currentUser.FullName}}</span>
+            <h4>{{currentUser?.UserName}}</h4><span>{{currentUser?.FullName}}</span>
           </div>
         </div>
       </aside>
       <nav class="list-group">
-        <a class="list-group-item" href="#"><i class="fa fa-user"></i> {{currentUser.UserName}}</a>
-        <a class="list-group-item with-badge" href="#"><i class="fa fa-envelope" aria-hidden="true"></i> {{currentUser.Email}}</a>
+        <a class="list-group-item" href="#"><i class="fa fa-user"></i> {{currentUser?.UserName}}</a>
+        <a class="list-group-item with-badge" href="#"><i class="fa fa-envelope" aria-hidden="true"></i> {{currentUser?.Email}}</a>
+        <a class="list-group-item" href="#"><i class="fa fa-address-card"></i> {{currentUser?.homeAddress}}</a>
 
-        <a class="list-group-item" href="#"><i class="fa fa-address-card"></i> {{currentUser.homeAddress}}</a>
-        <!--<a class="list-group-item with-badge" href="#"><i class="fa fa-heart"></i>Wishlist<span class="badge badge-primary badge-pill">3</span></a>
-      <a class="list-group-item with-badge active" href="#"><i class="fa fa-tag"></i>My Tickets<span class="badge badge-primary badge-pill">4</span></a>
-  -->
       </nav>
     </div>
-    <div class="col-lg-7">
+    <div class="col-lg-8">
 
-      <form [formGroup]="userForm" (ngSubmit)="getTicketsOfUser()" #formDir="ngForm" novalidate> 
-        <button type="submit" class="btn btn-primary">See my orders</button>
+      <form [formGroup]="userForm" (ngSubmit)="getTicketsOfUser()" #formDir="ngForm" novalidate>
+        <button type="submit" (click)="ShowDiv('A')" class="btn btn-primary">See my orders</button>
         <br />
       </form>
 
       <div class="padding-top-2x mt-2 hidden-lg-up"></div>
-
 
       <div class="table-responsive margin-bottom-2x" *ngIf="ticketList.length > 0 ">
         <br />
         <h3>My tickets</h3>
         <br />
 
-
         <table class="table margin-bottom-none">
           <thead>
             <tr>
               <th></th>
-              <th>My Tickets</th>
+              <th>Tickets</th>
+              <th></th>
               <th></th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let ticket of ticketList" >
-
+            <tr *ngFor="let ticket of ticketList; let indexT = index;">
+               
               <td style="border-bottom: 1px solid white;"><i class="fa fa-ticket" aria-hidden="true"></i></td>
               <td style="border-bottom: 1px solid white;">{{ticket.Price}}.00 $</td>
               <td style="border-bottom: 1px solid white;">{{ticket.Category}}</td>
               <td style="border-bottom: 1px solid white;"> </td>
 
-            </tr>
+               
+              <span *ngFor="let concert of concertList; let indexC = index;">
+                <td *ngIf="indexT == indexC">
 
-            <tr *ngFor="let concert of concertList">
+                  <i class="fa fa-music" aria-hidden="true"></i>
+                  {{concert.Artist}} - "{{concert.TourName}}" - {{concert.Stage}} 
+                </td> 
 
-              <td><i class="fa fa-music" aria-hidden="true"></i> </td>
-              <td>{{concert.Stage}}</td>
-              <td>{{concert.TourName}}</td>
-              <td>{{concert.Artist}}</td>
+              </span>
+
             </tr>
           </tbody>
         </table>
       </div>
       <!-- Messages-->
-
-    <div class="table-responsive margin-bottom-2x"  *ngIf="ticketList?.length == 0 ">
-
-        You haven't buy tickets yet ! 
-        </div> 
-
-
-
+       
+      <div *ngIf="currDiv == 'A'">
+        <span *ngIf="ticketList.length == 0"> You have no tickets!</span>
       </div>
+ 
+    </div>
     </div>
 </div>
 

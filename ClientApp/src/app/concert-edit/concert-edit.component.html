@@ -3,11 +3,14 @@
 
 <div class="container" style="width: 60%;padding-bottom:3em;">
 
+  <button class="btn btn-warning" (click)="navigation('/backoffice')">< Back</button>
+  <br />
+  <br />
   <h2><i class="fa fa-pencil" aria-hidden="true"></i> Edit concert</h2>
 
   <form [formGroup]="concertForm" (ngSubmit)="onSubmit(this.concertForm.value)" novalidate>
 
- 
+
     <div class="form-group">
       Tour name:
       <input formControlName="TourName" type="text" class="form-control" required>
@@ -19,23 +22,23 @@
     </div>
 
     <div class="form-group">
-      Picture path: 
+      Picture path:
       <input formControlName="Picture" type="text" class="form-control" required>
     </div>
 
     <div class="form-group">
-      Stage: 
+      Stage:
       <input formControlName="Stage" type="text" class="form-control" required>
     </div>
 
     <div class="form-group">
       <div class="row">
-          <div class="col-2">
-            Date:
-          </div>
-          <div class="col-10">
-            <input formControlName="ConcertDate" class="form-control" type="date" required>
-          </div>
+        <div class="col-2">
+          Date:
+        </div>
+        <div class="col-10">
+          <input formControlName="EventDate" class="form-control" type="date" required>
+        </div>
       </div>
     </div>
 
@@ -64,7 +67,7 @@
           <br />
           <h4>Ticket {{i+1}}</h4>
 
-           <div *ngIf="concertForm.controls.Tickets.controls[i].controls.UserId.value == null">           
+          <div *ngIf="concertForm.controls.Tickets.controls[i].controls.UserId.value == null">
 
             <div class="form-group">
               Ticket price:
