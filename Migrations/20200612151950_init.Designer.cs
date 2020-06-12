@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GIGTickets.Migrations
 {
     [DbContext(typeof(APIDBContext))]
-    [Migration("20200612131557_init")]
+    [Migration("20200612151950_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -282,13 +282,6 @@ namespace GIGTickets.Migrations
                             Category = "Cat 4",
                             ConcertId = 4,
                             Price = 150m
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Category = "Cat 3",
-                            ConcertId = 5,
-                            Price = 90m
                         },
                         new
                         {

@@ -227,7 +227,6 @@ namespace GIGTickets.Migrations
                     { 6, "VIP", 4, 150m, null },
                     { 7, "Cat 4", 4, 150m, null },
                     { 8, "Cat 4", 4, 150m, null },
-                    { 9, "Cat 3", 5, 90m, null },
                     { 10, "Standing", 6, 75m, null }
                 });
 

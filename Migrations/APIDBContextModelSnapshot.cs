@@ -283,13 +283,6 @@ namespace GIGTickets.Migrations
                         },
                         new
                         {
-                            Id = 9,
-                            Category = "Cat 3",
-                            ConcertId = 5,
-                            Price = 90m
-                        },
-                        new
-                        {
                             Id = 10,
                             Category = "Standing",
                             ConcertId = 6,

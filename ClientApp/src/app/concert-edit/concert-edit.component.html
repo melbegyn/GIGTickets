@@ -60,10 +60,11 @@
     <div formArrayName="Tickets">
       <br />
       <h2>Tickets:</h2>
-      
+      <i class="fa fa-check-square-o" aria-hidden="true"></i>
+      <small class="text-muted"> If tickets are displayed below, feel free to edit them! You cannot edit tickets already sold. </small>
+
+
       <div *ngFor="let item of TicketsFormArray.controls;  index as i">
-        <i class="fa fa-check-square-o" aria-hidden="true"></i>
-        <small class="text-muted"> Feel free to edit the tickets not sold yet! </small>
 
         <div [formGroupName]="i">
 
