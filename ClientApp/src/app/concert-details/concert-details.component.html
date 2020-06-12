@@ -1,38 +1,32 @@
 <app-nav-menu></app-nav-menu>
 
 
- 
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-12 col-lg-12 col-md-12 sol-sm-12">
-        <table class="table table-striped">
-          <tr>
-            <td>Tour</td>
-            <td>{{concertData?.TourName}}</td>
-          </tr>
-          <tr>
-            <td>Stage</td>
-            <td>{{concertData?.Stage}}</td>
-          </tr>
-          <tr>
-            <td>Price</td>
-            <td>{{concertData?.TicketPrice}}</td>
-          </tr>
-          <tr>
-            <td>Number of tickets</td>
-            <td>{{concertData?.NumberTicketsAvailable}}</td>
-          </tr>
-          <tr>
-          </tr>
-        </table>
-        <br>
-        <a [routerLink]="['/home/concert/recap-payment', concertData.Id]">
-          Buy ticket!
-        </a> 
- 
-        <button class="btn btn-warning" (click)="navigation('')">Go Back</button>
-      </div>
+<div class="container" style="width: 80%;">
+
+
+  <div class="card" style="width: 100%;">
+    <div style="background: url('/assets/img/farewell_tour.png'); height:200px;"></div>
+    <!--<img class="card-img-top" src="/assets/img/farewell_tour.png" alt="Card image cap"> -->
+    <div class="card-body">
+      <h5 class="card-title">{{concertData?.Artist}} | {{concertData?.TourName}}</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Number of ticket: {{concertData?.NumberTicketsAvailable}}</li>
+      <li class="list-group-item">Price: {{concertData?.TicketPrice}}</li>
+      <li class="list-group-item">Date: {{concertData?.ConcertDate | date}}</li>
+    </ul>
+    <div class="card-body">
+      <a [routerLink]="['/home/concert/recap-payment', concertData.Id]">
+        Buy ticket!
+      </a>
+
+      <button class="btn btn-warning" (click)="navigation('')">Go Back</button>
     </div>
   </div>
 
 
+   
+
+
+  </div>
