@@ -1,37 +1,76 @@
 <app-nav-menu></app-nav-menu>
 
 
-  <a routerLink='/backoffice/create-concert'>Add a new concert</a>
 
-<table>
-  <thead>
-    <tr>
-      <th scope="col">id</th>
-      <th scope="col">TourName</th>
-      <th scope="col">Artist</th>
-      <th scope="col">Stage</th>
-      <th scope="col">ConcertDate</th>
-      <th scope="col">NumberTicketsAvailable</th>
-      <th scope="col">TicketPrice</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let concert of concertService.list">
-      <td>{{concert.Id}}</td>
-      <td>{{concert.TourName}}</td>
-      <td>{{concert.Artist}}</td>
-      <td>{{concert.Stage}}</td>
-      <td>{{concert.ConcertDate}}</td>
-      <td>{{concert.NumberTicketsAvailable}}</td>
-      <td>{{concert.TicketPrice}}</td>
-      <td>
-        <a class="btn btn-primary" [routerLink]="['edit-concert', concert.Id]">
-          Edit
-        </a>
-      </td>
-      <td>
-        <button type=button class="btn btn-primary" (click)="onDelete(concert.Id)"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+
+<div class="container" style="width: 60%;">
+
+  <h2>Back Office</h2>
+
+
+  <a class="btn btn-primary" routerLink='/backoffice/create-concert'>+ New Concert</a>
+  <br />
+  <br />
+  <br />
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Tour name</th>
+        <th scope="col">Artist</th>
+        <th scope="col">Stage</th>
+        <th scope="col">Date</th>
+        <th scope="col">Tickets</th>
+        <th scope="col">Price</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+
+
+      <tr *ngFor="let concert of concertService.list">
+        <td>{{concert.Id}}</td>
+        <td>{{concert.TourName}}</td>
+        <td>{{concert.Artist}}</td>
+        <td>{{concert.Stage}}</td>
+        <td>{{concert.ConcertDate | date}}</td>
+        <td>{{concert.NumberTicketsAvailable}}</td>
+        <td>{{concert.TicketPrice}}</td>
+        <td>
+          <a class="btn btn-primary" [routerLink]="['edit-concert', concert.Id]">
+            <i class="fa fa-pencil" aria-hidden="true">  </i> Edit
+          </a>
+        </td>
+        <td>
+          <a class="btn btn-success" href="#" (click)="onDelete(concert.Id)">
+            <i class="fa fa-trash">  </i>  Delete
+          </a>
+          <!--<button type=button class="btn btn-primary" ><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>-->
+
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+
+
+
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">TourName</th>
+          <th scope="col">Artist</th>
+          <th scope="col">Stage</th>
+          <th scope="col">ConcertDate</th>
+          <th scope="col">NumberTicketsAvailable</th>
+          <th scope="col">TicketPrice</th>
+        </tr>
+      </thead>
+      <tbody>
         
-      </td>
-    </tr>
-</table>
+    </table>
