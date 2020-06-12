@@ -139,23 +139,7 @@ namespace GIGTickets.Data
                         new Ticket { Id = 10, ConcertId = 6, UserId = null, Category = "Standing", Price = 75 }
                     );
 
-
-
-            /*  builder.Entity<ApplicationUser>().HasData(
-
-
-
-              // USER ACCOUNT
-              new ApplicationUser { Id = "6616551dfgfgf5655", NormalizedEmail= "john.doe@gmail.com" , Email = "john.doe@gmail.com", FullName = "John Doe", PasswordHash="john", UserName = "JDoe", NormalizedUserName = "JDoe", homeAddress = "807 South Flower Street, 90017 Los Angeles" },
-
-                          // ADMIN ACCOUNT
-                          new ApplicationUser { Id = "3211ddsdf551sdfea", NormalizedEmail = "admin@gigtickets.com", Email = "admin@gigtickets.com", FullName = "admin", PasswordHash = "admin", UserName = "Admin", NormalizedUserName = "Admin", homeAddress = "7th Malcolm AV, 90025 Los Angeles" }
-
-
-              );
-
-
-              */
+             
         }
 
 

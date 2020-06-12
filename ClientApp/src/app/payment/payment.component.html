@@ -71,7 +71,7 @@
           <small class="text-muted"> Don't want to buy all the tickets ? Delete the ticket(s) that you don't want!</small>
         </span>
 
-        <ul class="list-group mb-3" *ngFor="let child of userForm.get('Tickets').controls; let i = index">
+        <ul class="list-group mb-3" *ngFor="let child of TicketsFormArray.controls; let i = index">
 
 
           <li [formGroupName]="i" class="list-group-item d-flex justify-content-between lh-condensed">

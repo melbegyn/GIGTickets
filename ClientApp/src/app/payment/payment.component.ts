@@ -84,7 +84,9 @@ export class PaymentComponent implements OnInit {
    // console.log(this.concertId)
   }
 
- 
+  get TicketsFormArray(): FormArray {
+    return this.userForm.get('Tickets') as FormArray;
+  }
 
   deleteTicket(index: number) {
     this.Tickets.removeAt(index);

@@ -20,6 +20,7 @@ export class ProfileComponent implements OnInit {
   ticket = Ticket;
   concertList = new Array<Concert>(); 
   userForm: FormGroup;
+  currDiv: string;
 
   constructor(
     private userService: UserService,
