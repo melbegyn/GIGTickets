@@ -50,7 +50,7 @@ export class ConcertService {
 
 
   getConcerts() {
-    return this.http.get<Concert[]>(this.rootURL + '/Concert/');
+    return this.http.get(this.rootURL + '/Concert/');
   }
 
 

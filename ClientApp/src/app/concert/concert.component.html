@@ -46,17 +46,19 @@
     </div>
 
     <div formArrayName="Tickets">
-      <div *ngFor="let item of TicketsFormArray.controls; let pointIndex=index" [formGroupName]="pointIndex">
-        <label> 
-          Price:
-        </label>
-        <input formControlName="Price" type="number" />
-        <label>
-          Category:
-        </label>
-        <input formControlName="Category" type="text" />
+      <div *ngFor="let item of TicketsFormArray.controls; index as i">
+        <div [formGroupName]="i">
+          <label>
+            Price:
+          </label>
+          <input formControlName="Price" type="number" />
+          <label>
+            Category:
+          </label>
+          <input formControlName="Category" type="text" />
+        </div>
       </div>
-    </div>
+      </div>
 
 
     <button type="button" (click)="addTicket()">Add new ticket</button>

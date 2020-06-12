@@ -16,11 +16,7 @@ export class ConcertComponent implements OnInit {
   public concertForm: FormGroup;
  // TicketsArray: FormArray;
 
-  arrayItems: {
-    id: number;
-    title: string;
-  }[];
-  fields: any;
+
   ticketForm: FormGroup;
 
   constructor(
@@ -44,7 +40,7 @@ export class ConcertComponent implements OnInit {
 
 
   ngOnInit() {
-    this.arrayItems = [];
+  
 
 /*    this.user = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],

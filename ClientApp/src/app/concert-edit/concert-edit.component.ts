@@ -4,6 +4,9 @@ import { ConcertService } from '../concert/concert.service';
 import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 import { Concert } from '../shared/concert.model';
 import { HttpParams, HttpHeaders } from '@angular/common/http';
+import { Ticket } from '../shared/ticket.model';
+import { UserService } from '../service/user.service';
+import { TicketService } from '../service/ticket.service';
 
 
 @Component({
@@ -17,8 +20,10 @@ export class ConcertEditComponent implements OnInit {
   id: number;
   concertData: any;
   concertId: any;
+  fields: any;
   Tickets: FormArray;
 
+  ticketList = new Array<Ticket>();
 
   ticketForm: FormGroup;
 
@@ -26,33 +31,95 @@ export class ConcertEditComponent implements OnInit {
     private router: Router,
     private actRoute: ActivatedRoute,
     private concertService: ConcertService,
+    private ticketService: TicketService,
     private fb: FormBuilder) {
 
-    if (this.actRoute.snapshot.params["id"]) {
-      this.id = this.actRoute.snapshot.params['id'];
-    }
-     
 
     this.concertForm = this.fb.group({ 
 
-      Id: 0,
+      Id: ['', Validators.required],
       TourName: ['', Validators.required],
       Artist: ['', Validators.compose([Validators.required])],
       Stage: ['', Validators.compose([Validators.required])],
+      Picture: ['', Validators.compose([Validators.required])],
       ConcertDate: [null, Validators.compose([Validators.required])],
       NumberTicketsAvailable: [null, Validators.compose([Validators.required])],
       TicketPrice: [null, Validators.compose([Validators.required])],
       Tickets: this.fb.array([
-        this.ticketForm = this.fb.group({
-          Id: [null, Validators.compose([Validators.required])],
-          ConcertId: [null, Validators.compose([Validators.required])],
-          Price: [null, Validators.compose([Validators.required])],
-          Category: ['', Validators.required]
-
-        })])
+        //this.createTicket()
+        ])
 
     });
-     
+
+
+   // this.loadForm;
+
+    if (this.actRoute.snapshot.params["id"]) {
+      this.id = this.actRoute.snapshot.params['id'];
+    }
+
+
+
+    ticketService.getTicketsByConcert(this.id).subscribe(response => {
+      response.map(item => {
+        this.ticketList = response
+      })
+
+      for (let i in response) {
+        this.Tickets = this.concertForm.get("Tickets") as FormArray;
+
+        this.Tickets.push(
+          this.fb.group(
+            {
+
+              Id: [response[i].Id, Validators.required],
+              ConcertId: [response[i].ConcertId, Validators.required],
+              UserId: [response[i].UserId, Validators.required],
+              Price: [response[i].Price, Validators.required],
+              Category: [response[i].Category, Validators.required]
+            })
+        );
+      }
+    });
+  }
+
+  loadForm(data) {
+
+    const ticketsFormArray = this.concertForm.get("Tickets") as FormArray;
+
+    this.fields.Tickets.forEach(x => {
+      ticketsFormArray.push(this.patchValues(x.Id, x.ConcertId, x.Price, x.Category, x.UserId))
+    })
+
+
+  }
+
+
+
+  patchValues(Id, ConcertId, Price, Category, UserId) {
+    return this.fb.group({
+      id: [Id],
+      ConcertId: [ConcertId],
+      Price: [Price],
+      Category: [Category],
+      UserId: null
+    })
+  }
+  createTicket(): FormGroup {
+
+    return this.fb.group({
+      Id: ['', Validators.required],
+      ConcertId: ['', Validators.required],
+      UserId: ['', Validators.required],
+      Price: ['', Validators.required],
+      Category: ['', Validators.required]
+
+    });
+  }
+
+
+  get TicketsFormArray(): FormArray {
+    return this.concertForm.get('Tickets') as FormArray;
   }
 
   ngOnInit() {
@@ -129,7 +196,6 @@ export class ConcertEditComponent implements OnInit {
       this.concertData = concert;
     });
   }
-
 
   
 

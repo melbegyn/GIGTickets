@@ -24,6 +24,11 @@
     </div>
 
     <div class="form-group">
+      <label for="artist">Picture: </label>
+      <input formControlName="Picture" type="text" class="form-control" required>
+    </div>
+
+    <div class="form-group">
       <label for="stage">Stage: </label>
       <input formControlName="Stage" type="text" class="form-control" required>
     </div>
@@ -38,7 +43,7 @@
 
     <div class="form-group">
       <label for="nbTicketsAvailable">Number of tickets: </label>
-      <input formControlName="NumberTicketsAvailable" type="number" class="form-control" required>
+      <input readonly  formControlName="NumberTicketsAvailable" type="number" class="form-control" required>
     </div>
 
 
@@ -49,21 +54,33 @@
 
 
 
-    <!--<div formGroupName="Tickets">
+    <div formArrayName="Tickets">
+      <div *ngFor="let item of TicketsFormArray.controls;  index as i" >
+        <div [formGroupName]="i">
+          <div *ngIf="concertForm.controls.Tickets.controls[i].controls.UserId.value == null">
 
-      <div *ngFor="let ticket of concertForm.get('Tickets')['controls']; let i=index" [formGroupName]="i">
-        <label>  Price: </label>
-        <input formControlName="Price" type="number" /><br>
-        <label>{ {i}}. Category: </label>
-        <input formControlName="Category" type="text" />-->
-    <!-- The repeated address template -->
-    <!--</div>
+            <label>
+              UserId:
+            </label>
+            <input formControlName="UserId" type="text" />
 
+            <label>
+              Price:
+            </label>
+            <input formControlName="Price" type="number" />
+            <label>
+              Category:
+            </label>
+            <input formControlName="Category" type="text" />
 
-  </div>-->
+          </div>
+ 
+        </div>
+      </div>
+    </div>
 
-
-    <button type="submit" class="btn btn-primary">Submit</button>
+     
+    <button type="submit" class="btn btn-primary"  >Create event</button>
   </form>
 </div>
 

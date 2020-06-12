@@ -55,7 +55,8 @@ namespace GIGTickets.Controllers
             await _context.SaveChangesAsync();
 
             // return CreatedAtAction("GetConcert", new { id = concert.Id }, concert);
-            return AcceptedAtAction("GetConcert", new { id = concert.Id }, concert);
+            return NoContent();
+            //return AcceptedAtAction("GetConcert", new { id = concert.Id }, concert);
         }
 
         // PUT: api/Concert/5
