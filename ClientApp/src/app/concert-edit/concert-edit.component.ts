@@ -50,9 +50,8 @@ export class ConcertEditComponent implements OnInit {
         ])
 
     });
-
-
-   // this.loadForm;
+ 
+    this.loadForm;
 
     if (this.actRoute.snapshot.params["id"]) {
       this.id = this.actRoute.snapshot.params['id'];
@@ -124,7 +123,10 @@ export class ConcertEditComponent implements OnInit {
 
   ngOnInit() {
 
-   // this.concertForm.controls['Tickets'] = this.fb.array([]);
+       this.Tickets = this.concertForm.get('Tickets') as FormArray;
+
+    // this.concertForm.controls['Tickets'] = this.fb.array([]);
+    this.concertForm.setControl('Tickets', this.TicketsFormArray);
 
     console.log("this.id " + this.id)
 
@@ -173,23 +175,24 @@ export class ConcertEditComponent implements OnInit {
   }*/
 
 
-  update() {
+  onSubmit(form) {
 
+    this.Tickets = this.concertForm.get('Tickets') as FormArray;
 
+    console.log(this.concertForm.value);
+ 
+    //this.concertForm.setControl('Tickets', this.fb.array(this.concertData.Tickets || []));
+   // this.concertForm.setControl('Tickets', this.TicketsFormArray);
 
-    
-
-    this.concertForm.setControl('Tickets', this.fb.array(this.concertData.Tickets || []));
-
-     
-    this.concertService.putConcert(this.concertForm.value)
+ 
+    this.concertService.putConcert(form)
       .subscribe((data) => {
         this.router.navigate(['backoffice']);
       }, err => {
         console.log(err);
-    }); 
+    });   
+ 
   }
-
 
   getConcert(id) {
     this.concertService.getConcert(id).subscribe(concert => {

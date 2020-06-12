@@ -5,7 +5,7 @@
 
   <h2><i class="fa fa-pencil" aria-hidden="true"></i> Edit concert</h2>
 
-  <form [formGroup]="concertForm" (ngSubmit)="update()" #formDir="ngForm" novalidate>
+  <form [formGroup]="concertForm" (ngSubmit)="onSubmit(this.concertForm.value)" novalidate>
 
 <!-- <div class="form-group">
       <label for="id">Id: </label>
@@ -38,31 +38,38 @@
             Date:
           </div>
           <div class="col-10">
-            <input formControlName="ConcertDate" class="form-control" type="date" required>
+            <input formControlName="ConcertDate" [value]="ConcertDate"  class="form-control" type="date" required>
           </div>
       </div>
     </div>
 
 
     <div class="form-group">
-      Number of tickets: 
+      Number of tickets: <br />
+      <i class="fa fa-info-circle" aria-hidden="true"></i>
+      <small class="text-muted"> Once the concert is created, you cannot edit the number of tickets, but edit the tickets already added.</small>
       <input readonly formControlName="NumberTicketsAvailable" type="number" class="form-control" required>
     </div>
 
     <div class="form-group">
-      Ticket price:
+      Ticket price: <br />
+      <i class="fa fa-info-circle" aria-hidden="true"></i>
+      <small class="text-muted"> Insert the lowest price of your tickets added.</small>
       <input formControlName="TicketPrice" type="number" class="form-control" required>
     </div>
 
     <div formArrayName="Tickets">
       <br />
       <h2>Tickets:</h2>
+      <i class="fa fa-check-square-o" aria-hidden="true"></i>
+      <small class="text-muted"> Feel free to edit the tickets not sold yet! </small>
       <div *ngFor="let item of TicketsFormArray.controls;  index as i">
         <div [formGroupName]="i">
           <br />
           <h4>Ticket {{i+1}}</h4>
 
-          <div *ngIf="concertForm.controls.Tickets.controls[i].controls.UserId.value == null">
+          <!--<div *ngIf="concertForm.controls.Tickets.controls[i].controls.UserId.value == null">-->
+          <div>
 
             <div class="form-group">
               Ticket price:
@@ -87,5 +94,4 @@
 
 
 
-<pre>{{concertForm.value | json }}</pre>
-
+ <pre>{{concertForm.value | json }}</pre> 

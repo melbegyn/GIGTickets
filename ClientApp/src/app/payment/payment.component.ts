@@ -112,7 +112,7 @@ export class PaymentComponent implements OnInit {
   }*/
 
 
-  deleteRow(index: number) {
+  deleteTicket(index: number) {
     this.Tickets.removeAt(index);
   }
 

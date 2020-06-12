@@ -74,6 +74,15 @@ namespace GIGTickets.Controllers
                 return BadRequest(ModelState);
             }
 
+            if(concert.Tickets.Count > 0 )
+            {
+                foreach (Ticket ticket in concert.Tickets)
+                {
+                    _context.Entry(ticket).State = EntityState.Modified; 
+                }
+            }
+            
+
             _context.Entry(concert).State = EntityState.Modified;
 
             try
@@ -92,8 +101,8 @@ namespace GIGTickets.Controllers
                 }
             }
 
-            return AcceptedAtAction("GetConcert", new { id = concert.Id }, concert);
-
+            //  return AcceptedAtAction("GetConcert", new { id = concert.Id }, concert);
+            return NoContent();
         }
 
         // DELETE: api/Concert/5

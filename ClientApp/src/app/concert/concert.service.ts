@@ -32,7 +32,7 @@ export class ConcertService {
   }
 
   putConcert(concert) {
-    console.log("concert final " + JSON.stringify(concert.value))
+    console.log(concert);
     return this.http.put(this.rootURL + '/Concert/' + concert.Id, concert)
   }
 

@@ -31,6 +31,8 @@ export class NavMenuComponent {
       this.currentUser = data as User;
 
     }, (err) => {
+
+        this.router.navigate(['/user/login']);
       console.log(err);
     });
 
