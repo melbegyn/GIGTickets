@@ -17,11 +17,11 @@
       </div>
       <div class="col-md-7">
         <div class="card-block">
-          <h4 class="card-title">{{concert.TourName}} | {{concert.Artist}}</h4>
+          <h4 class="card-title">{{concert.TourName}} | <span style="color: #388fcd;">{{concert.Artist}}</span></h4>
 
 
 
-          <span><i class="fa fa-map-marker" aria-hidden="true"></i> {{concert.Stage}} -  {{concert.ConcertDate | date }}</span>
+          <span><i class="fa fa-map-marker" aria-hidden="true"></i> {{concert.Stage}} - <i class="fa fa-calendar" aria-hidden="true"></i> {{concert.ConcertDate | date }}</span>
           <p> Tickets available : {{concert.NumberTicketsAvailable}} </p>
 
 

@@ -53,6 +53,6 @@ export class UserService {
   }
 
   getUserProfile() {
-    return this.http.get<User>(this.rootURL + '/UserProfile');
+    return this.http.get(this.rootURL + '/UserProfile');
   }
 }
