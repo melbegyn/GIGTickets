@@ -72,7 +72,7 @@ export class ConcertComponent implements OnInit {
 
  
 
-  deleteRow(index: number) {
+  deleteTicket(index: number) {
     //this.Tickets.removeAt(index);
     this.TicketsFormArray.removeAt(index);
   }
